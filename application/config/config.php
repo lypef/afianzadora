@@ -23,7 +23,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+switch($_SERVER['SERVER_NAME'])
+{
+    case 'localhost':
+            $config['base_url']    = "http://localhost/index.php/";
+            break;
+    default:
+            $config['base_url'] = 'http://www.linku.com.mx/index.php/';
+            break;       
+}
 
 /*
 |--------------------------------------------------------------------------
