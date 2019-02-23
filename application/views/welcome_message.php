@@ -1,89 +1,379 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+  //error_reporting(0);
+  session_start();
+  if (isset($_SESSION['usuario'])){}else{echo '<script>location.href = "index.php"</script>';}
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="metro/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="metro/favicon.ico" type="image/x-icon">
 
-	<style type="text/css">
+    <link href="metro/css/metro-all.css" rel="stylesheet">
+    <link href="metro/style.css" rel="stylesheet">
 
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
+    <title>ONAPAFFA</title>
 </head>
 <body>
+<!-- Menu -->
+<nav data-role="ribbonmenu">
+  <ul class="tabs-holder">
+      <li class="static"><a href="func/logout.php"><span class="mif-cross"></span> SALIR</a></li>
+      <li class="static"><a href="manager.php"><span class="mif-home"></span> <? echo $_SESSION['usuario_name']; ?></a></li>
+      <li><a href="#section-usuarios">Usuarios</a></li>
+  </ul>
 
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+  <div class="content-holder">
+      <div class="section" id="section-usuarios">
+        <!-- Inicia modulo Reportes-->
+        <? if ($_SESSION['gen_reports'] != 0)
+        {?>
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+        <div class="group">
+          <div class="ribbon-split-button">
+              <button class="ribbon-main">
+                  <span class="icon ribbon-main">
+                      <span class="mif-file-pdf"></span>
+                  </span>
+              </button>
+              <span class="ribbon-split dropdown-toggle">pdf</span>
+              <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
+                  <li><a href="reports/reporte_titulares.php">Reportes titulares</a></li>
+                  <li><a href="reports/reporte_vehicles.php">Reportes vehiculos</a></li>
+                  <li><a href="reports/reporte_adicionales.php">Reportes adicionales</a></li>
+                  <li><a href="reports/reporte_vehicles_vencidos.php">Engomados vencidos</a></li>
+              </ul>
+            </div>
+            <div class="ribbon-split-button">
+              <button class="ribbon-main">
+                  <span class="icon ribbon-main">
+                      <span class="mif-file-excel"></span>
+                  </span>
+              </button>
+              <span class="ribbon-split dropdown-toggle">xls</span>
+              <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
+                  <li><a href="reports/reporte_titulares_xls.php">Reportes titulares</a></li>
+                  <li><a href="reports/reporte_vehicles_xls.php">Reportes vehiculos</a></li>
+                  <li><a href="reports/reporte_adicionales_xls.php">Reportes adicionales</a></li>
+                  <li><a href="reports/reporte_vehicles_vencidos_xls.php">Engomados vencidos</a></li>
+              </ul>
+            </div>
+            <span class="title">REPORTES</span>
+        </div>
+        <?}?>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+        <!-- Finaliza modulo Reportes-->
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
+        <!-- Inicia modulo titulaes-->
+        <div class="group">
+            <? if ($_SESSION['add_titular'] != 0)
+            {?>
+            <a href="add_titular.php">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-plus"></span>
+                    </span>
+                <span class="caption">Alta titular</span>
+            </button></a>
+            <?}?>
 
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
+            <a href="gest_titulares.php?pagina=1">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-database"></span>
+                    </span>
+                <span class="caption">Gestionar</span>
+            </button>
+            </a>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
+            <button onclick="search_titular()" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-search"></span>
+                    </span>
+                <span class="caption">Buscar</span>
+            </button>
+            <span class="title">Titulares</span>
 
-</body>
-</html>
+        </div>
+        <!-- Finaliza modulo titulaes-->
+
+        <!-- Inicia modulo vehiculos-->
+        <div class="group">
+            <? if ($_SESSION['add_vehicle'] != 0)
+            {?>
+            <a href="select_titular_addvehicle.php?pagina=1">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-plus"></span>
+                    </span>
+                <span class="caption">Alta vehiculo</span>
+            </button></a>
+            <?}?>
+
+            <a href="gest_vehicles.php?pagina=1">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-automobile"></span>
+                    </span>
+                <span class="caption">Gestionar</span>
+            </button>
+            </a>
+
+            <button onclick="search_vehiculos()" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-search"></span>
+                    </span>
+                <span class="caption">Buscar</span>
+            </button>
+
+            <span class="title">Vehiculos</span>
+        </div>
+        <!-- Finaliza modulo vehiculos-->
+
+        <!-- Inicia modulo Adicionales-->
+        <div class="group">
+            <a href="gest_adicionales.php?pagina=1">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-chart-bars"></span>
+                    </span>
+                <span class="caption">Gestionar</span>
+            </button></a>
+
+            <button onclick="search_adicionales()" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-search"></span>
+                    </span>
+                <span class="caption">Buscar</span>
+            </button>
+
+            <span class="title">Adicionales</span>
+        </div>
+        <!-- Finaliza modulo Adicionales-->
+        <!-- Inicia modulo usuarios-->
+        <? if ($_SESSION['crud_users'] != 0){?>
+        <div class="group">
+            <a href="add_users.php">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-user-plus"></span>
+                    </span>
+                <span class="caption">Agregar usuario</span>
+            </button>
+            </a>
+
+            <a href="gest_users.php">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-users"></span>
+                    </span>
+                <span class="caption">Gestionar usuarios</span>
+            </button>
+            </a>
+
+            <span class="title">Usuarios</span>
+        </div>
+        <?}?>
+        <!-- Finaliza modulo usuarios-->
+
+        <!-- Inicia modulo sucursales-->
+        <? if ($_SESSION['gest_sucursales'] != 0){?>
+        <div class="group">
+            <button onclick="add_suc()" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-plus"></span>
+                    </span>
+                <span class="caption">Agregar sucursal</span>
+            </button>
+
+            <a href="gest_sucursales.php">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-library"></span>
+                    </span>
+                <span class="caption">Gestionar sucursales</span>
+            </button>
+            </a>
+
+            <span class="title">Sucursales</span>
+        </div>
+        <?}?>
+        <!-- Finaliza modulo sucursales-->
+
+        <!-- Inicia modulo perfil-->
+        <div class="group">
+
+             <div data-role="buttonsGroup" data-cls-active="active">
+                 <button onclick="update_profile()" class="ribbon-button">
+                     <span class="icon">
+                         <span class="mif-file-upload"></span>
+                     </span>
+                     <span class="caption">Actualizar</span>
+                 </button>
+                 <a href="my_highs.php?pagina=1">
+                 <button class="ribbon-button">
+                     <span class="icon">
+                         <span class="mif-chart-pie"></span>
+                     </span>
+                     <span class="caption">Mis altas</span>
+                 </button>
+                </a>
+
+                 <a href="my_logs.php?pagina=1">
+                 <button class="ribbon-button">
+                     <span class="icon">
+                         <span class="mif-file-text"></span>
+                     </span>
+                     <span class="caption">Mis registros</span>
+                 </button>
+                 </a>
+
+             </div>
+
+             <span class="title">Perfil</span>
+           </div>
+        </div>
+        <!-- Finaliza modulo perfil-->
+      </div>
+  </div>
+</nav>
+<?
+echo
+"
+<script>
+function add_suc(){
+    Metro.dialog.create({
+        title: '<p>Nueva sucursal',
+        content: '<div>'
+        +'<form  action=func/add_sucursal.php method=POST name=add_suc>'
+            +'<input  id=name name=name type=text  data-role=input data-prepend=".'Nombre: '." placeholder=".'"Esciba nombre de sucursal"'." autofocus>'
+            +'<input  id=direccion name=direccion type=text  data-role=input data-prepend=".'Direccion: '." placeholder=".'"Direccion sucursal"'." >'
+            +'<input  id=telefono name=telefono type=text  data-role=input data-prepend=".'Telefono: '." placeholder=".'"Telfono de sucursal"'." >'
+            +'<input type=submit hidden>'
+        +'</form></div>',
+        actions: [
+            {
+                caption: '<span class=mif-plus></span> Agregar',
+                cls: 'js-dialog-close info',
+                onclick: function(){
+                    document.add_suc.submit()
+                }
+            },
+            {
+                caption: '<span class=mif-cross></span>',
+                cls: 'js-dialog-close'
+            }
+        ]
+    });
+}
+
+function update_profile(){
+    Metro.dialog.create({
+        title: '<p>',
+        content: '<div>'
+        +'<form  action=func/edit_profile_action.php method=POST name=update_profile>'
+            +'<input  type=text name=id id=id value=".'"'.$_SESSION['usuario'].'"'." hidden>'
+            +'<input  value=".'"'.$_SESSION['usuario_name'].'"'." id=name name=name type=text  data-role=input data-prepend=".'Nombre'." placeholder=Text >'
+            +'<input  id=password name=password type=password  data-role=input data-prepend=".'"Nueva contraseña"'." placeholder=****** >'
+            +'<input  id=password_confirm name=password_confirm type=password  data-role=input data-prepend=".'"Repita contraseña"'." placeholder=****** >'
+            +'<input type=submit hidden>'
+        +'</form></div>',
+        actions: [
+            {
+                caption: '<span class=mif-floppy-disk></span> Guardar',
+                cls: 'js-dialog-close info',
+                onclick: function(){
+                    document.update_profile.submit()
+                }
+            },
+            {
+                caption: '<span class=mif-cross></span>',
+                cls: 'js-dialog-close'
+            }
+        ]
+    });
+}
+
+function search_titular(){
+    Metro.dialog.create({
+        title: '<p>',
+        content: '<div>'
+        +'<form  action=gest_titulares.php method=GET id=search_titular name=search_titular>'
+            +'<input  type=text name=pagina id=pagina value=1 hidden>'
+            +'<input  id=search name=search type=text  data-role=input data-prepend=".'"<span class=mif-search></span>"'." placeholder=Text autofocus>'
+            +'<input type=submit hidden>'
+        +'</form></div>',
+        actions: [
+            {
+                caption: '<span class=mif-checkmark></span> Buscar',
+                cls: 'js-dialog-close info',
+                onclick: function(){
+                    document.search_titular.submit()
+                }
+            },
+            {
+                caption: '<span class=mif-cross></span>',
+                cls: 'js-dialog-close'
+            }
+        ]
+    });
+}
+
+function search_vehiculos(){
+    Metro.dialog.create({
+        title: '<p>',
+        content: '<div>'
+        +'<form  action=gest_vehicles.php method=GET id=search_vehiculos name=search_vehiculos>'
+            +'<input  type=text name=pagina id=pagina value=1 hidden>'
+            +'<input  id=search_a name=search type=text  data-role=input data-prepend=".'"<span class=mif-search></span>"'." placeholder=Text autofocus>'
+            +'<input type=submit hidden>'
+        +'</form></div>',
+        actions: [
+            {
+                caption: '<span class=mif-checkmark></span> Buscar',
+                cls: 'js-dialog-close info',
+                onclick: function(){
+                    document.search_vehiculos.submit()
+                }
+            },
+            {
+                caption: '<span class=mif-cross></span>',
+                cls: 'js-dialog-close'
+            }
+        ]
+    });
+}
+
+function search_adicionales(){
+    Metro.dialog.create({
+        title: '<p>',
+        content: '<div>'
+        +'<form  action=gest_adicionales.php method=GET id=search_adicionales name=search_adicionales>'
+            +'<input  type=text name=pagina id=pagina value=1 hidden>'
+            +'<input  id=search name=search type=text  data-role=input data-prepend=".'"<span class=mif-search></span>"'." placeholder=Text autofocus>'
+            +'<input type=submit hidden>'
+        +'</form></div>',
+        actions: [
+            {
+                caption: '<span class=mif-checkmark></span> Buscar',
+                cls: 'js-dialog-close info',
+                onclick: function(){
+                    document.search_adicionales.submit()
+                }
+            },
+            {
+                caption: '<span class=mif-cross></span>',
+                cls: 'js-dialog-close'
+            }
+        ]
+    });
+}
+
+</script>
+";
+?>
+<!-- Finaliza Menu -->
+<div  style="background-color: #dcdcdc; width:100%;">
+<div class="container">
