@@ -12,22 +12,22 @@
       	
       	if (getUrlVars()["nosession"])
         {
-            Metro.notify.create("Verifique nombre de usuario y contraseña", "Error", {cls: "alert"});
+            Metro.notify.create("Verifique nombre de usuario y contraseña", "<span class='mif-cross'></span> Error", {cls: "alert"});
         }
 
         if (getUrlVars()["yessession"])
         {
-            Metro.notify.create("Credencial correcta", "Bienvenido", {cls: "info"});
+            Metro.notify.create("Sesión iniciada correctamente", "<span class='mif-checkmark'></span> Bienvenido", {cls: "info"});
         }
 
-        if (getUrlVars()["update_profile"])
+        if (getUrlVars()["bye"])
         {
-            Metro.notify.create("Informacion actualizada", "<span class='mif-checkmark'></span> Perfil actualizado.", {cls: "success"});
+            Metro.notify.create("Sesión cerrada correctamente", "Hasta pronto", {cls: "info"});
         }
 
-        if (getUrlVars()["noupdate_profile"])
+        if (getUrlVars()["requiredsession"])
         {
-            Metro.notify.create("No fue posible realizar alguna actualizacion", "<span class='mif-cross'></span> No se actualizo", {cls: "alert"});
+            Metro.notify.create("Es necesario que inicie sesion", "<span class='mif-checkmark'></span> Requerido", {cls: "warning"});
         }
     </script>
 

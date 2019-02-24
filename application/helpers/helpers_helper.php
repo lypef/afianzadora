@@ -3,9 +3,9 @@
     {
         $CI = & get_instance();
         
-        if (!$CI->session->userdata('username'))
+        if (!$CI->session->userdata('session_id'))
         {
-            redirect (base_url());
+            redirect (base_url().'?requiredsession=true');
         }
     }
     
@@ -13,7 +13,7 @@
     {
         $CI = & get_instance();
         
-        if (!$CI->session->userdata('username'))
+        if (!$CI->session->userdata('session_id'))
         {
             return false;
         }else

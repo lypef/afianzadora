@@ -9,6 +9,7 @@ class All extends CI_Controller {
 		$this->load->model('Models_model');
 		$this->load->helper('helpers');
 		$this->load->helper('url');
+		$this->load->library('session');
 	}
 
 	public function index()
@@ -40,13 +41,16 @@ class All extends CI_Controller {
 	public function login_close ()
 	{
 		$this->session->sess_destroy();
-		redirect(base_url());
+		redirect(base_url().'?bye=true');
 	}
 
 	public function dashboard ()
 	{
+		LoginCheck();
 		$this->load->view('layout/header');
+		$this->load->view('layout/header_next');
 		$this->load->view('dashboard');
+		$this->load->view('layout/footer_previus');
 		$this->load->view('layout/footer');
 	}
 }
