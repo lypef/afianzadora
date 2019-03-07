@@ -12,7 +12,7 @@ class Models_model extends CI_Model {
     public function login($username, $password)
     {
         $this->db->where('username',$username);
-        $this->db->where('password',base64_encode($password));
+        $this->db->where('password',base64_encode(md5($password)));
         $r = $this->db->get('users');
 
         if ($r->num_rows() > 0)

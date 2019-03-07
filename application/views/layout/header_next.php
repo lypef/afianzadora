@@ -49,18 +49,14 @@
 
         <!-- Inicia modulo titulaes-->
         <div class="group">
-            <? if ($_SESSION['add_titular'] != 0)
-            {?>
-            <a href="add_titular.php">
-            <button class="ribbon-button">
+            <button onclick="Metro.dialog.open('#add_fiador')" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-plus"></span>
                     </span>
                 <span class="caption">Agregar</span>
-            </button></a>
-            <?}?>
+            </button>
 
-            <a href="gest_titulares.php?pagina=1">
+            <a href="<?php echo base_url(); ?>all/fiadores_gestionar">
             <button class="ribbon-button">
                     <span class="icon">
                         <span class="mif-database"></span>
@@ -69,7 +65,7 @@
             </button>
             </a>
 
-            <button onclick="search_titular()" class="ribbon-button">
+            <button onclick="Metro.dialog.open('#search_fiador')" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-search"></span>
                     </span>
