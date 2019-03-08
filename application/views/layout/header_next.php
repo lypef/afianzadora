@@ -78,18 +78,16 @@
 
         <!-- Inicia modulo vehiculos-->
         <div class="group">
-            <? if ($_SESSION['add_vehicle'] != 0)
-            {?>
-            <a href="select_titular_addvehicle.php?pagina=1">
-            <button class="ribbon-button">
+            
+            <button onclick="Metro.dialog.open('#add_afianzadora')" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-plus"></span>
                     </span>
                 <span class="caption">Agregar</span>
-            </button></a>
-            <?}?>
+            </button>
+            
 
-            <a href="gest_vehicles.php?pagina=1">
+            <a href="<?php echo base_url(); ?>all/afianzadoras">
             <button class="ribbon-button">
                     <span class="icon">
                         <span class="mif-database"></span>
@@ -98,11 +96,28 @@
             </button>
             </a>
 
-            <button onclick="search_vehiculos()" class="ribbon-button">
+            
+            <button onclick="Metro.dialog.open('#search_afianzadora')" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-search"></span>
                     </span>
                 <span class="caption">Buscar</span>
+            </button>
+            
+            <a href="<?php echo base_url(); ?>all/afianzadores_tipos">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-file-text"></span>
+                    </span>
+                <span class="caption">Tipos</span>
+            </button>
+            </a>
+
+            <button onclick="Metro.dialog.open('#add_afianzadora_tipo')" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-note-add"></span>
+                    </span>
+                <span class="caption">Agregar Tipo</span>
             </button>
 
             <span class="title">Afianzadoras</span>

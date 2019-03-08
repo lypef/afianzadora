@@ -23,7 +23,7 @@
     ?>
 </ul>
 
-<form action="<?php echo base_url(); ?>all/fiadores_gestionar" method="get">
+<form action="<?php echo base_url(); ?>all/afianzadoras" method="get">
     <div class="input"><input id="search" name="search" type="text" class="" value="<?php if (isset($_GET['search'])) { echo $_GET["search"];}?>"><div class="button-group"><button class="button input-clear-button" tabindex="-1" type="button"><span class="default-icon-cross"></span></button></div><div class="prepend">Ingrese texto para realizar busqueda:</div></div>
 </form>
 
@@ -33,9 +33,10 @@
 <table class="table striped row-hover">
     <thead>
         <tr>
+            <th><center>NOMBRE</center></th>
             <th>RAZON SOCIAL</th>
-            <th>CONTACTOS</th>
-            <th>TELEFONO</th>
+            <th><center>TELEFONO</center></th>
+            <th>EMAIL</th>
             <th>OPCIONES</th>
         </tr>
     </thead>
@@ -46,9 +47,10 @@
             echo 
             '
             <tr>
+            <td><center>'.$item->nombre.'</center></td>
             <td>'.$item->razon_social.'</td>
-            <td>'.$item->contactos.'</td>
-            <td>'.$item->telefonos.'</td>
+            <td><center>'.$item->telefono.'</center></td>
+            <td><a target="_BLANK" href="mailto:'.$item->email.'" target="_top">'.$item->email.'</a></td>
             <td>
             
             <div class="split-button">
@@ -58,7 +60,7 @@
                     <li><a href="#" onclick="Metro.dialog.open(\'#editar'.$item->id.'\')"><span class="mif-pencil"></span> Editar</a></li>
                     <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Eliminar</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><span class="mif-folder-open"></span> Ver fianzas</a></li>
+                    <li><a href="#"><span class="mif-folder-open"></span> Ver contratos</a></li>
                 </ul>
             </div>
             </td>
@@ -66,11 +68,12 @@
             </tr>
 
             <div class="dialog" data-role="dialog" id="view'.$item->id.'">
-                <div class="dialog-title"><strong>'.$item->razon_social.'</strong></div>
+                <div class="dialog-title"><strong>'.$item->nombre.'</strong></div>
                 <div class="dialog-content">
-                    <strong>CONTACTO:</strong> '.$item->contactos.'
-                    <br><strong>TELEFONOS:</strong> '.$item->telefonos.'
-                    <center><br><strong>Emails:</strong><br><a target="_BLANK" href="mailto:'.$item->correo1.'" target="_top">'.$item->correo1.'</a><br><a target="_BLANK" href="mailto:'.$item->correo2.'" target="_top">'.$item->correo2.'</a></center>
+                    <strong>RAZON SOCIAL:</strong><br>'.$item->razon_social.'
+                    <br><br><strong>DIRECCION FISCAL:</strong><br>'.$item->direccion.'
+                    <br><br><strong>TELEFONO:</strong><br>'.$item->telefono.'
+                    <center><br><strong>EMAIL:</strong><br><a target="_BLANK" href="mailto:'.$item->email.'" target="_top">'.$item->email.'</a></center>
                 </div>
                 <div class="dialog-actions">
                     <button class="button info js-dialog-close">Ok</button>
@@ -80,32 +83,32 @@
             
             
             <div class="dialog" data-role="dialog" id="editar'.$item->id.'">
-                <div class="dialog-title"><strong><center>ACTUALIZAR: '.$item->razon_social.'</center></strong></div>
+                <div class="dialog-title"><strong><center>ACTUALIZAR: '.$item->nombre.'</center></strong></div>
                 <div class="dialog-content">
-                    <form action="'.base_url().'all/fiadores_update" method="post">
+                    <form action="'.base_url().'all/afianzadoras_update" method="post">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input id="nombre" name="nombre" type="text" placeholder="Ingrese nombre" required value="'.$item->nombre.'" />
+                        </div>
+
                         <div class="form-group">
                             <label>Razon social</label>
-                            <input id="razon_social" name="razon_social" type="text" placeholder="Ingrese razon social"/ required value="'.$item->razon_social.'">
+                            <input id="razon_social" name="razon_social" type="text" placeholder="Razon social" required value="'.$item->razon_social.'"/>
                         </div>
 
                         <div class="form-group">
-                            <label>Contactos</label>
-                            <input id="contactos" name="contactos" type="text" placeholder="Contacto, Puede se mas de uno"/ required value="'.$item->contactos.'">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Correo #1</label>
-                            <input id="correo1" name="correo1" type="email" placeholder="Correo electronico principal"/ required value="'.$item->correo1.'">
+                            <label>Direccion fiscal</label>
+                            <input id="direccion" name="direccion" type="text" placeholder="Direccion fiscal" value="'.$item->direccion.'"/>
                         </div>
 
                         <div class="form-group">
                             <label>Telefono</label>
-                            <input id="telefonos" name="telefonos" type="text" placeholder="Ingrese telefono, puede ser mas de uno"/ value="'.$item->telefonos.'">
+                            <input id="telefono" name="telefono" type="text" placeholder="Ingrese numero de telefono" value="'.$item->telefono.'" />
                         </div>
 
                         <div class="form-group">
-                            <label>Correo #2</label>
-                            <input id="correo2" name="correo2" type="email" placeholder="Correo electronico secundario"/ value="'.$item->correo2.'">
+                            <label>Email</label>
+                            <input id="email" name="email" type="email" placeholder="Correo electronico" value="'.$item->email.' " />
                         </div>
                         <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
                         <input type="hidden" id="id" name="id" value="'.$item->id.'">
@@ -119,10 +122,10 @@
 
 
             <div class="dialog" data-role="dialog" id="delete'.$item->id.'">
-                <div class="dialog-title"><strong><center>ELIMINAR: '.$item->razon_social.'</center></strong></div>
+                <div class="dialog-title"><strong><center>ELIMINAR: '.$item->nombre.'</center></strong></div>
                 <div class="dialog-content">
-                    <form action="'.base_url().'all/fiadores_delete" method="post">
-                        <p>Esta seguro de eliminar el fiador y toda su informacion relacionada ?</p>
+                    <form action="'.base_url().'all/afianzadoras_delete" method="post">
+                        <p>Esta seguro de eliminar la afianzadora: <strong>'.$item->nombre.'</strong> y todas la informacion relacionada ?</p>
                         <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
                         <input type="hidden" id="id" name="id" value="'.$item->id.'">
                 </div>
@@ -132,6 +135,7 @@
                     <button class="button success js-dialog-close"><span class="mif-checkmark"></span> NO eliminar</button>
                 </div>
             </div>
+            
             ';
         }
         ?>

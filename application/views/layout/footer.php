@@ -63,6 +63,51 @@
         {
             Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> INCORRECTO", {cls: "alert"});
         }
+        if (getUrlVars()["afiador_tipo_aupdatetrue"])
+        {
+            Metro.notify.create("Tipo afianza actualizado con exito", "<span class='mif-checkmark'></span> ACTUALIZADO", {cls: "success"});
+        }
+
+        if (getUrlVars()["afiador_tipo_aupdatefalse"])
+        {
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> INCORRECTO", {cls: "alert"});
+        }
+        if (getUrlVars()["afiador_tipo_deletetrue"])
+        {
+            Metro.notify.create("Tipo afianza eliminado con exito", "<span class='mif-checkmark'></span> ELIMINADO", {cls: "success"});
+        }
+
+        if (getUrlVars()["afiador_tipo_deletefalse"])
+        {
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> INCORRECTO", {cls: "alert"});
+        }
+        if (getUrlVars()["afianzadora_aupdatetrue"])
+        {
+            Metro.notify.create("Afianzadora actualizado con exito", "<span class='mif-checkmark'></span> ACTUALIZADO", {cls: "success"});
+        }
+
+        if (getUrlVars()["afianzadora_aupdatefalse"])
+        {
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO ACTUALIZADO", {cls: "alert"});
+        }
+        if (getUrlVars()["afianzadora_deletetrue"])
+        {
+            Metro.notify.create("Afianzadora eliminado con exito", "<span class='mif-checkmark'></span> ELIMINADO", {cls: "success"});
+        }
+
+        if (getUrlVars()["afianzadora_deletefalse"])
+        {
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO ELIMINADO", {cls: "alert"});
+        }
+        if (getUrlVars()["afianzadoraaddtrue"])
+        {
+            Metro.notify.create("Afianzadora agregada con exito", "<span class='mif-checkmark'></span> AGREGADO", {cls: "success"});
+        }
+
+        if (getUrlVars()["afianzadoraaddfalse"])
+        {
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO AGREGADO", {cls: "alert"});
+        }
     </script>
 
 </body>

@@ -11,6 +11,19 @@
     </div>
 </div>
 
+<div class="dialog" data-role="dialog" id="search_afianzadora">
+    <div class="dialog-title">Buscar Afianzadora: Nombre | Razon social</strong></div>
+    <div class="dialog-content">
+        <form action="<?php echo base_url(); ?>all/afianzadoras" method="get">
+            <input type="text" id="search" name="search" data-role="input" data-search-button="true" placeholder="Ingrese texto aqui ...">
+    </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button info js-dialog-close">Buscar</button>
+        </form>
+        <button class="button js-dialog-close">Cerrar</button>
+    </div>
+</div>
+
 <div class="dialog" data-role="dialog" id="add_fiador">
     <div class="dialog-title"><strong><center>ALTA FIADOR</center></strong></div>
     <div class="dialog-content">
@@ -38,6 +51,60 @@
             <div class="form-group">
                 <label>Correo #2</label>
                 <input id="correo2" name="correo2" type="email" placeholder="Correo electronico secundario"/>
+            </div>
+            <input type="hidden" id="url" name="url" value="<?php echo UrlActual($_SERVER['REQUEST_URI']);?>">
+    </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button info"><span class="mif-plus"></span> Agregar</button>
+    </form>
+    <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+    </div>
+</div>
+
+<div class="dialog" data-role="dialog" id="add_afianzadora">
+    <div class="dialog-title"><strong><center>ALTA AFIANZADORA</center></strong></div>
+    <div class="dialog-content">
+        <form action="<?php echo base_url(); ?>all/afianzadoras_add" method="post">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Ingrese nombre" required />
+        </div>
+
+        <div class="form-group">
+            <label>Razon social</label>
+            <input id="razon_social" name="razon_social" type="text" placeholder="Razon social" required />
+        </div>
+
+        <div class="form-group">
+            <label>Direccion fiscal</label>
+            <input id="direccion" name="direccion" type="text" placeholder="Direccion fiscal" />
+        </div>
+
+        <div class="form-group">
+            <label>Telefono</label>
+            <input id="telefono" name="telefono" type="text" placeholder="Ingrese numero de telefono" />
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input id="email" name="email" type="email" placeholder="Correo electronico" />
+        </div>
+            <input type="hidden" id="url" name="url" value="<?php echo UrlActual($_SERVER['REQUEST_URI']);?>">
+    </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button info"><span class="mif-plus"></span> Agregar</button>
+    </form>
+    <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+    </div>
+</div>
+
+<div class="dialog" data-role="dialog" id="add_afianzadora_tipo">
+    <div class="dialog-title"><strong><center>NUEVO TIPO AFIANZADOR</center></strong></div>
+    <div class="dialog-content">
+        <form action="<?php echo base_url(); ?>all/afianzador_tipo_add" method="post">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input id="nombre" name="nombre" type="text" placeholder="Ingrese nombre de el tipo afianzador"/ required>
             </div>
             <input type="hidden" id="url" name="url" value="<?php echo UrlActual($_SERVER['REQUEST_URI']);?>">
     </div>

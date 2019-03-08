@@ -157,4 +157,204 @@ class All extends CI_Controller {
 			redirect($url.'?fiadordeletefalse=false');
 		}
 	}
+
+	public function afianzadores_tipos ()
+	{
+		LoginCheck();
+		$pag = $this->input->get('pagina');
+		$buscar = $this->input->get('search');
+		$limit = '';
+		if (is_null($pag))
+		{
+			$pag = 1;
+		}
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadores_tipos WHERE nombre like '.$like.'  ')->num_rows() / 12, 0, '', ' ');
+		}
+		else
+		{
+			$TotalPags = number_format($this->db->query('SELECT id FROM `afianzadores_tipos`')->num_rows() / 12, 0, '', ' ');
+		}
+
+		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
+		$data['pags'] = $TotalPags;
+		$data['pag'] = $pag;
+
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$data['data'] = $this->db->query('SELECT * FROM afianzadores_tipos WHERE nombre like '.$like.'  ' . $limit .' ')->result();
+		}
+		else
+		{
+			$data['data'] = $this->db->query('SELECT * FROM `afianzadores_tipos`  '.$limit.' ')->result();
+		}
+		
+		$this->load->view('layout/header');
+		$this->load->view('layout/header_next');
+		$this->load->view('afianzadores_tipos', $data);
+		$this->load->view('layout/footer_previus');
+		$this->load->view('layout/footer');
+	}
+
+	public function afianzadores_tipo_update ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$data = array(
+			'nombre' => $this->input->post('tipo_fianza')
+		);
+		
+		$this->db->where('id', $this->input->post('id'))->update('afianzadores_tipos', $data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?afiador_tipo_aupdatetrue=true');
+		}else
+		{
+			redirect($url.'?afiador_tipo_aupdatefalse=false');
+		}
+	}
+
+	public function afianzadores_tipo_delete ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$this->db->where('id', $this->input->post('id'))->delete('afianzadores_tipos');
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?afiador_tipo_deletetrue=true');
+		}else
+		{
+			redirect($url.'?afiador_tipo_deletefalse=false');
+		}
+	}
+
+	public function afianzador_tipo_add ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$data = array(
+			'nombre' => $this->input->post('nombre')
+		);
+		
+		$this->db->insert('afianzadores_tipos',$data);
+
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?fiadoraddtrue=true');
+		}else
+		{
+			redirect($url.'?fiadoraddfalse=false');
+		}
+	}
+
+	public function afianzadoras ()
+	{
+		LoginCheck();
+		$pag = $this->input->get('pagina');
+		$buscar = $this->input->get('search');
+		$limit = '';
+		if (is_null($pag))
+		{
+			$pag = 1;
+		}
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ')->num_rows() / 12, 0, '', ' ');
+		}
+		else
+		{
+			$TotalPags = number_format($this->db->query('SELECT id FROM `afianzadoras`')->num_rows() / 12, 0, '', ' ');
+		}
+
+		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
+		$data['pags'] = $TotalPags;
+		$data['pag'] = $pag;
+
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$data['data'] = $this->db->query('SELECT * FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ' . $limit .' ')->result();
+		}
+		else
+		{
+			$data['data'] = $this->db->query('SELECT * FROM `afianzadoras`  '.$limit.' ')->result();
+		}
+		
+		$this->load->view('layout/header');
+		$this->load->view('layout/header_next');
+		$this->load->view('afianzadoras', $data);
+		$this->load->view('layout/footer_previus');
+		$this->load->view('layout/footer');
+	}
+
+	public function afianzadoras_add ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$data = array(
+			'nombre' => $this->input->post('nombre'),
+			'razon_social' => $this->input->post('razon_social'),
+			'direccion' => $this->input->post('direccion'),
+			'telefono' => $this->input->post('telefono'),
+			'email' => $this->input->post('email')
+		);
+		
+		$this->db->insert('afianzadoras',$data);
+
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?afianzadoraaddtrue=true');
+		}else
+		{
+			redirect($url.'?afianzadoraaddfalse=false');
+		}
+	}
+
+	public function afianzadoras_update ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$data = array(
+			'nombre' => $this->input->post('nombre'),
+			'razon_social' => $this->input->post('razon_social'),
+			'direccion' => $this->input->post('direccion'),
+			'telefono' => $this->input->post('telefono'),
+			'email' => $this->input->post('email')
+		);
+		
+		$this->db->where('id', $this->input->post('id'))->update('afianzadoras', $data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?afianzadora_aupdatetrue=true');
+		}else
+		{
+			redirect($url.'?afianzadora_aupdatefalse=false');
+		}
+	}
+
+	public function afianzadoras_delete ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$this->db->where('id', $this->input->post('id'))->delete('afianzadoras');
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?afianzadora_deletetrue=true');
+		}else
+		{
+			redirect($url.'?afianzadora_deletefalse=false');
+		}
+	}
 }
