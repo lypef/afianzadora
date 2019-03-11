@@ -108,6 +108,15 @@
         {
             Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO AGREGADO", {cls: "alert"});
         }
+        if (getUrlVars()["fianza_deletetrue"])
+        {
+            Metro.notify.create("Fianza eliminada con exito", "<span class='mif-checkmark'></span> ELIMINADO", {cls: "success"});
+        }
+
+        if (getUrlVars()["fianza_deletefalse"])
+        {
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO AGREGADO", {cls: "alert"});
+        }
     </script>
 
 </body>

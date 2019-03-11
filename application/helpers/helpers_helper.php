@@ -40,4 +40,94 @@
             return true;
         }
     }
+
+    function GetFiadoresSelect ($fiadores, $id_select)
+    {
+        $r = null;
+        $r = '
+        <div class="form-group">
+            <label><strong>Fiador</strong></label>
+            <select id="fiador" name="fiador">
+        ';
+        
+        foreach ($fiadores as $row)
+        {
+                if ($id_select == $row->id)
+                {
+                    $r .= '
+                        <option value="'.$row->id.'" selected>'.$row->razon_social.'</option>
+                    ';
+                }else
+                {
+                    $r .= '
+                        <option value="'.$row->id.'">'.$row->razon_social.'</option>
+                    ';
+                }
+        }
+        $r .= '
+        </select>
+        </div>
+        ';
+        return $r;
+    }
+
+    function GetFianzaTipoSelect ($afianzadores_tipos ,$id_select)
+    {
+        $r = null;
+        $r = '
+        <div class="form-group">
+            <label><strong>Tipo de fianza</strong></label>
+            <select id="tipo_fianza" name="tipo_fianza">
+        ';
+        
+        foreach ($afianzadores_tipos as $row)
+        {
+                if ($id_select == $row->id)
+                {
+                    $r .= '
+                        <option value="'.$row->id.'" selected>'.$row->nombre.'</option>
+                    ';
+                }else
+                {
+                    $r .= '
+                        <option value="'.$row->id.'">'.$row->nombre.'</option>
+                    ';
+                }
+        }
+        $r .= '
+        </select>
+        </div>
+        ';
+        return $r;
+    }
+
+    function GetAfianzadoraSelect ($afianzadora, $id_select)
+    {
+        $r = null;
+        $r = '
+        <div class="form-group">
+            <label><strong>Afianzadora</strong></label>
+            <select id="afianzadora" name="afianzadora">
+        ';
+        
+        foreach ($afianzadora as $row)
+        {
+                if ($id_select == $row->id)
+                {
+                    $r .= '
+                        <option value="'.$row->id.'" selected>'.$row->nombre.'</option>
+                    ';
+                }else
+                {
+                    $r .= '
+                        <option value="'.$row->id.'">'.$row->nombre.'</option>
+                    ';
+                }
+        }
+        $r .= '
+        </select>
+        </div>
+        ';
+        return $r;
+    }
 ?>

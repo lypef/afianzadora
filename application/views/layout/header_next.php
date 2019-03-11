@@ -124,6 +124,37 @@
         </div>
         <!-- Finaliza modulo vehiculos-->
 
+        <!-- Finaliza modulo Reportes-->
+
+        <!-- Inicia modulo titulaes-->
+        <div class="group">
+            <button onclick="Metro.dialog.open('#add_fiador')" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-plus"></span>
+                    </span>
+                <span class="caption">Agregar</span>
+            </button>
+
+            <a href="<?php echo base_url(); ?>all/fianzas_gestionar">
+            <button class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-database"></span>
+                    </span>
+                <span class="caption">Gestionar</span>
+            </button>
+            </a>
+
+            <button onclick="Metro.dialog.open('#search_fiador')" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-search"></span>
+                    </span>
+                <span class="caption">Buscar</span>
+            </button>
+            <span class="title">Fianzas</span>
+
+        </div>
+        <!-- Finaliza modulo titulaes-->
+
         <!-- Inicia modulo Adicionales-->
         <div class="group">
             <a href="gest_adicionales.php?pagina=1">
