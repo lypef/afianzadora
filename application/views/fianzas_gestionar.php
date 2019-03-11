@@ -102,21 +102,13 @@
                             <input id="folio_fianza" name="folio_fianza" type="text" placeholder="Ingrese folio de la fianza" required value="'.$item->folio_fianza.'" />
                         </div>
                         '.GetAfianzadoraSelect($afianzadora, $item->afianzadora_id).'
+                        
                         <div class="form-group">
                             <label><strong>Fecha de emision</strong></label>
-                            <input data-role="datepicker" data-value="'.$item->fecha_emision.'" data-locale="es-MX" data-on-set="myLib'.$item->id.'.date.set">
-                            <script>
-                            
-                            var myLib'.$item->id.' = {
-                                date: {
-                                    set: function(val){
-                                        $("#fecha_emision'.$item->id.'").val(val.format("%Y-%m-%d"));
-                                    }
-                                }
-                            }
-                            </script>
+                            <input data-role="datepicker" data-value="'.$item->fecha_emision.'" data-locale="es-MX" data-on-set="fecha_emision('.$item->id.', arguments[1])" data-distance="1">
                             <input type="hidden" id="fecha_emision'.$item->id.'" name="fecha_emision'.$item->id.'">
                         </div>
+
                         <div class="form-group">
                             <label><strong>Folio factura</strong></label>
                             <input id="folio_factura" name="folio_factura" type="text" placeholder="Ingrese folio de la factura" required value="'.$item->folio_factura.'" />
@@ -127,17 +119,7 @@
                         </div>
                         <div class="form-group">
                             <label><strong>Fecha de pago</strong></label>
-                            <input id="" name="" data-role="datepicker" data-value="'.$item->fecha_pago.'" data-locale="es-MX" data-on-set="f_pago'.$item->id.'.date.set">
-                            <script>
-                            
-                            var f_pago'.$item->id.' = {
-                                date: {
-                                    set: function(val){
-                                        $("#fecha_pago'.$item->id.'").val(val.format("%Y-%m-%d"));
-                                    }
-                                }
-                            }
-                            </script>
+                            <input data-role="datepicker" data-value="'.$item->fecha_pago.'" data-locale="es-MX" data-on-set="fecha_pago('.$item->id.', arguments[1])" data-distance="1" style="z-index: 100">
                             <input type="hidden" id="fecha_pago'.$item->id.'" name="fecha_pago'.$item->id.'">
                         </div>
                         <div class="form-group">
@@ -178,6 +160,18 @@
 </table>
 </div>
 
+<script>
+    function fecha_emision (id, fecha)
+    {
+        $("#fecha_emision".concat(id)).val(fecha);
+    }
+
+    function fecha_pago (id, fecha)
+    {
+        $("#fecha_pago".concat(id)).val(fecha);
+    }
+</script>
+
 <ul class="pagination alert flex-justify-center">
     <?php
     if ($pag > 1)
@@ -201,4 +195,4 @@
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-right"></span></a></li>';
     }
     ?>
-</ul>
+</ul>                                    
