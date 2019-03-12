@@ -1,3 +1,4 @@
+</p>
 <ul class="pagination alert flex-justify-center">
     <?php
     if ($pag > 1)
@@ -90,41 +91,89 @@
                 <div class="dialog-title"><strong><center>CONTRATO: '.$item->contrato.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/fianzas_update" method="post">
-                        
-                       <div class="form-group">
-                            <label><strong>Contrato</strong></label>
-                            <input id="contrato" name="contrato" type="text" placeholder="Ingrese numero de contrato" required value="'.$item->contrato.'" />
-                        </div>
-                        '.GetFiadoresSelect($fiadores, $item->fiador_id).'
-                        '.GetFianzaTipoSelect($afianzadores_tipos, $item->tipo_fianza_id).'
-                        <div class="form-group">
-                            <label><strong>Folio fianza</strong></label>
-                            <input id="folio_fianza" name="folio_fianza" type="text" placeholder="Ingrese folio de la fianza" required value="'.$item->folio_fianza.'" />
-                        </div>
-                        '.GetAfianzadoraSelect($afianzadora, $item->afianzadora_id).'
-                        
                         <div class="form-group">
                             <label><strong>Fecha de emision</strong></label>
                             <input data-role="datepicker" data-value="'.$item->fecha_emision.'" data-locale="es-MX" data-on-set="fecha_emision('.$item->id.', arguments[1])" data-distance="1">
                             <input type="hidden" id="fecha_emision'.$item->id.'" name="fecha_emision'.$item->id.'">
                         </div>
+                        </p>
+                        <div class="row">
+                            
+                            <div class="cell-6"><div class="form-group">
+                                <label><strong>Contrato</strong></label>
+                                <input id="contrato" name="contrato" type="text" placeholder="Ingrese numero de contrato" required value="'.$item->contrato.'" />
+                            </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label><strong>Folio factura</strong></label>
-                            <input id="folio_factura" name="folio_factura" type="text" placeholder="Ingrese folio de la factura" required value="'.$item->folio_factura.'" />
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Monto factura $</strong></label>
-                            <input id="monto_factura" name="monto_factura" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->monto_factura.'" />
-                        </div>
+                            <div class="cell-6">
+                            '.GetFianzaTipoSelect($afianzadores_tipos, $item->tipo_fianza_id).'    
+                            </div>
+                        </div> 
+                       </p>
+                        '.GetFiadoresSelect($fiadores, $item->fiador_id).'
+                        </p>
+                        <div class="row">
+                            
+                            <div class="cell-6"><div class="form-group">
+                                <div class="form-group">
+                                <label><strong>Monto factura $</strong></label>
+                                <input id="monto_factura" name="monto_factura" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->monto_factura.'" />
+                            </div>
+                            </div>
+                            </div>
+
+                            <div class="cell-6">
+                            <div class="form-group">
+                                <label><strong>Folio factura</strong></label>
+                                <input id="folio_factura" name="folio_factura" type="text" placeholder="Ingrese folio de la factura" required value="'.$item->folio_factura.'" />
+                            </div>
+                            </div>
+                        </div> 
+                        </p>
+                        <div class="row">
+                            
+                            <div class="cell-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label><strong>Folio fianza</strong></label>
+                                    <input id="folio_fianza" name="folio_fianza" type="text" placeholder="Ingrese folio de la fianza" required value="'.$item->folio_fianza.'" />
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="cell-6">
+                                <div class="form-group">
+                                    <label><strong>Estatus</strong></label>
+                                    <input id="entrega" name="entrega" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->entrega.'" />
+                                </div>
+                            </div>
+                        </div> 
+                        </p>
+                        '.GetAfianzadoraSelect($afianzadora, $item->afianzadora_id).'
+                        </p>
+                        <div class="row">
+                            
+                            <div class="cell-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label><strong>Monto factura $</strong></label>
+                                    <input id="monto_factura" name="monto_factura" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->monto_factura.'" />
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="cell-6">
+                            <div class="form-group">
+                                <label><strong>Folio factura</strong></label>
+                                <input id="folio_factura" name="folio_factura" type="text" placeholder="Ingrese folio de la factura" required value="'.$item->folio_factura.'" />
+                            </div>
+                            </div>
+                        </div> 
+                        </p>
                         <div class="form-group">
                             <label><strong>Fecha de pago</strong></label>
                             <input data-role="datepicker" data-value="'.$item->fecha_pago.'" data-locale="es-MX" data-on-set="fecha_pago('.$item->id.', arguments[1])" data-distance="1" style="z-index: 100">
                             <input type="hidden" id="fecha_pago'.$item->id.'" name="fecha_pago'.$item->id.'">
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Estatus</strong></label>
-                            <input id="entrega" name="entrega" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->entrega.'" />
                         </div>
                         <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
                         <input type="hidden" id="id" name="id" value="'.$item->id.'">
@@ -134,6 +183,7 @@
                     </form>
                     <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
                 </div>
+            </div>
             </div>
 
             <!--Eliminar-->
@@ -160,17 +210,7 @@
 </table>
 </div>
 
-<script>
-    function fecha_emision (id, fecha)
-    {
-        $("#fecha_emision".concat(id)).val(fecha);
-    }
 
-    function fecha_pago (id, fecha)
-    {
-        $("#fecha_pago".concat(id)).val(fecha);
-    }
-</script>
 
 <ul class="pagination alert flex-justify-center">
     <?php

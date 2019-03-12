@@ -1,3 +1,4 @@
+</div>
 <div class="dialog" data-role="dialog" id="search_fiador">
     <div class="dialog-title">Buscar Afianzador: Razon social | Contacto</strong></div>
     <div class="dialog-content">
@@ -113,9 +114,6 @@
     </form>
     <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
     </div>
-</div>
-            
-            
 </div>
   <footer class="container-fluid bg-grayWhite p-4">
     <div class="row">

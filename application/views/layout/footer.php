@@ -1,3 +1,14 @@
+<script>
+    function fecha_emision (id, fecha)
+    {
+        $("#fecha_emision".concat(id)).val(fecha);
+    }
+
+    function fecha_pago (id, fecha)
+    {
+        $("#fecha_pago".concat(id)).val(fecha);
+    }
+</script>
 <!--Script metro
     <script src="../../../metro/js/jquery-3.3.1.min.js"></script>
 -->
@@ -117,13 +128,13 @@
         {
             Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO AGREGADO", {cls: "alert"});
         }
+
+        $(window).load(function() {
+            $('#preloader').fadeOut('slow');
+            $('body').css({'overflow':'visible'});
+        })
+        
     </script>
 
 </body>
 </html>
-<script>
-$(window).load(function() {
-	$('#preloader').fadeOut('slow');
-	$('body').css({'overflow':'visible'});
-})
-</script>

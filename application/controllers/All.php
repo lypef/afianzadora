@@ -371,14 +371,14 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ')->num_rows() / 10, 0, '', ' ');
 		}
 		else
 		{
-			$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id')->num_rows() / 10, 0, '', ' ');
 		}
 
-		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
+		$limit = 'LIMIT '.(($pag * 10) - 10).', 10;';
 		$data['pags'] = $TotalPags;
 		$data['pag'] = $pag;
 
