@@ -371,7 +371,7 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ')->num_rows() / 10, 0, '', ' ');
+			$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.razon_social like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.contrato like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and t.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_fianza like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_factura like '.$like.' ')->num_rows() / 10, 0, '', ' ');
 		}
 		else
 		{
@@ -385,7 +385,7 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$data['data'] = $this->db->query('SELECT * FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ' . $limit .' ')->result();
+			$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, fi.id as fiador_id, f.contrato, t.nombre as tipo_fianza, t.id as tipo_fianza_id, f.folio_fianza, a.nombre as afianzadora, a.id as afianzadora_id, f.fecha_emision, f.folio_factura, f.monto_factura, f.fecha_pago, f.entrega, f.pdf_contrato_obra, f.pdf_constancia_situacion_fiscal, f.pdf_estados_financiero, f.pdf_comprobante_domicilio, f.pdf_ife_representante_legal, f.pdf_curp FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.razon_social like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.contrato like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and t.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_fianza like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_factura like '.$like.'  ' . $limit .' ')->result();
 		}
 		else
 		{
@@ -425,10 +425,10 @@ class All extends CI_Controller {
 		
 		if ($this->db->affected_rows() >= 1 )
 		{
-			redirect($url.'?afianzadora_aupdatetrue=true');
+			redirect($url.'?afianzadora_aupdatetrue=true&search='.$this->input->post('contrato'));
 		}else
 		{
-			redirect($url.'?afianzadora_aupdatefalse=false');
+			redirect($url.'?afianzadora_aupdatefalse=false&search='.$this->input->post('contrato'));
 		}
 	}
 

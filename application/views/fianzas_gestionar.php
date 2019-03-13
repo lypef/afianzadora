@@ -1,9 +1,12 @@
 </p>
 <ul class="pagination alert flex-justify-center">
     <?php
+    $search = "";
+    if (isset($_GET['search'])){$search = '&search='.$_GET['search'];}
+    
     if ($pag > 1)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).'" ><span class="mif-arrow-left"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).$search.'" ><span class="mif-arrow-left"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-left"></span></a></li>';
     }
@@ -12,19 +15,19 @@
          if ($pag == $i)
             echo '<li class="page-item active"><a class="page-link" >'.$i.'</a></li>';
          else
-            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.'">'.$i.'</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.$search.'">'.$i.'</a></li>';
       }
     }
     if ($pag < $pags)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).'"><span class="mif-arrow-right"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).$search.'"><span class="mif-arrow-right"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-right"></span></a></li>';
     }
     ?>
 </ul>
 
-<form action="<?php echo base_url(); ?>all/fiadores_gestionar" method="get">
+<form action="<?php echo base_url(); ?>all/fianzas_gestionar" method="get">
     <div class="input"><input id="search" name="search" type="text" class="" value="<?php if (isset($_GET['search'])) { echo $_GET["search"];}?>"><div class="button-group"><button class="button input-clear-button" tabindex="-1" type="button"><span class="default-icon-cross"></span></button></div><div class="prepend">Ingrese texto para realizar busqueda:</div></div>
 </form>
 
@@ -93,7 +96,7 @@
                     <form action="'.base_url().'all/fianzas_update" method="post">
                         <div class="form-group">
                             <label><strong>Fecha de emision</strong></label>
-                            <input data-role="datepicker" data-value="'.$item->fecha_emision.'" data-locale="es-MX" data-on-set="fecha_emision('.$item->id.', arguments[1])" data-distance="1">
+                            <input data-role="datepicker" data-value="'.date("Y-m-d",strtotime($item->fecha_emision."+ 1 days")).'" data-locale="es-MX" data-on-set="fecha_emision('.$item->id.', arguments[1])" data-distance="1">
                             <input type="hidden" id="fecha_emision'.$item->id.'" name="fecha_emision'.$item->id.'">
                         </div>
                         </p>
@@ -114,12 +117,11 @@
                         </p>
                         <div class="row">
                             
-                            <div class="cell-6"><div class="form-group">
-                                <div class="form-group">
-                                <label><strong>Monto factura $</strong></label>
-                                <input id="monto_factura" name="monto_factura" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->monto_factura.'" />
-                            </div>
-                            </div>
+                            <div class="cell-6">
+                            <div class="form-group">
+                                    <label><strong>Monto factura $</strong></label>
+                                    <input id="monto_factura" name="monto_factura" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->monto_factura.'" />
+                                </div>
                             </div>
 
                             <div class="cell-6">
@@ -151,28 +153,10 @@
                         </p>
                         '.GetAfianzadoraSelect($afianzadora, $item->afianzadora_id).'
                         </p>
-                        <div class="row">
-                            
-                            <div class="cell-6">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label><strong>Monto factura $</strong></label>
-                                    <input id="monto_factura" name="monto_factura" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->monto_factura.'" />
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="cell-6">
-                            <div class="form-group">
-                                <label><strong>Folio factura</strong></label>
-                                <input id="folio_factura" name="folio_factura" type="text" placeholder="Ingrese folio de la factura" required value="'.$item->folio_factura.'" />
-                            </div>
-                            </div>
-                        </div> 
-                        </p>
+                        
                         <div class="form-group">
                             <label><strong>Fecha de pago</strong></label>
-                            <input data-role="datepicker" data-value="'.$item->fecha_pago.'" data-locale="es-MX" data-on-set="fecha_pago('.$item->id.', arguments[1])" data-distance="1" style="z-index: 100">
+                            <input data-role="datepicker" data-value="'.date("Y-m-d",strtotime($item->fecha_pago."+ 1 days")).'" data-locale="es-MX" data-on-set="fecha_pago('.$item->id.', arguments[1])" data-distance="1" style="z-index: 100">
                             <input type="hidden" id="fecha_pago'.$item->id.'" name="fecha_pago'.$item->id.'">
                         </div>
                         <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
@@ -210,13 +194,26 @@
 </table>
 </div>
 
+<script>
+    function fecha_emision (id, fecha)
+    {
+        $("#fecha_emision".concat(id)).val(fecha);
+    }
 
+    function fecha_pago (id, fecha)
+    {
+        $("#fecha_pago".concat(id)).val(fecha);
+    }
+</script>
 
 <ul class="pagination alert flex-justify-center">
     <?php
+    $search = "";
+    if (isset($_GET['search'])){$search = '&search='.$_GET['search'];}
+    
     if ($pag > 1)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).'" ><span class="mif-arrow-left"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).$search.'" ><span class="mif-arrow-left"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-left"></span></a></li>';
     }
@@ -225,14 +222,14 @@
          if ($pag == $i)
             echo '<li class="page-item active"><a class="page-link" >'.$i.'</a></li>';
          else
-            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.'">'.$i.'</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.$search.'">'.$i.'</a></li>';
       }
     }
     if ($pag < $pags)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).'"><span class="mif-arrow-right"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).$search.'"><span class="mif-arrow-right"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-right"></span></a></li>';
     }
     ?>
-</ul>                                    
+</ul>                                  
