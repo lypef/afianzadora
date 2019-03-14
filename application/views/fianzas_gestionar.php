@@ -103,7 +103,7 @@
             </div>
             
             <!--Actualizar-->            
-            <div class="dialog" data-role="dialog" id="editar'.$item->id.'">
+            <div class="dialog" data-role="dialog" id="editar'.$item->id.'" data-width="550">
                 <div class="dialog-title"><strong><center>CONTRATO: '.$item->contrato.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/fianzas_update" method="post">
@@ -161,7 +161,7 @@
                             <div class="cell-6">
                                 <div class="form-group">
                                     <label><strong>Estatus</strong></label>
-                                    <input id="entrega" name="entrega" type="text" placeholder="Ingrese el monto de la factura" required value="'.$item->entrega.'" />
+                                    <input id="entrega" name="entrega" type="text" placeholder="Estatus" required value="'.$item->entrega.'" />
                                 </div>
                             </div>
                         </div> 
@@ -209,32 +209,6 @@
     </tbody>
 </table>
 </div>
-
-<script>
-    function fecha_emision (id, fecha)
-    {
-        $("#fecha_emision".concat(id)).val(fecha);
-    }
-
-    function fecha_pago (id, fecha)
-    {
-        $("#fecha_pago".concat(id)).val(fecha);
-    }
-
-    function select_afianzadora (id, select)
-    {
-        $("#afianzadora_".concat(id)).val(select);
-    }
-    function select_fiador (id, select)
-    {
-        $("#fiador_".concat(id)).val(select);
-    }
-    function select_tipo_fianza (id, select)
-    {
-        $("#tipo_fianza_".concat(id)).val(select);
-    }
-</script>
-
 <ul class="pagination alert flex-justify-center">
     <?php
     $search = "";

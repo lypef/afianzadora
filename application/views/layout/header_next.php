@@ -128,7 +128,7 @@
 
         <!-- Inicia modulo titulaes-->
         <div class="group">
-            <button onclick="Metro.dialog.open('#add_fiador')" class="ribbon-button">
+            <button onclick="Metro.dialog.open('#add_fianza')" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-plus"></span>
                     </span>

@@ -43,6 +43,12 @@
 
     function GetFiadoresSelect ($fiadores, $id_select, $input)
     {
+        if (empty($fiadores))
+        {
+            $c =& get_instance();
+            $fiadores = $c->db->query('SELECT id, razon_social FROM `fiadores` order by razon_social asc')->result();
+        }
+
         $r = null;
         $r = '
         <div class="form-group">
@@ -52,6 +58,11 @@
         
         foreach ($fiadores as $row)
         {
+                if ($id_select <= 0)
+                {
+                    $id_select = $row->id;
+                }
+
                 if ($id_select == $row->id)
                 {
                     $r .= '
@@ -68,11 +79,21 @@
         </select>
         </div>
         ';
+        if ($input <= 0)
+        {
+            echo '<script>document.getElementById("fiador_0").value = "'.$id_select.'";</script>';
+        }
         return $r;
     }
 
     function GetFianzaTipoSelect ($afianzadores_tipos ,$id_select, $input)
     {
+        if (empty($afianzadores_tipos))
+        {
+            $c =& get_instance();
+            $afianzadores_tipos = $c->db->query('SELECT * FROM afianzadores_tipos order by nombre asc')->result();
+        }
+
         $r = null;
         $r = '
         <div class="form-group">
@@ -82,6 +103,10 @@
         
         foreach ($afianzadores_tipos as $row)
         {
+                if ($id_select <= 0)
+                {
+                    $id_select = $row->id;
+                }
                 if ($id_select == $row->id)
                 {
                     $r .= '
@@ -98,11 +123,21 @@
         </select>
         </div>
         ';
+        if ($input <= 0)
+        {
+            echo '<script>document.getElementById("tipo_fianza_0").value = "'.$id_select.'";</script>';
+        }
         return $r;
     }
 
     function GetAfianzadoraSelect ($afianzadora, $id_select, $input)
     {
+        if (empty($afianzadora))
+        {
+            $c =& get_instance();
+            $afianzadora = $c->db->query('SELECT id, nombre FROM afianzadoras order by nombre asc')->result();
+        }
+        
         $r = null;
         $r = '
         <div class="form-group">
@@ -113,6 +148,10 @@
         
         foreach ($afianzadora as $row)
         {
+                if ($id_select <= 0)
+                {
+                    $id_select = $row->id;
+                }
                 if ($id_select == $row->id)
                 {
                     $r .= '
@@ -129,6 +168,10 @@
         </select>
         </div>
         ';
+        if ($input <= 0)
+        {
+            echo '<script>document.getElementById("afianzadora_0").value = "'.$id_select.'";</script>';
+        }
         return $r;
     }
 ?>

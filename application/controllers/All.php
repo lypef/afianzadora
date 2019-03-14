@@ -403,6 +403,37 @@ class All extends CI_Controller {
 		$this->load->view('layout/footer');
 	}
 
+	public function fianzas_add ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$data = array(
+			'fiador' => $this->input->post('fiador_0'),
+			'contrato' => $this->input->post('contrato'),
+			'tipo_fianza' => $this->input->post('tipo_fianza_0'),
+			'folio_fianza' => $this->input->post('folio_fianza'),
+			'afianzadora' => $this->input->post('afianzadora_0'),
+			'fecha_emision' => $this->input->post('fecha_emision0'),
+			'folio_factura' => $this->input->post('folio_factura'),
+			'monto_factura' => floatval($this->input->post('monto_factura')),
+			'fecha_pago' => $this->input->post('fecha_pago0'),
+			'entrega' => $this->input->post('entrega')
+		);
+		
+		
+		//print_r($data);
+		$this->db->insert('fianzas',$data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?afianzadora_aupdatetrue=true&search='.$this->input->post('contrato'));
+		}else
+		{
+			redirect($url.'?afianzadora_aupdatefalse=false&search='.$this->input->post('contrato'));
+		}
+	}
+	
 	public function fianzas_update ()
 	{
 		LoginCheck();
