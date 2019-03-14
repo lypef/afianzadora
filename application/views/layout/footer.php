@@ -1,9 +1,9 @@
 <!--Script metro
     <script src="../../../metro/js/jquery-3.3.1.min.js"></script>
 -->
-<script src="../../../metro/js/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-<script src="../../../metro/js/metro.js"></script>
+<script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 
 	<script>
         function getUrlVars() {
@@ -118,11 +118,23 @@
             Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO AGREGADO", {cls: "alert"});
         }
 
-        $(window).load(function() {
+        // Ocultar load js 1.9
+        //$(window).load(function() {
+          //  $('#preloader').fadeOut('slow');
+           // $('body').css({'overflow':'visible'});
+        //})
+
+        // Ocultar load js 3.3.1
+        $(window).on("load", function() {
             $('#preloader').fadeOut('slow');
             $('body').css({'overflow':'visible'});
-        })
+        });
         
+        //Limpiar input buscar
+        function clear_focus_seaerch() {
+            document.getElementById("search").value = "";
+            document.getElementById("search").focus();
+        }
     </script>
 
 </body>

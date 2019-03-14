@@ -12,6 +12,19 @@
     </div>
 </div>
 
+<div class="dialog" data-role="dialog" id="search_fianza">
+    <div class="dialog-title">Buscar Fianza:</strong></div>
+    <div class="dialog-content">
+        <form action="<?php echo base_url(); ?>all/fianzas_gestionar" method="get">
+            <input type="text" id="search" name="search" data-role="input" data-search-button="true" placeholder="Ingrese texto aqui ..." >
+    </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button info js-dialog-close">Buscar</button>
+        </form>
+        <button class="button js-dialog-close">Cerrar</button>
+    </div>
+</div>
+
 <div class="dialog" data-role="dialog" id="search_afianzadora">
     <div class="dialog-title">Buscar Afianzadora: Nombre | Razon social</strong></div>
     <div class="dialog-content">

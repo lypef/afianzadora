@@ -41,13 +41,13 @@
         }
     }
 
-    function GetFiadoresSelect ($fiadores, $id_select)
+    function GetFiadoresSelect ($fiadores, $id_select, $input)
     {
         $r = null;
         $r = '
         <div class="form-group">
             <label><strong>Fiador</strong></label>
-            <select id="fiador" name="fiador">
+            <select id="fiador" name="fiador" data-role="select" data-on-item-select="select_fiador('.$input.',arguments[0])">
         ';
         
         foreach ($fiadores as $row)
@@ -71,13 +71,13 @@
         return $r;
     }
 
-    function GetFianzaTipoSelect ($afianzadores_tipos ,$id_select)
+    function GetFianzaTipoSelect ($afianzadores_tipos ,$id_select, $input)
     {
         $r = null;
         $r = '
         <div class="form-group">
             <label><strong>Tipo de fianza</strong></label>
-            <select id="tipo_fianza" name="tipo_fianza">
+            <select id="tipo_fianza" name="tipo_fianza" data-role="select" data-on-item-select="select_tipo_fianza('.$input.',arguments[0])">
         ';
         
         foreach ($afianzadores_tipos as $row)
@@ -101,13 +101,14 @@
         return $r;
     }
 
-    function GetAfianzadoraSelect ($afianzadora, $id_select)
+    function GetAfianzadoraSelect ($afianzadora, $id_select, $input)
     {
         $r = null;
         $r = '
         <div class="form-group">
-            <label><strong>Afianzadora</strong></label>
-            <select id="afianzadora" name="afianzadora">
+            <label ><strong>Afianzadora</strong></label>
+            <select id="afianzadora" name="afianzadora" data-role="select" data-on-item-select="select_afianzadora('.$input.',arguments[0])">
+            
         ';
         
         foreach ($afianzadora as $row)

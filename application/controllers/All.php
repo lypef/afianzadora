@@ -409,11 +409,11 @@ class All extends CI_Controller {
 		$url = $this->input->post('url');
 		
 		$data = array(
-			'fiador' => $this->input->post('fiador'),
+			'fiador' => $this->input->post('fiador_'.$this->input->post('id')),
 			'contrato' => $this->input->post('contrato'),
-			'tipo_fianza' => $this->input->post('tipo_fianza'),
+			'tipo_fianza' => $this->input->post('tipo_fianza_'.$this->input->post('id')),
 			'folio_fianza' => $this->input->post('folio_fianza'),
-			'afianzadora' => $this->input->post('afianzadora'),
+			'afianzadora' => $this->input->post('afianzadora_'.$this->input->post('id')),
 			'fecha_emision' => $this->input->post('fecha_emision'.$this->input->post('id')),
 			'folio_factura' => $this->input->post('folio_factura'),
 			'monto_factura' => floatval($this->input->post('monto_factura')),
@@ -421,6 +421,7 @@ class All extends CI_Controller {
 			'entrega' => $this->input->post('entrega')
 		);
 		
+		//print_r($data);
 		$this->db->where('id', $this->input->post('id'))->update('fianzas', $data);
 		
 		if ($this->db->affected_rows() >= 1 )

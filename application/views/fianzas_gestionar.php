@@ -28,7 +28,12 @@
 </ul>
 
 <form action="<?php echo base_url(); ?>all/fianzas_gestionar" method="get">
-    <div class="input"><input id="search" name="search" type="text" class="" value="<?php if (isset($_GET['search'])) { echo $_GET["search"];}?>"><div class="button-group"><button class="button input-clear-button" tabindex="-1" type="button"><span class="default-icon-cross"></span></button></div><div class="prepend">Ingrese texto para realizar busqueda:</div></div>
+    <div class="input">
+    <input id="search" name="search" type="text" class="" value="<?php if (isset($_GET['search'])) { echo $_GET["search"];}?>">
+    <div class="button-group">
+        <button class="button input-clear-button" tabindex="-1" type="button" onclick="clear_focus_seaerch()"><span class="default-icon-cross"></span></button>
+    </div>
+    <div class="prepend">Ingrese texto para realizar busqueda:</div></div>
 </form>
 
 <br>
@@ -44,6 +49,14 @@
             <th>OPCIONES</th>
         </tr>
     </thead>
+
+        <script>
+            function select ()
+            {
+                console.log(select.val());
+            }
+        </script>
+
     <tbody>
     <?php
         foreach ($data as $item) 
@@ -109,11 +122,13 @@
                             </div>
 
                             <div class="cell-6">
-                            '.GetFianzaTipoSelect($afianzadores_tipos, $item->tipo_fianza_id).'    
+                            <input type="hidden" id="tipo_fianza_'.$item->id.'" name="tipo_fianza_'.$item->id.'" value="'.$item->tipo_fianza_id.'">
+                            '.GetFianzaTipoSelect($afianzadores_tipos, $item->tipo_fianza_id, $item->id).'
                             </div>
                         </div> 
                        </p>
-                        '.GetFiadoresSelect($fiadores, $item->fiador_id).'
+                       <input type="hidden" id="fiador_'.$item->id.'" name="fiador_'.$item->id.'" value="'.$item->fiador_id.'">
+                        '.GetFiadoresSelect($fiadores, $item->fiador_id, $item->id).'
                         </p>
                         <div class="row">
                             
@@ -151,7 +166,8 @@
                             </div>
                         </div> 
                         </p>
-                        '.GetAfianzadoraSelect($afianzadora, $item->afianzadora_id).'
+                        <input type="hidden" id="afianzadora_'.$item->id.'" name="afianzadora_'.$item->id.'" value="'.$item->afianzadora_id.'">
+                        '.GetAfianzadoraSelect($afianzadora, $item->afianzadora_id, $item->id).'
                         </p>
                         
                         <div class="form-group">
@@ -203,6 +219,19 @@
     function fecha_pago (id, fecha)
     {
         $("#fecha_pago".concat(id)).val(fecha);
+    }
+
+    function select_afianzadora (id, select)
+    {
+        $("#afianzadora_".concat(id)).val(select);
+    }
+    function select_fiador (id, select)
+    {
+        $("#fiador_".concat(id)).val(select);
+    }
+    function select_tipo_fianza (id, select)
+    {
+        $("#tipo_fianza_".concat(id)).val(select);
     }
 </script>
 

@@ -24,7 +24,12 @@
 </ul>
 
 <form action="<?php echo base_url(); ?>all/fiadores_gestionar" method="get">
-    <div class="input"><input id="search" name="search" type="text" class="" value="<?php if (isset($_GET['search'])) { echo $_GET["search"];}?>"><div class="button-group"><button class="button input-clear-button" tabindex="-1" type="button"><span class="default-icon-cross"></span></button></div><div class="prepend">Ingrese texto para realizar busqueda:</div></div>
+    <div class="input">
+    <input id="search" name="search" type="text" class="" value="<?php if (isset($_GET['search'])) { echo $_GET["search"];}?>">
+    <div class="button-group">
+        <button class="button input-clear-button" tabindex="-1" type="button" onclick="clear_focus_seaerch()"><span class="default-icon-cross"></span></button>
+    </div>
+    <div class="prepend">Ingrese texto para realizar busqueda:</div></div>
 </form>
 
 <br>

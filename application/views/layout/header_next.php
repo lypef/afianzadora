@@ -144,14 +144,14 @@
             </button>
             </a>
 
-            <button onclick="Metro.dialog.open('#search_fiador')" class="ribbon-button">
+            <button onclick="Metro.dialog.open('#search_fianza');" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-search"></span>
                     </span>
                 <span class="caption">Buscar</span>
             </button>
             <span class="title">Fianzas</span>
-
+            
         </div>
         <!-- Finaliza modulo titulaes-->
 
