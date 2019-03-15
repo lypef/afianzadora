@@ -464,6 +464,95 @@ class All extends CI_Controller {
 		}
 	}
 
+	public function fianzas_up_docs ()
+	{
+		LoginCheck();
+		$id = $this->input->post('id'); $contrato = $this->input->post('contrato');
+		$date = date("YmdHis");
+		
+		$pdf_contrato_obra = false; $situacion_fiscal= false; $estados_financieros= false; $comprobante_domicilio= false;	
+		$pdf_contrato_obra_url = ""; $situacion_fiscal_url= ""; $estados_financieros_url= ""; $comprobante_domicilio_url= "";	
+		
+		$ife_r_legal= false; $curp= false;
+		$ife_r_legal_url= ""; $curp_url= "";
+
+		$config['upload_path'] = "../../documentos/";
+		$config['allowed_types'] = 'pdf';
+		$config['max_size'] = '5000';
+		$config['max_width']  = '5024';
+		$config['max_height']  = '5768';
+		$config['file_name'] = 'finza_'.$id.'_'. $date .'.pdf';
+		$this->load->library('upload', $config);
+
+		//subir pdf_contrato_obra
+		if ($this->upload->do_upload('pdf_contrato_obra'.$this->input->post('id')))
+		{
+			$pdf_contrato_obra = true;
+			$pdf_contrato_obra_url = $config['upload_path'] . $config['file_name'];
+		}
+		
+
+		//subir situacion_fiscal
+		if ($this->upload->do_upload('situacion_fiscal'.$this->input->post('id')))
+		{
+			$situacion_fiscal = true;
+			$situacion_fiscal_url = $config['upload_path'] . 'finza_'.$id.'_'. $date .'1.pdf';
+		}
+
+		//subir estados_financieros
+		if ($this->upload->do_upload('estados_financieros'.$this->input->post('id')))
+		{
+			$estados_financieros = true;
+			$estados_financieros_url = $config['upload_path'] . 'finza_'.$id.'_'. $date .'2.pdf';
+		}
+
+		//subir comprobante_domicilio
+		if ($this->upload->do_upload('comprobante_domicilio'.$this->input->post('id')))
+		{
+			$comprobante_domicilio = true;
+			$comprobante_domicilio_url = $config['upload_path'] .'finza_'.$id.'_'. $date .'3.pdf';
+		}
+
+		//subir ife_r_legal
+		if ($this->upload->do_upload('ife_r_legal'.$this->input->post('id')))
+		{
+			$ife_r_legal = true;
+			$ife_r_legal_url = $config['upload_path'] . 'finza_'.$id.'_'. $date .'4.pdf';
+		}
+
+		//subir curp
+		if ($this->upload->do_upload('curp'.$this->input->post('id')))
+		{
+			$curp = true;
+			$curp_url = $config['upload_path'] . 'finza_'.$id.'_'. $date .'5.pdf';
+		}
+		
+		$data = array(
+			'pdf_contrato_obra' => $pdf_contrato_obra_url,
+			'pdf_constancia_situacion_fiscal' => $situacion_fiscal_url,
+			'pdf_estados_financiero' => $estados_financieros_url,
+			'pdf_comprobante_domicilio' => $comprobante_domicilio_url,
+			'pdf_ife_representante_legal' => $ife_r_legal_url,
+			'pdf_curp' => $curp_url
+		);
+
+		if ($pdf_contrato_obra && $situacion_fiscal && $estados_financieros && $comprobante_domicilio && $ife_r_legal && $curp)
+		{
+			$this->db->where('id', $this->input->post('id'))->update('fianzas', $data);
+		
+			if ($this->db->affected_rows() >= 1 )
+			{
+				redirect(base_url().'all/fianzas_gestionar?search='.$contrato.'&afianzadora_aupdatetrue');
+			}else
+			{
+				redirect(base_url().'all/fianzas_gestionar?search='.$contrato.'&afianzadora_aupdatefals');
+			}
+		}else
+		{
+			redirect(base_url().'all/fianzas_gestionar?search='.$contrato.'&afianzadora_aupdatefals');
+		}
+	}
+
 	public function fianzas_delete ()
 	{
 		LoginCheck();

@@ -1,3 +1,4 @@
+
 </p>
 <ul class="pagination alert flex-justify-center">
     <?php
@@ -61,6 +62,21 @@
     <?php
         foreach ($data as $item) 
         {
+            $documentos = "";
+            if (empty($item->pdf_contrato_obra))
+            {
+                $documentos = '<li><a href="#" onclick="Metro.dialog.open(\'#add_docs'.$item->id.'\')"><span class="mif-folder-plus fg-red"></span> <span class="fg-red">Subir documentos solicitud</span></a></li>';
+            }else
+            {
+                $documentos = '
+                    <li><a href="#" onclick="Metro.dialog.open(\'#pdf_contrato_obra'.$item->id.'\')"><span class="mif-file-pdf"></span> Contrato de obra</a></li>
+                    <li><a href="#" onclick="Metro.dialog.open(\'#pdf_constancia_situacion_fiscal'.$item->id.'\')"><span class="mif-file-pdf"></span> Constancia fiscal</a></li>
+                    <li><a href="#" onclick="Metro.dialog.open(\'#pdf_estados_financiero'.$item->id.'\')"><span class="mif-file-pdf"></span> Estado financiero</a></li>
+                    <li><a href="#" onclick="Metro.dialog.open(\'#pdf_comprobante_domicilio'.$item->id.'\')"><span class="mif-file-pdf"></span> Comprobante de domicilio</a></li>
+                    <li><a href="#" onclick="Metro.dialog.open(\'#pdf_ife_representante_legal'.$item->id.'\')"><span class="mif-file-pdf"></span> Representante legal</a></li>
+                    <li><a href="#" onclick="Metro.dialog.open(\'#pdf_curp'.$item->id.'\')"><span class="mif-file-pdf"></span> Curp</a></li>
+                ';
+            }
             echo 
             '
             <tr>
@@ -77,13 +93,158 @@
                     <li><a href="#" onclick="Metro.dialog.open(\'#editar'.$item->id.'\')"><span class="mif-pencil"></span> Editar</a></li>
                     <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Eliminar</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><span class="mif-folder-open"></span> Ver documentos solicitud</a></li>
+                    '.$documentos.'
                 </ul>
             </div>
             </td>
             
             </tr>
             
+            <!--Visualizar pdf_contrato_obra-->            
+            <div class="dialog" data-role="dialog" id="pdf_contrato_obra'.$item->id.'" data-width="80%">
+                <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+                <div class="content" style="height: 500px;">
+                    <iframe src="'.$item->pdf_contrato_obra.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                </div>
+                </div>
+                <div class="dialog-actions">
+                    <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                </div>
+            </div>
+
+            <!--Visualizar pdf_constancia_situacion_fiscal-->            
+            <div class="dialog" data-role="dialog" id="pdf_constancia_situacion_fiscal'.$item->id.'" data-width="80%">
+                <div class="dialog-title"><strong>CONSTANCIA DE SITUACION FISCAL: | CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+                <div class="content" style="height: 500px;">
+                    <iframe src="'.$item->pdf_constancia_situacion_fiscal.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                </div>
+                </div>
+                <div class="dialog-actions">
+                    <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                </div>
+            </div>
+
+            <!--Visualizar pdf_estados_financiero-->            
+            <div class="dialog" data-role="dialog" id="pdf_estados_financiero'.$item->id.'" data-width="80%">
+                <div class="dialog-title"><strong>ESTADO FINANCIERO: | CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+                <div class="content" style="height: 500px;">
+                    <iframe src="'.$item->pdf_estados_financiero.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                </div>
+                </div>
+                <div class="dialog-actions">
+                    <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                </div>
+            </div>
+
+            <!--Visualizar pdf_comprobante_domicilio-->            
+            <div class="dialog" data-role="dialog" id="pdf_comprobante_domicilio'.$item->id.'" data-width="80%">
+                <div class="dialog-title"><strong>COMPROBANTE DE DOMICILIO: | CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+                <div class="content" style="height: 500px;">
+                    <iframe src="'.$item->pdf_comprobante_domicilio.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                </div>
+                </div>
+                <div class="dialog-actions">
+                    <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                </div>
+            </div>
+
+            <!--Visualizar pdf_ife_representante_legal-->            
+            <div class="dialog" data-role="dialog" id="pdf_ife_representante_legal'.$item->id.'" data-width="80%">
+                <div class="dialog-title"><strong>IFE, REPRESENTANTE LEGAL: | CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+                <div class="content" style="height: 500px;">
+                    <iframe src="'.$item->pdf_ife_representante_legal.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                </div>
+                </div>
+                <div class="dialog-actions">
+                    <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                </div>
+            </div>
+
+            <!--Visualizar pdf_curp-->            
+            <div class="dialog" data-role="dialog" id="pdf_curp'.$item->id.'" data-width="80%">
+                <div class="dialog-title"><strong>CURP: | CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+                <div class="content" style="height: 500px;">
+                    <iframe src="'.$item->pdf_curp.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                </div>
+                </div>
+                <div class="dialog-actions">
+                    <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                </div>
+            </div>
+
+            <!--Subir documentos-->            
+            <div class="dialog" data-role="dialog" id="add_docs'.$item->id.'" data-width="80%">
+                <div class="dialog-title"><strong>DOCUMENTACION DEL CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+                
+                <form action="'.base_url().'all/fianzas_up_docs" method="post" enctype="multipart/form-data">
+                <div data-role="accordion" data-one-frame="true" data-show-active="true">
+                    <div class="frame active">
+                        <div class="heading bg-darkgray bg-gray-hover fg-white">Ingrese PDf - Contrato de obra</div>
+                        <div class="content">
+                            <div class="p-2">
+                                <input type="file" id="pdf_contrato_obra'.$item->id.'" name="pdf_contrato_obra'.$item->id.'" aria-label="File browser example" accept="application/pdf" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame">
+                        <div class="heading bg-darkgray bg-gray-hover fg-white">Ingrese PDf - Situacion fiscal</div>
+                        <div class="content">
+                            <div class="p-2">
+                                <input type="file" id="situacion_fiscal'.$item->id.'" name="situacion_fiscal'.$item->id.'" aria-label="File browser example" accept="application/pdf" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame">
+                        <div class="heading bg-darkgray bg-gray-hover fg-white">Ingrese PDf - Estados financieros</div>
+                        <div class="content">
+                            <div class="p-2">
+                                <input type="file" id="estados_financieros'.$item->id.'" name="estados_financieros'.$item->id.'" aria-label="File browser example" accept="application/pdf" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame">
+                        <div class="heading bg-darkgray bg-gray-hover fg-white">Ingrese PDf - Comprobante de domicilio</div>
+                        <div class="content">
+                            <div class="p-2">
+                            <input type="file" id="comprobante_domicilio'.$item->id.'" name="comprobante_domicilio'.$item->id.'" aria-label="File browser example" accept="application/pdf" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame">
+                        <div class="heading bg-darkgray bg-gray-hover fg-white">Ingrese PDf - IFE, Representante legal</div>
+                        <div class="content">
+                            <div class="p-2">
+                                <input type="file" id="ife_r_legal'.$item->id.'" name="ife_r_legal'.$item->id.'" aria-label="File browser example" accept="application/pdf" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame">
+                        <div class="heading bg-darkgray bg-gray-hover fg-white">Ingrese PDf - CURP</div>
+                        <div class="content">
+                            <div class="p-2">
+                                <input type="file" id="curp'.$item->id.'" name="curp'.$item->id.'" aria-label="File browser example" accept="application/pdf" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="id" name="id" value="'.$item->id.'"> 
+                <input type="hidden" id="contrato" name="contrato" value="'.$item->contrato.'"> 
+                </div>
+                <div class="dialog-actions">
+                    <button type="submit" class="button success"><span class="mif-cloud-upload"></span> Subir ficheros</button>
+                    </form>
+                    <button class="button warning js-dialog-close"><span class="mif-cross"></span> cancelar</button>
+                </div>
+            </div>
+            
+            <!--Visualizar Informacion-->
             <div class="dialog" data-role="dialog" id="view'.$item->id.'">
                 <div class="dialog-title"><strong>CONTRATO: '.$item->contrato.'</strong></div>
                 <div class="dialog-content">
@@ -208,6 +369,12 @@
         ?>
     </tbody>
 </table>
+<script>
+function insertvaldocs ()
+{
+    console.log = 's';
+}
+</script>
 </div>
 <ul class="pagination alert flex-justify-center">
     <?php
