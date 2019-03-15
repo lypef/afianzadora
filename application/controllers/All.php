@@ -364,6 +364,9 @@ class All extends CI_Controller {
 		$pag = $this->input->get('pagina');
 		$buscar = $this->input->get('search');
 		$limit = '';
+		$fiador = $this->input->get('fiador');
+		$afianzadora = $this->input->get('afianzadora');
+		
 		if (is_null($pag))
 		{
 			$pag = 1;
@@ -375,7 +378,19 @@ class All extends CI_Controller {
 		}
 		else
 		{
-			$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id')->num_rows() / 10, 0, '', ' ');
+			if  ($fiador > 0)
+			{
+				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.id = '.$fiador.' ')->num_rows() / 10, 0, '', ' ');
+			}
+			else if ($afianzadora > 0)
+			{
+				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.id = '.$afianzadora.' ')->num_rows() / 10, 0, '', ' ');
+			}
+			else
+			{
+				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id')->num_rows() / 10, 0, '', ' ');
+			}
+			
 		}
 
 		$limit = 'LIMIT '.(($pag * 10) - 10).', 10;';
@@ -389,13 +404,26 @@ class All extends CI_Controller {
 		}
 		else
 		{
-			$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, fi.id as fiador_id, f.contrato, t.nombre as tipo_fianza, t.id as tipo_fianza_id, f.folio_fianza, a.nombre as afianzadora, a.id as afianzadora_id, f.fecha_emision, f.folio_factura, f.monto_factura, f.fecha_pago, f.entrega, f.pdf_contrato_obra, f.pdf_constancia_situacion_fiscal, f.pdf_estados_financiero, f.pdf_comprobante_domicilio, f.pdf_ife_representante_legal, f.pdf_curp FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id '.$limit.' ')->result();
+			if  ($fiador > 0)
+			{
+				$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, fi.id as fiador_id, f.contrato, t.nombre as tipo_fianza, t.id as tipo_fianza_id, f.folio_fianza, a.nombre as afianzadora, a.id as afianzadora_id, f.fecha_emision, f.folio_factura, f.monto_factura, f.fecha_pago, f.entrega, f.pdf_contrato_obra, f.pdf_constancia_situacion_fiscal, f.pdf_estados_financiero, f.pdf_comprobante_domicilio, f.pdf_ife_representante_legal, f.pdf_curp FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.id = '.$fiador.' '.$limit.' ')->result();
+			}
+			else if ($afianzadora > 0)
+			{
+				$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, fi.id as fiador_id, f.contrato, t.nombre as tipo_fianza, t.id as tipo_fianza_id, f.folio_fianza, a.nombre as afianzadora, a.id as afianzadora_id, f.fecha_emision, f.folio_factura, f.monto_factura, f.fecha_pago, f.entrega, f.pdf_contrato_obra, f.pdf_constancia_situacion_fiscal, f.pdf_estados_financiero, f.pdf_comprobante_domicilio, f.pdf_ife_representante_legal, f.pdf_curp FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.id = '.$afianzadora.' '.$limit.' ')->result();
+			}
+			else
+			{
+				$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, fi.id as fiador_id, f.contrato, t.nombre as tipo_fianza, t.id as tipo_fianza_id, f.folio_fianza, a.nombre as afianzadora, a.id as afianzadora_id, f.fecha_emision, f.folio_factura, f.monto_factura, f.fecha_pago, f.entrega, f.pdf_contrato_obra, f.pdf_constancia_situacion_fiscal, f.pdf_estados_financiero, f.pdf_comprobante_domicilio, f.pdf_ife_representante_legal, f.pdf_curp FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id '.$limit.' ')->result();
+			}
+			
 		}
 		
 		$data['fiadores'] = $this->db->query('SELECT id, razon_social FROM `fiadores` order by razon_social asc')->result();
 		$data['afianzadores_tipos'] = $this->db->query('SELECT * FROM afianzadores_tipos order by nombre asc')->result();
 		$data['afianzadora'] = $this->db->query('SELECT id, nombre FROM afianzadoras order by nombre asc')->result();
 
+		
 		$this->load->view('layout/header');
 		$this->load->view('layout/header_next');
 		$this->load->view('fianzas_gestionar', $data);

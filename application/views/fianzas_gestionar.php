@@ -1,13 +1,24 @@
-
 </p>
 <ul class="pagination alert flex-justify-center">
     <?php
     $search = "";
     if (isset($_GET['search'])){$search = '&search='.$_GET['search'];}
     
+    $afi_fia = '&afianzadora=';
+    
+    if (isset($_GET['afianzadora'])){
+        $afi_fia .= $_GET['afianzadora'];
+    }else {$afi_fia .= '0';}
+
+    $afi_fia .= '&fiador=';
+    
+    if (isset($_GET['fiador'])){
+        $afi_fia .= $_GET['fiador'];
+    }else {$afi_fia .= '0';}
+
     if ($pag > 1)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).$search.'" ><span class="mif-arrow-left"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).$search.$afi_fia.'" ><span class="mif-arrow-left"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-left"></span></a></li>';
     }
@@ -16,12 +27,12 @@
          if ($pag == $i)
             echo '<li class="page-item active"><a class="page-link" >'.$i.'</a></li>';
          else
-            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.$search.'">'.$i.'</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.$search.$afi_fia.'">'.$i.'</a></li>';
       }
     }
     if ($pag < $pags)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).$search.'"><span class="mif-arrow-right"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).$search.$afi_fia.'"><span class="mif-arrow-right"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-right"></span></a></li>';
     }
@@ -369,21 +380,12 @@
         ?>
     </tbody>
 </table>
-<script>
-function insertvaldocs ()
-{
-    console.log = 's';
-}
-</script>
 </div>
 <ul class="pagination alert flex-justify-center">
     <?php
-    $search = "";
-    if (isset($_GET['search'])){$search = '&search='.$_GET['search'];}
-    
     if ($pag > 1)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).$search.'" ><span class="mif-arrow-left"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag - 1 ).$search.$afi_fia.'" ><span class="mif-arrow-left"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-left"></span></a></li>';
     }
@@ -392,12 +394,12 @@ function insertvaldocs ()
          if ($pag == $i)
             echo '<li class="page-item active"><a class="page-link" >'.$i.'</a></li>';
          else
-            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.$search.'">'.$i.'</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.$i.$search.$afi_fia.'">'.$i.'</a></li>';
       }
     }
     if ($pag < $pags)
     {
-        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).$search.'"><span class="mif-arrow-right"></span></a></li>';
+        echo '<li class="page-item service"><a class="page-link" href="'.UrlActual($_SERVER['REQUEST_URI']).'?pagina='.($pag + 1 ).$search.$afi_fia.'"><span class="mif-arrow-right"></span></a></li>';
     }else {
         echo '<li class="page-item service"><a class="page-link" ><span class="mif-arrow-right"></span></a></li>';
     }

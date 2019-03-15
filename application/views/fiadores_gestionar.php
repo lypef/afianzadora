@@ -63,7 +63,7 @@
                     <li><a href="#" onclick="Metro.dialog.open(\'#editar'.$item->id.'\')"><span class="mif-pencil"></span> Editar</a></li>
                     <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Eliminar</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><span class="mif-folder-open"></span> Ver fianzas</a></li>
+                    <li><a href="'.base_url().'all/fianzas_gestionar?fiador='.$item->id.'"><span class="mif-folder-open"></span> Ver fianzas</a></li>
                 </ul>
             </div>
             </td>
