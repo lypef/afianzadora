@@ -232,6 +232,11 @@
 </footer>
 </div>
 <script>
+    function comentarios (id, comentario)
+    {
+        $("#comentarios".concat(id)).val(comentario);
+    }
+    
     function fecha_emision (id, fecha)
     {
         $("#fecha_emision".concat(id)).val(fecha);

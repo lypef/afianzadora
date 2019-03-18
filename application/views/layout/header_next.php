@@ -143,13 +143,23 @@
                 <span class="caption">Gestionar</span>
             </button>
             </a>
-
+            
+            <a href="<?php echo base_url(); ?>all/fianzas_gestionar_cancelaciones">
+            <button onclick="search_adicionales()" class="ribbon-button">
+                    <span class="icon">
+                        <span class="mif-cross"></span>
+                    </span>
+                <span class="caption">Cancelaciones</span>
+            </button>
+            </a>
+            
             <button onclick="Metro.dialog.open('#search_fianza');" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-search"></span>
                     </span>
                 <span class="caption">Buscar</span>
             </button>
+
             <span class="title">Fianzas</span>
             
         </div>
@@ -165,13 +175,6 @@
                 <span class="caption">Cobranza</span>
             </button></a>
 
-            <button onclick="search_adicionales()" class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-cross"></span>
-                    </span>
-                <span class="caption">Cancelaciones</span>
-            </button>
-            
             <a href="gest_adicionales.php?pagina=1">
             <button class="ribbon-button">
                     <span class="icon">

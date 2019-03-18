@@ -73,7 +73,20 @@
     <?php
         foreach ($data as $item) 
         {
-            $documentos = "";
+            $documentos = ""; $active = ""; $classTable="";
+            
+            if ($item->active == 1)
+            {
+                $active = '<li><a href="#" onclick="Metro.dialog.open(\'#bloqued'.$item->id.'\')"><span class="mif-blocked"></span> Cancelar</a></li>';
+                $classTable = '';
+            }
+            else
+            {
+                $active = '<li><a href="#" onclick="Metro.dialog.open(\'#active'.$item->id.'\')"><span class="mif-checkmark"></span> Activar</a></li>';
+                $classTable = 'class="bg-lightorange bg-orange-hover"';
+            }
+            
+            
             if (empty($item->pdf_contrato_obra))
             {
                 $documentos = '<li><a href="#" onclick="Metro.dialog.open(\'#add_docs'.$item->id.'\')"><span class="mif-folder-plus fg-red"></span> <span class="fg-red">Subir documentos solicitud</span></a></li>';
@@ -88,9 +101,10 @@
                     <li><a href="#" onclick="Metro.dialog.open(\'#pdf_curp'.$item->id.'\')"><span class="mif-file-pdf"></span> Curp</a></li>
                 ';
             }
+
             echo 
             '
-            <tr>
+            <tr '.$classTable.'>
             <td>'.$item->fiador.'</td>
             <td><center>'.$item->afianzadora.'</center></td>
             <td>'.$item->contrato.'</td>
@@ -101,8 +115,11 @@
                 <button class="button" onclick="Metro.dialog.open(\'#view'.$item->id.'\')"><span class="mif-eye"></span> Detalles</button>
                 <button class="split dropdown-toggle"></button>
                 <ul class="d-menu" data-role="dropdown">
+                    <li><a href="#" onclick="Metro.dialog.open(\'#comment'.$item->id.'\')"><span class="mif-comment"></span> Comentarios</a></li>
+                    <li class="divider"></li>
                     <li><a href="#" onclick="Metro.dialog.open(\'#editar'.$item->id.'\')"><span class="mif-pencil"></span> Editar</a></li>
-                    <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Eliminar</a></li>
+                    '.$active.'
+                    <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Anular</a></li>
                     <li class="divider"></li>
                     '.$documentos.'
                 </ul>
@@ -111,6 +128,38 @@
             
             </tr>
             
+            <!--Cancelar-->
+            <div class="dialog" data-role="dialog" id="bloqued'.$item->id.'" data-width="800">
+                <div class="dialog-title"><strong>Cancelar contrato: '.$item->contrato.'?, Puede activarlo nuevamente despues.</strong></div>
+                <div class="dialog-content">
+                    <form action="'.base_url().'all/fianzas_update_active_no" method="post">
+                    <input type="hidden" id="contrato" name="contrato" value="'.$item->contrato.'" />
+                    <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
+                    <input type="hidden" id="id" name="id" value="'.$item->id.'">
+                </div>
+                <div class="dialog-actions">
+                    <button type="submit" class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cancelar</button>
+                    </form>
+                    <button class="button success js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+                </div>
+            </div>
+
+            <!--Activar-->
+            <div class="dialog" data-role="dialog" id="active'.$item->id.'" data-width="800">
+                <div class="dialog-title"><strong>Activar contrato: '.$item->contrato.'?, Puede desactivarlo nuevamente despues.</strong></div>
+                <div class="dialog-content">
+                    <form action="'.base_url().'all/fianzas_update_active_si" method="post">
+                    <input type="hidden" id="contrato" name="contrato" value="'.$item->contrato.'" />
+                    <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
+                    <input type="hidden" id="id" name="id" value="'.$item->id.'">
+                </div>
+                <div class="dialog-actions">
+                    <button type="submit" class="button warning js-dialog-close"><span class="mif-checkmark"></span> Activar</button>
+                    </form>
+                    <button class="button success js-dialog-close"><span class="mif-cross"></span> Cancelar</button>
+                </div>
+            </div>
+
             <!--Visualizar pdf_contrato_obra-->            
             <div class="dialog" data-role="dialog" id="pdf_contrato_obra'.$item->id.'" data-width="80%">
                 <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
@@ -255,22 +304,79 @@
                 </div>
             </div>
             
-            <!--Visualizar Informacion-->
-            <div class="dialog" data-role="dialog" id="view'.$item->id.'">
-                <div class="dialog-title"><strong>CONTRATO: '.$item->contrato.'</strong></div>
+            <!--Editar Comentarios-->
+            <div class="dialog" data-role="dialog" id="comment'.$item->id.'" data-width="800">
+                <div class="dialog-title"><strong>COMENTARIOS, CONTRATO: '.$item->contrato.'</strong></div>
                 <div class="dialog-content">
-                    <strong>FIADOR:</strong> '.$item->fiador.'
-                    <br><strong>CONTRATO:</strong> '.$item->contrato.'
-                    <br><strong>TIPO DE FIANZA:</strong> '.$item->tipo_fianza.'
-                    <br><strong>AFIANZADORA:</strong> '.$item->afianzadora.'
-                    <br><strong>FECHA DE EMISION:</strong> '.$item->fecha_emision.'
-                    <br><strong>FOLIO DE FACTURA:</strong> '.$item->folio_factura.'
-                    <br><strong>MONTO DE FACTURA:</strong> $ '.$item->monto_factura.' MXN
-                    <br><strong>FECHA DE PAGO:</strong> '.$item->fecha_pago.'
-                    <br><strong>ESTATUS DE ENTREGA:</strong> '.$item->entrega.'
+                    <form action="'.base_url().'all/fianzas_update_comment" method="post">
+                        <textarea id="text" name="text" style="overflow-y:scroll;" data-clear-button="false" data-auto-size="false" rows="12" data-role="textarea" data-prepend="<span class='.'mif-leanpub'.'></span>" data-on-change="comentarios('.$item->id.', arguments[0])">'.$item->comentarios.'</textarea>
+                        <textarea id="comentarios'.$item->id.'" name="comentarios'.$item->id.'" style="display:none;">'.$item->comentarios.'</textarea>
+                        
+                        <input type="hidden" id="contrato" name="contrato" value="'.$item->contrato.'" />
+                        <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
+                        <input type="hidden" id="id" name="id" value="'.$item->id.'">
                 </div>
                 <div class="dialog-actions">
-                    <button class="button info js-dialog-close">Ok</button>
+                    <button type="submit" class="button success js-dialog-close"><span class="mif-checkmark"></span> Guardar</button>
+                    </form>
+                    <button class="button info js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+                </div>
+            </div>
+            
+            <!--Visualizar Informacion-->
+            <div class="dialog" data-role="dialog" id="view'.$item->id.'" data-width="950">
+                <div class="dialog-title text-center"><strong>CONTRATO: '.$item->contrato.'</strong></div>
+                <div class="dialog-content">
+
+                <div class="grid">
+                    <div class="row">
+                        <div class="cell">
+                            <div>
+                                <strong>INFORMACION:</strong></p>
+                                <div class="pl-6 pb-2">
+                                    <strong>FIADOR:</strong> '.$item->fiador.'
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>CONTRATO:</strong> '.$item->contrato.'
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>TIPO DE FIANZA:</strong> '.$item->tipo_fianza.'
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>AFIANZADORA:</strong> '.$item->afianzadora.'
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>FECHA DE EMISION:</strong> '.$item->fecha_emision.'
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>FOLIO DE FACTURA:</strong> '.$item->folio_factura.'
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>MONTO DE FACTURA:</strong> $ '.$item->monto_factura.' MXN
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>FECHA DE PAGO:</strong> '.$item->fecha_pago.'
+                                </div>
+                                <div class="pl-6 pb-2">
+                                    <strong>ESTATUS DE ENTREGA:</strong> '.$item->entrega.'
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cell">
+                            <div>
+                                <strong>COMENTARIOS:</strong></p>
+                                <textarea id="text" name="text" style="overflow-y:scroll;" data-clear-button="false" data-auto-size="false" rows="13" data-role="textarea" data-prepend="<span class='.'mif-leanpub'.'></span>">'.$item->comentarios.'</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                    
+                </div>
+                <div class="dialog-actions">
+                    <button class="button info js-dialog-close"><span class="mif-checkmark"></span> Ok</button>
                 </div>
             </div>
             
