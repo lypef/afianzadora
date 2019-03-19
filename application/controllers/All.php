@@ -422,7 +422,6 @@ class All extends CI_Controller {
 		$data['fiadores'] = $this->db->query('SELECT id, razon_social FROM `fiadores` order by razon_social asc')->result();
 		$data['afianzadores_tipos'] = $this->db->query('SELECT * FROM afianzadores_tipos order by nombre asc')->result();
 		$data['afianzadora'] = $this->db->query('SELECT id, nombre FROM afianzadoras order by nombre asc')->result();
-
 		
 		$this->load->view('layout/header');
 		$this->load->view('layout/header_next');
@@ -528,10 +527,10 @@ class All extends CI_Controller {
 		
 		if ($this->db->affected_rows() >= 1 )
 		{
-			redirect($url.'?afianzadora_aupdatetrue=true&search='.$this->input->post('contrato'));
+			redirect(base_url().'/all/fianzas_gestionar?afianzadora_aupdatetrue=true&search='.$this->input->post('contrato'));
 		}else
 		{
-			redirect($url.'?afianzadora_aupdatefalse=false&search='.$this->input->post('contrato'));
+			redirect(base_url().'/all/fianzas_gestionar?afianzadora_aupdatefalse=false&search='.$this->input->post('contrato'));
 		}
 	}
 	
