@@ -203,18 +203,17 @@
         </div>
         <!-- Finaliza modulo Adicionales-->
         <!-- Inicia modulo usuarios-->
-        <? if ($_SESSION['crud_users'] != 0){?>
         <div class="group">
-            <a href="add_users.php">
-            <button class="ribbon-button">
+            
+            <button onclick="Metro.dialog.open('#add_user_sistem');"  class="ribbon-button">
                     <span class="icon">
                         <span class="mif-user-plus"></span>
                     </span>
                 <span class="caption">Agregar usuario</span>
             </button>
-            </a>
+            
 
-            <a href="gest_users.php">
+            <a href="<?php echo base_url(); ?>all/manager_users">
             <button class="ribbon-button">
                     <span class="icon">
                         <span class="mif-users"></span>
@@ -225,7 +224,6 @@
 
             <span class="title">Usuarios</span>
         </div>
-        <?}?>
         <!-- Finaliza modulo usuarios-->
         <!-- Inicia modulo perfil-->
         <div class="group">

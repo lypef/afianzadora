@@ -135,7 +135,23 @@
             document.getElementById("search").value = "";
             document.getElementById("search").focus();
         }
-        
+        if (getUrlVars()["process_deletetrue"])
+        {
+            Metro.notify.create("Item eliminado con exito", "<span class='mif-checkmark'></span> ELIMINADO", {cls: "success"});
+        }
+
+        if (getUrlVars()["no_posible"])
+        {
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO AGREGADO", {cls: "alert"});
+        }
+        if (getUrlVars()["updateusertrue"])
+        {
+            Metro.notify.create("Item actualizado con exito", "<span class='mif-checkmark'></span> ACTUALIZADO", {cls: "success"});
+        }
+        if (getUrlVars()["addusertrue"])
+        {
+            Metro.notify.create("Usuario agregado con exito", "<span class='mif-checkmark'></span> AGREGADO", {cls: "success"});
+        }
     </script>
 
 </body>

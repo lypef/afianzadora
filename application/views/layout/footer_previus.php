@@ -1,5 +1,35 @@
 </div>
 
+<!--Agregar usuario-->
+<div class="dialog" data-role="dialog" id="add_user_sistem">
+    <div class="dialog-title"><strong><center>NUEVO USUARIO</center></strong></div>
+    <div class="dialog-content">
+        <form action="<?php echo base_url(); ?>all/manager_users_add" method="post" autocomplete="off">
+            
+        <div class="form-group">
+            <label>Nombre completo:</label>
+            <input id="name" name="name" type="text" placeholder="Ingrese nombre completo" value=""  required autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+            <label>Nombre de usuario:</label>
+            <input id="username" name="username" type="text" placeholder="Ingrese nombre de usuario" value=""  required autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+            <label>ingrese nueva contraseña:</label>
+            <input id="password" name="password" type="password" placeholder="Ingrese contraseña" required autocomplete="off">
+        </div>
+
+        <input type="hidden" id="url" name="url" value="<?php echo UrlActual($_SERVER['REQUEST_URI']) ?>">
+    </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button warning"><span class="mif-plus"></span> Agregar</button>
+        </form>
+        <button class="button js-dialog-close"><span class="mif-cross"></span> cancelar</button>
+    </div>
+</div>
+
 <!--Agregar fianza-->            
 <div class="dialog" data-role="dialog" id="add_fianza" data-width="550">
     <div class="dialog-title"><strong><center>NUEVA FIANZA</center></strong></div>

@@ -728,4 +728,95 @@ class All extends CI_Controller {
 			redirect($url.'?fianza_deletefalse=false');
 		}
 	}
+
+	public function manager_users ()
+	{
+		LoginCheck();
+		
+		$data['users'] = $this->db->query('SELECT * FROM users order by name asc')->result();
+
+		$this->load->view('layout/header');
+		$this->load->view('layout/header_next');
+		$this->load->view('manager_users', $data);
+		$this->load->view('layout/footer_previus');
+		$this->load->view('layout/footer');
+	}
+
+	public function manager_users_delete ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$this->db->where('id', $this->input->post('id'))->delete('users');
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?process_deletetrue=true');
+		}else
+		{
+			redirect($url.'?no_posible=false');
+		}
+	}
+
+	public function manager_users_update ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		
+		if (!empty($this->input->post('password')))
+		{
+			if ( base64_encode(md5($this->input->post('password'))) == base64_encode(md5($this->input->post('password_confirm'))) )
+			{
+				$data = array(
+					'name' => $this->input->post('name'),
+					'username' => $this->input->post('username'),
+					'password' => base64_encode(md5($this->input->post('password')))
+				);
+			}else
+			{
+				redirect($url.'?no_posible=false');	
+			}
+		}else
+		{
+			$data = array(
+				'name' => $this->input->post('name'),
+				'username' => $this->input->post('username')
+			);
+		}
+		
+		
+		$this->db->where('id', $this->input->post('id'))->update('users', $data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?updateusertrue=true');
+		}else
+		{
+			redirect($url.'?no_posible=false');
+		}
+	}
+
+	public function manager_users_add ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		
+		$data = array(
+			'name' => $this->input->post('name'),
+			'username' => $this->input->post('username'),
+			'password' => base64_encode(md5($this->input->post('password')))
+		);
+		
+		
+		$this->db->insert('users',$data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?addusertrue=true');
+		}else
+		{
+			redirect($url.'?no_posible=false');
+		}
+	}
 }
