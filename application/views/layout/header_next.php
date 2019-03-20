@@ -225,32 +225,6 @@
             <span class="title">Usuarios</span>
         </div>
         <!-- Finaliza modulo usuarios-->
-        <!-- Inicia modulo perfil-->
-        <div class="group">
-
-             <div data-role="buttonsGroup" data-cls-active="active">
-                 <button onclick="update_profile()" class="ribbon-button">
-                     <span class="icon">
-                         <span class="mif-file-upload"></span>
-                     </span>
-                     <span class="caption">Actualizar</span>
-                 </button>
-
-                 <a href="my_logs.php?pagina=1">
-                 <button class="ribbon-button">
-                     <span class="icon">
-                         <span class="mif-file-text"></span>
-                     </span>
-                     <span class="caption">Mis registros</span>
-                 </button>
-                 </a>
-
-             </div>
-
-             <span class="title">Perfil</span>
-           </div>
-        </div>
-        <!-- Finaliza modulo perfil-->
       </div>
   </div>
 </nav>
