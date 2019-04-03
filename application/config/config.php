@@ -29,7 +29,7 @@ switch($_SERVER['SERVER_NAME'])
             $config['base_url']    = "http://localhost/index.php/";
             break;
     default:
-            $config['base_url'] = 'http://www.linku.com.mx/index.php/';
+            $config['base_url'] = 'http://serviciosrjd.com/index.php/';
             break;       
 }
 

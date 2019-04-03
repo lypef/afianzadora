@@ -534,7 +534,6 @@ class All extends CI_Controller {
 		}
 	}
 	
-	
 	public function fianzas_update ()
 	{
 		LoginCheck();
