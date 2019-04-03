@@ -9,7 +9,7 @@
   <div class="content-holder">
       <div class="section" id="section-usuarios">
         <!-- Inicia modulo Reportes-->
-        <? if ($_SESSION['gen_reports'] != 0)
+        <? if (true)
         {?>
 
         <div class="group">
