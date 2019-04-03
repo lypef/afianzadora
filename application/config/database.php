@@ -7,7 +7,7 @@ switch($_SERVER['SERVER_NAME'])
 			$active_group = 'local';
 			break;
 	default:
-			$active_group = 'linku';
+			$active_group = 'serviciosrjd';
             break;       
 }
 
@@ -33,12 +33,12 @@ $db['local'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-$db['linku'] = array(
+$db['serviciosrjd'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'linkucom_user',
-	'password' => 'oWcs?c2LJHrY',
-	'database' => 'linkucom_db',
+	'username' => 'servi175_user',
+	'password' => '29KV1mKf-Cn#',
+	'database' => 'servi175_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
