@@ -381,11 +381,11 @@
     <div class="row">
         <div class="cell-md-6">
             <p>
-              <span class="no-wrap">ONAPPAFA, A.C.</span>
+              <span class="no-wrap">PROYECCIÓN Y SERVICIOS RJD</span>
                 <br />
                 <span class="no-wrap">Direccion temporal, 234 altos</span><br>
                 <span class="no-wrap">Ciudad: Manizales. CP: 23700, Vercruz, mexico.</span><br>
-                <span class="no-wrap"><a target="_blank" href="http://www.cyberchoapas.com"> © 2019 | CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE</a>.</span>
+                <span class="no-wrap">© 2019 | DESARROLLADO POR <a target="_blank" href="http://www.cyberchoapas.com"> CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE</a>.</span>
             </p>
             <ul class="inline-list h-menu no-hover bg-grayWhite" style="margin-left: -.5rem">
                 <li><a target="_blank" href="#">Quienes somos</a></li>

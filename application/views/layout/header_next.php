@@ -21,10 +21,10 @@
               </button>
               <span class="ribbon-split dropdown-toggle">pdf</span>
               <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
-                  <li><a href="reports/reporte_titulares.php">Reportes titulares</a></li>
-                  <li><a href="reports/reporte_vehicles.php">Reportes vehiculos</a></li>
-                  <li><a href="reports/reporte_adicionales.php">Reportes adicionales</a></li>
-                  <li><a href="reports/reporte_vehicles_vencidos.php">Engomados vencidos</a></li>
+                  <li><a href="reports/reporte_titulares.php">Reportes fiadores</a></li>
+                  <li><a href="reports/reporte_vehicles.php">Reportes afianzadoras</a></li>
+                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas</a></li>
+                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas canceladas</a></li>
               </ul>
             </div>
             <div class="ribbon-split-button">
@@ -35,10 +35,10 @@
               </button>
               <span class="ribbon-split dropdown-toggle">xls</span>
               <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
-                  <li><a href="reports/reporte_titulares_xls.php">Reportes titulares</a></li>
-                  <li><a href="reports/reporte_vehicles_xls.php">Reportes vehiculos</a></li>
-                  <li><a href="reports/reporte_adicionales_xls.php">Reportes adicionales</a></li>
-                  <li><a href="reports/reporte_vehicles_vencidos_xls.php">Engomados vencidos</a></li>
+                  <li><a href="reports/reporte_titulares.php">Reportes fiadores</a></li>
+                  <li><a href="reports/reporte_vehicles.php">Reportes afianzadoras</a></li>
+                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas</a></li>
+                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas canceladas</a></li>
               </ul>
             </div>
             <span class="title">REPORTES</span>
