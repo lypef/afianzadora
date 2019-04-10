@@ -6,8 +6,8 @@
         foreach ($users as $item) 
         {
             $name_tmp = explode(' ', $item->name);
-            echo 
-            '
+            $modals = '';
+            $body = '
             <div class="cell-4">
                 <div class="card">
                     <div class="card-header">
@@ -27,13 +27,17 @@
                     </div>
                     <div class="card-footer">
                         <button onclick="Metro.dialog.open(\'#permisos'.$item->id.'\')" class="flat-button mif-security mif-2x"></button>
-                        <button onclick="Metro.dialog.open(\'#editar'.$item->id.'\')" class="flat-button mif-pencil mif-2x"></button>    
-                        <button onclick="Metro.dialog.open(\'#delete'.$item->id.'\')" class="flat-button mif-bin mif-2x"></button>
+                        <button onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'block\'" class="flat-button mif-pencil mif-2x"></button>    
+                        <button onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'" class="flat-button mif-bin mif-2x"></button>
                     </div>
                 </div>
-            </div>
+            </div>';
 
-            <div class="dialog" data-role="dialog" id="editar'.$item->id.'">
+            $modals = '
+            <!--Editar-->
+            <div id="editar'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
                 <div class="dialog-title"><strong><center>ACTUALIZAR DATOS: '.$item->name.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/manager_users_update" method="post">
@@ -64,11 +68,16 @@
                 <div class="dialog-actions">
                     <button type="submit" class="button warning"><span class="mif-pencil"></span> Actualizar</button>
                     </form>
-                    <button class="button js-dialog-close"><span class="mif-cross"></span> cancelar</button>
+                    <button class="button" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> cancelar</button>
+                </div>
                 </div>
             </div>
+            </div>
 
-            <div class="dialog" data-role="dialog" id="delete'.$item->id.'">
+            <!--Eliminar-->
+            <div id="delete'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
                 <div class="dialog-title"><strong><center>ELIMINAR: '.$item->name.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/manager_users_delete" method="post">
@@ -79,10 +88,13 @@
                 <div class="dialog-actions">
                     <button type="submit" class="button alert"><span class="mif-bin"></span> Eliminar</button>
                     </form>
-                    <button class="button success js-dialog-close"><span class="mif-checkmark"></span> NO eliminar</button>
+                    <button class="button success" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> NO eliminar</button>
+                </div>
                 </div>
             </div>
-            ';
+            </div>';
+
+            echo $body . $modals;
         }
     ?>
 </div>

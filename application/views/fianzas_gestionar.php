@@ -212,12 +212,14 @@
                 ';
                 if (empty($item->pdf_contrato_obra))
                 {
-                    $body .= '
-                        <li><a href="#" onclick="Metro.dialog.open(\'#add_docs'.$item->id.'\')"><span class="mif-folder-plus fg-red"></span> <span class="fg-red">Subir documentos solicitud</span></a></li>
+                    $body .= '<li><a href="#" onclick="document.getElementById(\'add_docs'.$item->id.'\').style.display=\'block\'"><span class="mif-folder-plus fg-red"></span> <span class="fg-red">Subir documentos solicitud</span></a></li>';
 
-                        <!--Subir documentos-->            
-                        <div class="dialog" data-role="dialog" id="add_docs'.$item->id.'" data-width="80%">
-                            <div class="dialog-title"><strong>DOCUMENTACION DEL CONTRATO: '.$item->contrato.'</strong></div>
+                    $modals .='
+                    <!--Subir documentos-->            
+                    <div id="add_docs'.$item->id.'" class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container">
+                        <div class="dialog-title"><strong>DOCUMENTACION DEL CONTRATO: '.$item->contrato.'</strong></div>
                             <div class="dialog-content">
                             
                             <form action="'.base_url().'all/fianzas_up_docs" method="post" enctype="multipart/form-data">
@@ -277,96 +279,127 @@
                             <div class="dialog-actions">
                                 <button type="submit" class="button success"><span class="mif-cloud-upload"></span> Subir ficheros</button>
                                 </form>
-                                <button class="button warning js-dialog-close"><span class="mif-cross"></span> cancelar</button>
+                                <button class="button warning" onclick="document.getElementById(\'add_docs'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> cancelar</button>
                             </div>
                         </div>
+                    </div>
+                    </div>
                     ';
                 }else
                 {
                     $body .= '
-                        <li><a href="#" onclick="Metro.dialog.open(\'#_pdf_contrato_obra'.$item->id.'\')"><span class="mif-file-pdf"></span> Contrato de obra</a></li>
-                        <li><a href="#" onclick="Metro.dialog.open(\'#pdf_constancia_situacion_fiscal'.$item->id.'\')"><span class="mif-file-pdf"></span> Constancia fiscal</a></li>
-                        <li><a href="#" onclick="Metro.dialog.open(\'#pdf_estados_financiero'.$item->id.'\')"><span class="mif-file-pdf"></span> Estado financiero</a></li>
-                        <li><a href="#" onclick="Metro.dialog.open(\'#pdf_comprobante_domicilio'.$item->id.'\')"><span class="mif-file-pdf"></span> Comprobante de domicilio</a></li>
-                        <li><a href="#" onclick="Metro.dialog.open(\'#pdf_ife_representante_legal'.$item->id.'\')"><span class="mif-file-pdf"></span> Representante legal</a></li>
-                        <li><a href="#" onclick="Metro.dialog.open(\'#pdf_curp'.$item->id.'\')"><span class="mif-file-pdf"></span> Curp</a></li>
+                        <li><a href="#" onclick="document.getElementById(\'_pdf_contrato_obra'.$item->id.'\').style.display=\'block\'"><span class="mif-file-pdf"></span> Contrato de obra</a></li>
+                        <li><a href="#" onclick="document.getElementById(\'pdf_constancia_situacion_fiscal'.$item->id.'\').style.display=\'block\'"><span class="mif-file-pdf"></span> Constancia fiscal</a></li>
+                        <li><a href="#" onclick="document.getElementById(\'pdf_estados_financiero'.$item->id.'\').style.display=\'block\'"><span class="mif-file-pdf"></span> Estado financiero</a></li>
+                        <li><a href="#" onclick="document.getElementById(\'pdf_comprobante_domicilio'.$item->id.'\').style.display=\'block\'"><span class="mif-file-pdf"></span> Comprobante de domicilio</a></li>
+                        <li><a href="#" onclick="document.getElementById(\'pdf_ife_representante_legal'.$item->id.'\').style.display=\'block\'"><span class="mif-file-pdf"></span> Representante legal</a></li>
+                        <li><a href="#" onclick="document.getElementById(\'pdf_curp'.$item->id.'\').style.display=\'block\'"><span class="mif-file-pdf"></span> Curp</a></li>';
 
+
+                    $modals .= '
                         <!--Visualizar _pdf_contrato_obra-->            
-                        <div class="dialog" data-role="dialog" id="_pdf_contrato_obra'.$item->id.'" data-width="80%">
+                        <div id="_pdf_contrato_obra'.$item->id.'" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
                             <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
-                            <div class="dialog-content">
-                            <div class="content" style="height: 500px;">
-                                <iframe src="'.$item->pdf_contrato_obra.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                                <div class="dialog-content">
+                                <div class="content" style="height: 700px;">
+                                    <iframe src="'.$item->pdf_contrato_obra.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                                </div>
+                                </div>
+                                <div class="dialog-actions">
+                                    <button class="button warning" onclick="document.getElementById(\'_pdf_contrato_obra'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Cerrar</button>
+                                </div>
                             </div>
-                            </div>
-                            <div class="dialog-actions">
-                                <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
-                            </div>
+                        </div>
                         </div>
 
                         <!--Visualizar pdf_constancia_situacion_fiscal-->            
-                        <div class="dialog" data-role="dialog" id="pdf_constancia_situacion_fiscal'.$item->id.'" data-width="80%">
-                            <div class="dialog-title"><strong>CONSTANCIA DE SITUACION FISCAL: | CONTRATO: '.$item->contrato.'</strong></div>
-                            <div class="dialog-content">
-                            <div class="content" style="height: 500px;">
-                                <iframe src="'.$item->pdf_constancia_situacion_fiscal.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                        <div id="pdf_constancia_situacion_fiscal'.$item->id.'" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                            <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
+                                <div class="dialog-content">
+                                <div class="content" style="height: 700px;">
+                                    <iframe src="'.$item->pdf_constancia_situacion_fiscal.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                                </div>
+                                </div>
+                                <div class="dialog-actions">
+                                    <button class="button warning" onclick="document.getElementById(\'pdf_constancia_situacion_fiscal'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Cerrar</button>
+                                </div>
                             </div>
-                            </div>
-                            <div class="dialog-actions">
-                                <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
-                            </div>
+                        </div>
                         </div>
 
                         <!--Visualizar pdf_estados_financiero-->            
-                        <div class="dialog" data-role="dialog" id="pdf_estados_financiero'.$item->id.'" data-width="80%">
-                            <div class="dialog-title"><strong>ESTADO FINANCIERO: | CONTRATO: '.$item->contrato.'</strong></div>
-                            <div class="dialog-content">
-                            <div class="content" style="height: 500px;">
-                                <iframe src="'.$item->pdf_estados_financiero.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
-                            </div>
-                            </div>
-                            <div class="dialog-actions">
-                                <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                        <div id="pdf_estados_financiero'.$item->id.'" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                            <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
+                                <div class="dialog-content">
+                                <div class="content" style="height: 700px;">
+                                    <iframe src="'.$item->pdf_estados_financiero.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                                </div>
+                                </div>
+                                <div class="dialog-actions">
+                                    <button class="button warning" onclick="document.getElementById(\'pdf_estados_financiero'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Cerrar</button>
+                                </div>
                             </div>
                         </div>
+                        </div>
+
 
                         <!--Visualizar pdf_comprobante_domicilio-->            
-                        <div class="dialog" data-role="dialog" id="pdf_comprobante_domicilio'.$item->id.'" data-width="80%">
-                            <div class="dialog-title"><strong>COMPROBANTE DE DOMICILIO: | CONTRATO: '.$item->contrato.'</strong></div>
-                            <div class="dialog-content">
-                            <div class="content" style="height: 500px;">
-                                <iframe src="'.$item->pdf_comprobante_domicilio.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
-                            </div>
-                            </div>
-                            <div class="dialog-actions">
-                                <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                        <div id="pdf_comprobante_domicilio'.$item->id.'" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                            <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
+                                <div class="dialog-content">
+                                <div class="content" style="height: 700px;">
+                                    <iframe src="'.$item->pdf_comprobante_domicilio.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                                </div>
+                                </div>
+                                <div class="dialog-actions">
+                                    <button class="button warning" onclick="document.getElementById(\'pdf_comprobante_domicilio'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Cerrar</button>
+                                </div>
                             </div>
                         </div>
+                        </div>
+
 
                         <!--Visualizar pdf_ife_representante_legal-->            
-                        <div class="dialog" data-role="dialog" id="pdf_ife_representante_legal'.$item->id.'" data-width="80%">
-                            <div class="dialog-title"><strong>IFE, REPRESENTANTE LEGAL: | CONTRATO: '.$item->contrato.'</strong></div>
-                            <div class="dialog-content">
-                            <div class="content" style="height: 500px;">
-                                <iframe src="'.$item->pdf_ife_representante_legal.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
-                            </div>
-                            </div>
-                            <div class="dialog-actions">
-                                <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
+                        <div id="pdf_ife_representante_legal'.$item->id.'" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                            <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
+                                <div class="dialog-content">
+                                <div class="content" style="height: 700px;">
+                                    <iframe src="'.$item->pdf_ife_representante_legal.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                                </div>
+                                </div>
+                                <div class="dialog-actions">
+                                    <button class="button warning" onclick="document.getElementById(\'pdf_ife_representante_legal'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Cerrar</button>
+                                </div>
                             </div>
                         </div>
+                        </div>
+
 
                         <!--Visualizar pdf_curp-->            
-                        <div class="dialog" data-role="dialog" id="pdf_curp'.$item->id.'" data-width="80%">
-                            <div class="dialog-title"><strong>CURP: | CONTRATO: '.$item->contrato.'</strong></div>
-                            <div class="dialog-content">
-                            <div class="content" style="height: 500px;">
-                                <iframe src="'.$item->pdf_curp.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                        <div id="pdf_curp'.$item->id.'" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                            <div class="dialog-title"><strong>CONTRATO DE OBRA: | CONTRATO: '.$item->contrato.'</strong></div>
+                                <div class="dialog-content">
+                                <div class="content" style="height: 700px;">
+                                    <iframe src="'.$item->pdf_curp.'" style="min-width:100%; min-height:100%;" frameborder="0"></iframe>
+                                </div>
+                                </div>
+                                <div class="dialog-actions">
+                                    <button class="button warning" onclick="document.getElementById(\'pdf_curp'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Cerrar</button>
+                                </div>
                             </div>
-                            </div>
-                            <div class="dialog-actions">
-                                <button class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cerrar</button>
-                            </div>
+                        </div>
                         </div>
                     ';
                 }
@@ -374,9 +407,13 @@
             else
             {
                 $body .= '
-                <li><a href="#" onclick="Metro.dialog.open(\'#active'.$item->id.'\')"><span class="mif-checkmark"></span> Activar</a></li>
+                <li><a href="#" onclick="document.getElementById(\'active'.$item->id.'\').style.display=\'block\'"><span class="mif-checkmark"></span> Activar</a></li>';
+                
+                $modals .= '
                 <!--Activar-->
-                <div class="dialog" data-role="dialog" id="active'.$item->id.'" data-width="800">
+                <div id="active'.$item->id.'" class="w3-modal">
+                <div class="w3-modal-content">
+                    <div class="w3-container">
                     <div class="dialog-title"><strong>Activar contrato: '.$item->contrato.'?, Puede desactivarlo nuevamente despues.</strong></div>
                     <div class="dialog-content">
                         <form action="'.base_url().'all/fianzas_update_active_si" method="post">
@@ -387,8 +424,10 @@
                     <div class="dialog-actions">
                         <button type="submit" class="button warning js-dialog-close"><span class="mif-checkmark"></span> Activar</button>
                         </form>
-                        <button class="button success js-dialog-close"><span class="mif-cross"></span> Cancelar</button>
+                        <button class="button success" onclick="document.getElementById(\'active'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> Cancelar</button>
                     </div>
+                    </div>
+                </div>
                 </div>';
             }    
             $body .='
@@ -397,12 +436,16 @@
 
             if ($active)
             {
-                $body .='
-                    <li><a href="#" onclick="Metro.dialog.open(\'#bloqued'.$item->id.'\')"><span class="mif-blocked"></span> Cancelar</a></li>
-                    <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Anular</a></li>
-                    <!--Cancelar-->
-                    <div class="dialog" data-role="dialog" id="bloqued'.$item->id.'" data-width="800">
-                        <div class="dialog-title"><strong>Cancelar contrato: '.$item->contrato.'?, Puede activarlo nuevamente despues.</strong></div>
+                $body .= '
+                <li><a href="#" onclick="document.getElementById(\'bloqued'.$item->id.'\').style.display=\'block\'"><span class="mif-blocked"></span> Cancelar</a></li>
+                <li><a href="#" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-cross"></span> Anular</a></li>';
+                
+                $modals .= '
+                <!--Cancelar-->
+                <div id="bloqued'.$item->id.'" class="w3-modal">
+                <div class="w3-modal-content">
+                    <div class="w3-container">
+                    <div class="dialog-title"><strong>Cancelar contrato: '.$item->contrato.'?, Puede activarlo nuevamente despues.</strong></div>
                         <div class="dialog-content">
                             <form action="'.base_url().'all/fianzas_update_active_no" method="post">
                             <input type="hidden" id="contrato" name="contrato" value="'.$item->contrato.'" />
@@ -412,13 +455,14 @@
                         <div class="dialog-actions">
                             <button type="submit" class="button warning js-dialog-close"><span class="mif-checkmark"></span> Cancelar</button>
                             </form>
-                            <button class="button success js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+                            <button class="button success" onclick="document.getElementById(\'bloqued'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> Cerrar</button>
                         </div>
                     </div>
-                ';
+                </div>
+                </div>';
             }else {
                 $body .='
-                    <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Anular</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-cross"></span> Anular</a></li>
                 ';
             }
             
@@ -429,7 +473,7 @@
             
             </tr>';
             
-            $body .= 
+            $modals .= 
             '
             <!--Visualizar Informacion-->
             <div id="view'.$item->id.'" class="w3-modal">
@@ -490,10 +534,11 @@
             </div>
 
             
-
-            <!--Eliminar-->
-            <div class="dialog" data-role="dialog" id="delete'.$item->id.'">
-                <div class="dialog-title"><strong><center>ELIMINAR CONTRATO: '.$item->contrato.'</center></strong></div>
+            <!--Anular-->
+            <div id="delete'.$item->id.'" class="w3-modal">
+                <div class="w3-modal-content">
+                    <div class="w3-container">
+                    <div class="dialog-title"><strong><center>ELIMINAR CONTRATO: '.$item->contrato.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/fianzas_delete" method="post">
                         <p>Esta seguro de eliminar el contrato: <strong>'.$item->contrato.'</strong>, de el fiador: <strong>'.$item->fiador.' ?</strong></p>
@@ -505,10 +550,11 @@
                 <div class="dialog-actions">
                     <button type="submit" class="button alert"><span class="mif-bin"></span> Eliminar</button>
                     </form>
-                    <button class="button success js-dialog-close"><span class="mif-checkmark"></span> NO eliminar</button>
+                    <button class="button success" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> NO eliminar</button>
                 </div>
-            </div>
-            ';
+                    </div>
+                </div>
+                </div>';
 
             $body .= $modals;
             echo $body;

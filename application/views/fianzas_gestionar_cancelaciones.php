@@ -61,20 +61,12 @@
             <th>OPCIONES</th>
         </tr>
     </thead>
-
-        <script>
-            function select ()
-            {
-                console.log(select.val());
-            }
-        </script>
-
     <tbody>
     <?php
         foreach ($data as $item) 
         {
-            echo 
-            '
+            $modals = '';
+            $body = '
             <tr class="fg-red">
             <td>'.$item->fiador.'</td>
             <td><center>'.$item->afianzadora.'</center></td>
@@ -83,34 +75,22 @@
             <td>
             
             <div class="split-button">
-                <button class="button fg-red" onclick="Metro.dialog.open(\'#view'.$item->id.'\')"><span class="mif-eye"></span> Detalles</button>
+                <button class="button" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'block\'"><span class="mif-eye"></span> Detalles</button>
                 <button class="split dropdown-toggle"></button>
                 <ul class="d-menu" data-role="dropdown">
-                    <li><a href="#" onclick="Metro.dialog.open(\'#active'.$item->id.'\')"><span class="mif-checkmark"></span> Activar</a></li>
-                    <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Anular</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'active'.$item->id.'\').style.display=\'block\'"><span class="mif-checkmark"></span> Activar</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-cross"></span> Anular</a></li>
                 </ul>
             </div>
             </td>
-            
             </tr>
-            <!--Activar-->
-            <div class="dialog" data-role="dialog" id="active'.$item->id.'" data-width="800">
-                <div class="dialog-title"><strong>Activar contrato: '.$item->contrato.'?, Puede desactivarlo nuevamente despues.</strong></div>
-                <div class="dialog-content">
-                    <form action="'.base_url().'all/fianzas_update_active_si" method="post">
-                    <input type="hidden" id="contrato" name="contrato" value="'.$item->contrato.'" />
-                    <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
-                    <input type="hidden" id="id" name="id" value="'.$item->id.'">
-                </div>
-                <div class="dialog-actions">
-                    <button type="submit" class="button warning js-dialog-close"><span class="mif-checkmark"></span> Activar</button>
-                    </form>
-                    <button class="button success js-dialog-close"><span class="mif-cross"></span> Cancelar</button>
-                </div>
-            </div>
+            ';
 
+            $modals .= '
             <!--Visualizar Informacion-->
-            <div class="dialog" data-role="dialog" id="view'.$item->id.'" data-width="950">
+            <div id="view'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 880px; !important">
+                <div class="w3-container">
                 <div class="dialog-title text-center"><strong>CONTRATO: '.$item->contrato.'</strong></div>
                 <div class="dialog-content">
 
@@ -157,33 +137,59 @@
                         </div>
                     </div>
                 </div>
-
-
-                    
                 </div>
                 <div class="dialog-actions">
-                    <button class="button info js-dialog-close"><span class="mif-checkmark"></span> Ok</button>
+                    <button class="button info" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Ok</button>
+                </div>
                 </div>
             </div>
-            
-            <!--Eliminar-->
-            <div class="dialog" data-role="dialog" id="delete'.$item->id.'">
-                <div class="dialog-title"><strong><center>ELIMINAR CONTRATO: '.$item->contrato.'</center></strong></div>
+            </div>
+
+            <!--Activar-->
+            <div id="active'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                <div class="dialog-title"><strong>Activar contrato: '.$item->contrato.'?, Puede desactivarlo nuevamente despues.</strong></div>
                 <div class="dialog-content">
-                    <form action="'.base_url().'all/fianzas_delete" method="post">
-                        <p>Esta seguro de eliminar el contrato: <strong>'.$item->contrato.'</strong>, de el fiador: <strong>'.$item->fiador.' ?</strong></p>
-                        <br>
-                        <p><strong><center>Toda informacion relacionada a este contrato se perdera</center></strong></p>
-                        <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
-                        <input type="hidden" id="id" name="id" value="'.$item->id.'">
+                    <form action="'.base_url().'all/fianzas_update_active_si" method="post">
+                    <input type="hidden" id="contrato" name="contrato" value="'.$item->contrato.'" />
+                    <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
+                    <input type="hidden" id="id" name="id" value="'.$item->id.'">
                 </div>
                 <div class="dialog-actions">
-                    <button type="submit" class="button alert"><span class="mif-bin"></span> Eliminar</button>
+                    <button type="submit" class="button warning js-dialog-close"><span class="mif-checkmark"></span> Activar</button>
                     </form>
-                    <button class="button success js-dialog-close"><span class="mif-checkmark"></span> NO eliminar</button>
+                    <button class="button success" onclick="document.getElementById(\'active'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> Cancelar</button>
                 </div>
+                </div>
+            </div>
+            </div>
+
+
+            <!--Anular-->
+            <div id="delete'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                <div class="dialog-title"><strong><center>ELIMINAR CONTRATO: '.$item->contrato.'</center></strong></div>
+            <div class="dialog-content">
+                <form action="'.base_url().'all/fianzas_delete" method="post">
+                    <p>Esta seguro de eliminar el contrato: <strong>'.$item->contrato.'</strong>, de el fiador: <strong>'.$item->fiador.' ?</strong></p>
+                    <br>
+                    <p><strong><center>Toda informacion relacionada a este contrato se perdera</center></strong></p>
+                    <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
+                    <input type="hidden" id="id" name="id" value="'.$item->id.'">
+            </div>
+            <div class="dialog-actions">
+                <button type="submit" class="button alert"><span class="mif-bin"></span> Eliminar</button>
+                </form>
+                <button class="button success" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> NO eliminar</button>
+            </div>
+                </div>
+            </div>
             </div>
             ';
+            $body .= $modals;
+            echo $body;
         }
         ?>
     </tbody>
