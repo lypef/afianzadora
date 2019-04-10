@@ -50,15 +50,16 @@
             <td><center>'.$item->nombre.'</center></td>
             <td>
             <center>
-                <button class="button info" onclick="Metro.dialog.open(\'#editar'.$item->id.'\')"><span class="mif-pencil"></span> Actualizar</button>
-                <button class="button alert" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-bin"></span> Eliminar</button>
+                <button class="button info" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'block\'"><span class="mif-pencil"></span> Actualizar</button>
+                <button class="button alert" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-bin"></span> Eliminar</button>
             </center>
             </td>
             
             </tr>
 
-            
-            <div class="dialog" data-role="dialog" id="editar'.$item->id.'">
+            <div id="editar'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 480px; !important">
+                <div class="w3-container">
                 <div class="dialog-title"><strong><center>ACTUALIZAR: '.$item->nombre.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/afianzadores_tipo_update" method="post">
@@ -73,12 +74,16 @@
                 <div class="dialog-actions">
                     <button type="submit" class="button warning"><span class="mif-pencil"></span> Actualizar</button>
                     </form>
-                    <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+                    <button class="button" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> Cerrar</button>
                 </div>
+                </div>
+            </div>
             </div>
 
 
-            <div class="dialog" data-role="dialog" id="delete'.$item->id.'">
+            <div id="delete'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 480px; !important">
+                <div class="w3-container">
                 <div class="dialog-title"><strong><center>ELIMINAR: '.$item->nombre.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/afianzadores_tipo_delete" method="post">
@@ -89,9 +94,12 @@
                 <div class="dialog-actions">
                     <button type="submit" class="button alert"><span class="mif-bin"></span> Eliminar</button>
                     </form>
-                    <button class="button success js-dialog-close"><span class="mif-checkmark"></span> NO eliminar</button>
+                    <button class="button success" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> NO eliminar</button>
+                </div>    
                 </div>
             </div>
+            </div>
+
             ';
         }
         ?>

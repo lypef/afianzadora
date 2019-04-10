@@ -59,11 +59,11 @@
             <td>
             
             <div class="split-button">
-                <button class="button" onclick="Metro.dialog.open(\'#view'.$item->id.'\')"><span class="mif-eye"></span> Detalles</button>
+                <button class="button" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'block\'"><span class="mif-eye"></span> Detalles</button>
                 <button class="split dropdown-toggle"></button>
                 <ul class="d-menu" data-role="dropdown">
-                    <li><a href="#" onclick="Metro.dialog.open(\'#editar'.$item->id.'\')"><span class="mif-pencil"></span> Editar</a></li>
-                    <li><a href="#" onclick="Metro.dialog.open(\'#delete'.$item->id.'\')"><span class="mif-cross"></span> Eliminar</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'block\'"><span class="mif-pencil"></span> Editar</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-cross"></span> Eliminar</a></li>
                     <li class="divider"></li>
                     <li><a href="'.base_url().'all/fianzas_gestionar?afianzadora='.$item->id.'"><span class="mif-folder-open"></span> Ver contratos activos</a></li>
                     <li><a href="'.base_url().'all/fianzas_gestionar_cancelaciones?afianzadora='.$item->id.'"><span class="mif-folder"></span> Ver contratos cancelados</a></li>
@@ -73,7 +73,9 @@
             
             </tr>
 
-            <div class="dialog" data-role="dialog" id="view'.$item->id.'">
+            <div id="view'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 480px; !important">
+                <div class="w3-container">
                 <div class="dialog-title"><strong>'.$item->nombre.'</strong></div>
                 <div class="dialog-content">
                     <strong>RAZON SOCIAL:</strong><br>'.$item->razon_social.'
@@ -82,13 +84,17 @@
                     <center><br><strong>EMAIL:</strong><br><a target="_BLANK" href="mailto:'.$item->email.'" target="_top">'.$item->email.'</a></center>
                 </div>
                 <div class="dialog-actions">
-                    <button class="button info js-dialog-close">Ok</button>
+                    <button class="button info" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'none\'">Ok</button>
+                </div>
                 </div>
             </div>
+            </div>
+
 
             
-            
-            <div class="dialog" data-role="dialog" id="editar'.$item->id.'">
+            <div id="editar'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 480px; !important">
+                <div class="w3-container">
                 <div class="dialog-title"><strong><center>ACTUALIZAR: '.$item->nombre.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/afianzadoras_update" method="post">
@@ -122,12 +128,15 @@
                 <div class="dialog-actions">
                     <button type="submit" class="button warning"><span class="mif-pencil"></span> Actualizar</button>
                     </form>
-                    <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+                    <button class="button" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> Cerrar</button>
+                </div>
                 </div>
             </div>
+            </div>
 
-
-            <div class="dialog" data-role="dialog" id="delete'.$item->id.'">
+            <div id="delete'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 480px; !important">
+                <div class="w3-container">
                 <div class="dialog-title"><strong><center>ELIMINAR: '.$item->nombre.'</center></strong></div>
                 <div class="dialog-content">
                     <form action="'.base_url().'all/afianzadoras_delete" method="post">
@@ -138,10 +147,12 @@
                 <div class="dialog-actions">
                     <button type="submit" class="button alert"><span class="mif-bin"></span> Eliminar</button>
                     </form>
-                    <button class="button success js-dialog-close"><span class="mif-checkmark"></span> NO eliminar</button>
+                    <button class="button success" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> NO eliminar</button>
+                </div>    
                 </div>
             </div>
-            
+            </div>
+
             ';
         }
         ?>

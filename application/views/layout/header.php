@@ -12,7 +12,8 @@
         <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-colors.min.css">
         <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-rtl.min.css">
         <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-icons.min.css">
-
-    <title>Sistema Afianzadora</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        
+    <title>SERVICIOS | RJD</title>
 </head>
 <body>

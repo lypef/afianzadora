@@ -77,6 +77,7 @@
             
             if ($item->active != 1){ $classTable = 'class="bg-lightorange bg-orange-hover"'; $active = false;}
 
+            $modals = '';
             $body = '
             <tr '.$classTable.'>
             <td>'.$item->fiador.'</td>
@@ -86,19 +87,22 @@
             <td>
             
             <div class="split-button">
-                <button class="button" onclick="Metro.dialog.open(\'#view'.$item->id.'\')"><span class="mif-eye"></span> Detalles</button>
+                <button class="button" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'block\'"><span class="mif-eye"></span> Detalles</button>
                 <button class="split dropdown-toggle"></button>
                 <ul class="d-menu" data-role="dropdown">                    
                     ';
             if ($active)
             {
                 $body .= '
-                    <li><a href="#" onclick="Metro.dialog.open(\'#comment'.$item->id.'\')"><span class="mif-comment"></span> Comentarios</a></li>
-                    <li><a href="#" onclick="Metro.dialog.open(\'#editar'.$item->id.'\')"><span class="mif-pencil"></span> Editar</a></li>
-                    <li class="divider"></li>
+                    <li><a href="#" onclick="document.getElementById(\'comment'.$item->id.'\').style.display=\'block\'"><span class="mif-comment"></span> Comentarios</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'block\'"><span class="mif-pencil"></span> Editar</a></li>
+                    <li class="divider"></li>';
 
-                    <!--Editar Comentarios-->
-                    <div class="dialog" data-role="dialog" id="comment'.$item->id.'" data-width="800">
+                $modals .= '
+                <!--Editar Comentarios-->
+                    <div id="comment'.$item->id.'" class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container">
                         <div class="dialog-title"><strong>COMENTARIOS, CONTRATO: '.$item->contrato.'</strong></div>
                         <div class="dialog-content">
                             <form action="'.base_url().'all/fianzas_update_comment" method="post">
@@ -112,12 +116,16 @@
                         <div class="dialog-actions">
                             <button type="submit" class="button success js-dialog-close"><span class="mif-checkmark"></span> Guardar</button>
                             </form>
-                            <button class="button info js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+                            <button class="button info" onclick="document.getElementById(\'comment'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> Cerrar</button>
+                        </div>
                         </div>
                     </div>
+                    </div>
 
-                    <!--Actualizar-->            
-                    <div class="dialog" data-role="dialog" id="editar'.$item->id.'" data-width="550">
+                    <!--Actualizar-->    
+                    <div id="editar'.$item->id.'" class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container">
                         <div class="dialog-title"><strong><center>CONTRATO: '.$item->contrato.'</center></strong></div>
                         <div class="dialog-content">
                             <form action="'.base_url().'all/fianzas_update" method="post">
@@ -195,8 +203,10 @@
                         <div class="dialog-actions">
                             <button type="submit" class="button warning"><span class="mif-pencil"></span> Actualizar</button>
                             </form>
-                            <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+                            <button class="button" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'none\'"><span class="mif-cross"></span> Cerrar</button>
                         </div>
+                        </div>
+                    </div>
                     </div>
                     
                 ';
@@ -422,16 +432,9 @@
             $body .= 
             '
             <!--Visualizar Informacion-->
-
-            <div class="info-box" data-role="infobox">
-                <span class="button square closer"></span>
-                <div class="info-box-content">
-                    <h3>What is Lorem Ipsum?</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-            </div>
-
-            <div class="dialog" data-role="dialog" id="view'.$item->id.'" data-width="950">
+            <div id="view'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 880px; !important">
+                <div class="w3-container">
                 <div class="dialog-title text-center"><strong>CONTRATO: '.$item->contrato.'</strong></div>
                 <div class="dialog-content">
 
@@ -478,15 +481,14 @@
                         </div>
                     </div>
                 </div>
-
-
-                    
                 </div>
                 <div class="dialog-actions">
-                    <button class="button info js-dialog-close"><span class="mif-checkmark"></span> Ok</button>
+                    <button class="button info" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'none\'"><span class="mif-checkmark"></span> Ok</button>
+                </div>
                 </div>
             </div>
-            
+            </div>
+
             
 
             <!--Eliminar-->
@@ -507,6 +509,8 @@
                 </div>
             </div>
             ';
+
+            $body .= $modals;
             echo $body;
         }
         ?>

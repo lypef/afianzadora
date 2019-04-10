@@ -1,7 +1,9 @@
 </div>
 
-<!--Agregar usuario-->
-<div class="dialog" data-role="dialog" id="add_user_sistem">
+<!-- Agregar Usuario -->
+<div id="add_user_sistem" class="w3-modal">
+  <div class="w3-modal-content" style="width: 550px; !important">
+    <div class="w3-container">
     <div class="dialog-title"><strong><center>NUEVO USUARIO</center></strong></div>
     <div class="dialog-content">
         <form action="<?php echo base_url(); ?>all/manager_users_add" method="post" autocomplete="off">
@@ -26,12 +28,105 @@
     <div class="dialog-actions">
         <button type="submit" class="button warning"><span class="mif-plus"></span> Agregar</button>
         </form>
-        <button class="button js-dialog-close"><span class="mif-cross"></span> cancelar</button>
+        <button class="button" onclick="document.getElementById('add_user_sistem').style.display='none'" ><span class="mif-cross"></span> cancelar</button>
     </div>
+    </div>
+  </div>
 </div>
+<!-- Finaliza Agregar Usuario -->
 
 <!--Agregar fianza-->            
-<div class="dialog" data-role="dialog" id="add_fianza" data-width="550">
+
+
+<div id="add_fianza" class="w3-modal">
+    <div class="w3-modal-content" style="width: 550px; !important">
+      <div class="w3-container">
+        <div class="dialog-title"><strong><center>NUEVA FIANZA</center></strong></div>
+        <div class="dialog-content">
+            <form action="<?php echo base_url() ?>all/fianzas_add" method="post">
+                <div class="form-group">
+                    <label><strong>Fecha de emision</strong></label>
+                    <input data-role="datepicker" data-locale="es-MX" data-on-set="fecha_emision(0, arguments[1])" data-distance="1">
+                    <input type="hidden" id="fecha_emision0" name="fecha_emision0">
+                </div>
+                </p>
+                <div class="row">
+                    
+                    <div class="cell-6"><div class="form-group">
+                        <label><strong>Contrato</strong></label>
+                        <input id="contrato" name="contrato" type="text" placeholder="Numero de contrato" required value="" />
+                    </div>
+                    </div>
+
+                    <div class="cell-6">
+                    <input type="hidden" id="tipo_fianza_0" name="tipo_fianza_0" value="">
+                    <?php echo GetFianzaTipoSelect("", 0, 0) ?>
+                    </div>
+                </div> 
+                </p>
+                <input type="hidden" id="fiador_0" name="fiador_0" value="">
+                <?php echo GetFiadoresSelect("", 0, 0) ?>
+                </p>
+                <div class="row">
+                    
+                    <div class="cell-6">
+                    <div class="form-group">
+                            <label><strong>Monto factura $</strong></label>
+                            <input id="monto_factura" name="monto_factura" type="text" placeholder="Monto de la factura" required value="" />
+                        </div>
+                    </div>
+
+                    <div class="cell-6">
+                    <div class="form-group">
+                        <label><strong>Folio factura</strong></label>
+                        <input id="folio_factura" name="folio_factura" type="text" placeholder="Folio de la factura" required value="" />
+                    </div>
+                    </div>
+                </div> 
+                </p>
+                <div class="row">
+                    
+                    <div class="cell-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label><strong>Folio fianza</strong></label>
+                            <input id="folio_fianza" name="folio_fianza" type="text" placeholder="Folio de la fianza" required value="" />
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="cell-6">
+                        <div class="form-group">
+                            <label><strong>Estatus</strong></label>
+                            <input id="entrega" name="entrega" type="text" placeholder="Estatus" required value="" />
+                        </div>
+                    </div>
+                </div> 
+                </p>
+                <input type="hidden" id="afianzadora_0" name="afianzadora_0" value="">
+                <?php echo GetAfianzadoraSelect("", 0, 0) ?>
+                </p>
+                
+                <div class="form-group">
+                    <label><strong>Fecha de pago</strong></label>
+                    <input data-role="datepicker" data-value="" data-locale="es-MX" data-on-set="fecha_pago(0, arguments[1])" data-distance="1" style="z-index: 100">
+                    <input type="hidden" id="fecha_pago0" name="fecha_pago0">
+                </div>
+                <input type="hidden" id="url" name="url" value="<?php echo UrlActual($_SERVER['REQUEST_URI']) ?>">
+        </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button warning"><span class="mif-pencil"></span> Actualizar</button>
+        </form>
+        <button class="button" onclick="document.getElementById('add_fianza').style.display='none'"><span class="mif-cross"></span> Cerrar</button>
+    </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="dialog" data-role="dialog" id="" data-width="550">
     <div class="dialog-title"><strong><center>NUEVA FIANZA</center></strong></div>
     <div class="dialog-content">
         <form action="<?php echo base_url() ?>all/fianzas_add" method="post">
@@ -113,19 +208,29 @@
 </div>
 </div>
 
-<div class="dialog" data-role="dialog" id="search_fiador" data-on-open="document.getElementById('1search').focus();" data-width = "700" >
-    <div class="dialog-title">Buscar Fiador: Razon social | Contacto</strong></div>
-    <div class="dialog-content">
-        <form action="<?php echo base_url(); ?>all/fiadores_gestionar" method="get">
-            <input type="text" id="1search" name="search" data-role="input" data-search-button="true" placeholder="Ingrese texto aqui ...">
+<!-- search fiador -->
+<div id="search_fiador" class="w3-modal">
+  <div class="w3-modal-content">
+    <div class="w3-container">
+        <div class="dialog-title">Buscar Fiador: Razon social | Contacto</strong></div>
+        <div class="dialog-content">
+            <form action="<?php echo base_url(); ?>all/fiadores_gestionar" method="get">
+                <input type="text" id="1search" name="search" data-role="input" data-search-button="true" placeholder="Ingrese texto aqui ...">
+        </div>
+        <div class="dialog-actions">
+            </form>
+            <button class="button" onclick="document.getElementById('search_fiador').style.display='none'" >Cerrar</button>
+        </div>  
     </div>
-    <div class="dialog-actions">
-        </form>
-        <button class="button js-dialog-close">Cerrar</button>
-    </div>
+  </div>
 </div>
+<!-- Finaliza search fiador -->
 
-<div class="dialog" data-role="dialog" id="search_fianza" data-on-open="document.getElementById('3search').focus();" data-width = "700" >
+
+<!-- search_fianza -->
+<div id="search_fianza" class="w3-modal">
+  <div class="w3-modal-content">
+    <div class="w3-container">
     <div class="dialog-title">Buscar Fianza:</strong></div>
     <div class="dialog-content">
         <form action="<?php echo base_url(); ?>all/fianzas_gestionar" method="get">
@@ -133,11 +238,17 @@
     </div>
     <div class="dialog-actions">
         </form>
-        <button class="button js-dialog-close">Cerrar</button>
+        <button class="button" onclick="document.getElementById('search_fianza').style.display='none'" >Cerrar</button>
     </div>
+    </div>
+  </div>
 </div>
+<!-- Finaliza search_fianza -->
 
-<div class="dialog" data-role="dialog" id="search_afianzadora" data-on-open="document.getElementById('2search').focus();" data-width = "700" >
+<!-- search_afianzadora-->
+<div id="search_afianzadora" class="w3-modal">
+  <div class="w3-modal-content">
+    <div class="w3-container">
     <div class="dialog-title">Buscar Afianzadora: Nombre | Razon social</strong></div>
     <div class="dialog-content">
         <form action="<?php echo base_url(); ?>all/afianzadoras" method="get">
@@ -145,11 +256,18 @@
     </div>
     <div class="dialog-actions">
         </form>
-        <button class="button js-dialog-close">Cerrar</button>
+        <button class="button" onclick="document.getElementById('search_afianzadora').style.display='none'" >Cerrar</button>
+    </div>  
     </div>
+  </div>
 </div>
+<!-- Finaliza search_afianzadora -->
 
-<div class="dialog" data-role="dialog" id="add_fiador">
+<!-- Alta fiador -->
+
+<div id="add_fiador" class="w3-modal">
+  <div class="w3-modal-content" style="width: 550px; !important">
+    <div class="w3-container">
     <div class="dialog-title"><strong><center>ALTA FIADOR</center></strong></div>
     <div class="dialog-content">
         <form action="<?php echo base_url(); ?>all/fiadores_add" method="post">
@@ -182,11 +300,19 @@
     <div class="dialog-actions">
         <button type="submit" class="button info"><span class="mif-plus"></span> Agregar</button>
     </form>
-    <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+    <button class="button" onclick="document.getElementById('add_fiador').style.display='none'"  ><span class="mif-cross"></span> Cerrar</button>
+    </div>  
     </div>
+  </div>
 </div>
+<!-- finaliza Alta fiador -->
 
-<div class="dialog" data-role="dialog" id="add_afianzadora">
+
+<!-- agregar afianzadora -->
+
+<div id="add_afianzadora" class="w3-modal">
+  <div class="w3-modal-content" style="width: 550px; !important">
+    <div class="w3-container">
     <div class="dialog-title"><strong><center>ALTA AFIANZADORA</center></strong></div>
     <div class="dialog-content">
         <form action="<?php echo base_url(); ?>all/afianzadoras_add" method="post">
@@ -219,11 +345,18 @@
     <div class="dialog-actions">
         <button type="submit" class="button info"><span class="mif-plus"></span> Agregar</button>
     </form>
-    <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+    <button class="button" onclick="document.getElementById('add_afianzadora').style.display='none'" ><span class="mif-cross"></span> Cerrar</button>
+    </div>      
     </div>
+  </div>
 </div>
+<!-- Finaliza agregar afianzadora -->
 
-<div class="dialog" data-role="dialog" id="add_afianzadora_tipo">
+
+<!-- add_afianzadora_tipo -->
+<div id="add_afianzadora_tipo" class="w3-modal">
+  <div class="w3-modal-content">
+    <div class="w3-container">
     <div class="dialog-title"><strong><center>NUEVO TIPO AFIANZADOR</center></strong></div>
     <div class="dialog-content">
         <form action="<?php echo base_url(); ?>all/afianzador_tipo_add" method="post">
@@ -236,9 +369,14 @@
     <div class="dialog-actions">
         <button type="submit" class="button info"><span class="mif-plus"></span> Agregar</button>
     </form>
-    <button class="button js-dialog-close"><span class="mif-cross"></span> Cerrar</button>
+    <button class="button" onclick="document.getElementById('add_afianzadora_tipo').style.display='none'"><span class="mif-cross"></span> Cerrar</button>
+    </div>      
     </div>
+  </div>
 </div>
+<!-- Finaliza add_afianzadora_tipo -->
+
+
   <footer class="container-fluid bg-grayWhite p-4">
     <div class="row">
         <div class="cell-md-6">

@@ -49,7 +49,7 @@
 
         <!-- Inicia modulo titulaes-->
         <div class="group">
-            <button onclick="Metro.dialog.open('#add_fiador')" class="ribbon-button">
+            <button onclick="document.getElementById('add_fiador').style.display='block'" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-plus"></span>
                     </span>
@@ -65,7 +65,7 @@
             </button>
             </a>
 
-            <button onclick="Metro.dialog.open('#search_fiador')" class="ribbon-button">
+            <button onclick="document.getElementById('search_fiador').style.display='block'; document.getElementById('1search').focus();" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-search"></span>
                     </span>
@@ -79,7 +79,7 @@
         <!-- Inicia modulo vehiculos-->
         <div class="group">
             
-            <button onclick="Metro.dialog.open('#add_afianzadora')" class="ribbon-button">
+            <button onclick="document.getElementById('add_afianzadora').style.display='block'" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-plus"></span>
                     </span>
@@ -97,7 +97,7 @@
             </a>
 
             
-            <button onclick="Metro.dialog.open('#search_afianzadora')" class="ribbon-button">
+            <button onclick="document.getElementById('search_afianzadora').style.display='block'; document.getElementById('2search').focus();" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-search"></span>
                     </span>
@@ -113,7 +113,7 @@
             </button>
             </a>
 
-            <button onclick="Metro.dialog.open('#add_afianzadora_tipo')" class="ribbon-button">
+            <button onclick="document.getElementById('add_afianzadora_tipo').style.display='block';" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-note-add"></span>
                     </span>
@@ -128,7 +128,7 @@
 
         <!-- Inicia modulo titulaes-->
         <div class="group">
-            <button onclick="Metro.dialog.open('#add_fianza')" class="ribbon-button">
+            <button onclick="document.getElementById('add_fianza').style.display='block'" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-plus"></span>
                     </span>
@@ -153,7 +153,7 @@
             </button>
             </a>
             
-            <button onclick="Metro.dialog.open('#search_fianza');" class="ribbon-button">
+            <button onclick="document.getElementById('search_fianza').style.display='block'; document.getElementById('3search').focus();" class="ribbon-button">
                     <span class="icon">
                         <span class="mif-search"></span>
                     </span>
@@ -205,7 +205,7 @@
         <!-- Inicia modulo usuarios-->
         <div class="group">
             
-            <button onclick="Metro.dialog.open('#add_user_sistem');"  class="ribbon-button">
+            <button onclick="document.getElementById('add_user_sistem').style.display='block';"  class="ribbon-button">
                     <span class="icon">
                         <span class="mif-user-plus"></span>
                     </span>
