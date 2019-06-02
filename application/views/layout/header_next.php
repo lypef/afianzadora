@@ -49,28 +49,24 @@
 
         <!-- Inicia modulo titulaes-->
         <div class="group">
-            <button onclick="document.getElementById('add_fiador').style.display='block'" class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-plus"></span>
-                    </span>
-                <span class="caption">Agregar</span>
-            </button>
 
+            <div class="ribbon-split-button">
             <a href="<?php echo base_url(); ?>all/fiadores_gestionar">
-            <button class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-database"></span>
-                    </span>
-                <span class="caption">Gestionar</span>
-            </button>
-            </a>
+                    <button class="ribbon-main">
+                        <span class="icon ribbon-main">
+                            <span class="mif-database"></span>
+                        </span>
+                    </button>
+                </a>
+                    <span class="ribbon-split dropdown-toggle">Gestionar</span>
+                    <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
+                        <li><a href="<?php echo base_url(); ?>all/fiadores_gestionar"><span class="mif-database"></span> Gestionar</a></li>
+                        <li><a href="#" onclick="document.getElementById('add_fiador').style.display='block'"><span class="mif-plus"></span> Agregar</a></li>
+                        <li><a href="#" onclick="document.getElementById('search_fiador').style.display='block'; document.getElementById('1search').focus();"><span class="mif-search"></span> Buscar</a></li>
+                    </ul>
+            </div>
 
-            <button onclick="document.getElementById('search_fiador').style.display='block'; document.getElementById('1search').focus();" class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-search"></span>
-                    </span>
-                <span class="caption">Buscar</span>
-            </button>
+
             <span class="title">Fiadores</span>
 
         </div>
@@ -78,47 +74,38 @@
 
         <!-- Inicia modulo vehiculos-->
         <div class="group">
+        
+            <div class="ribbon-split-button">
+                <a href="<?php echo base_url(); ?>all/afianzadoras">
+                        <button class="ribbon-main">
+                            <span class="icon ribbon-main">
+                                <span class="mif-database"></span>
+                            </span>
+                        </button>
+                    </a>
+                    <span class="ribbon-split dropdown-toggle">Gestionar</span>
+                    <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
+                        <li><a href="<?php echo base_url(); ?>all/afianzadoras"><span class="mif-database"></span> Gestionar</a></li>
+                        <li><a href="#" onclick="document.getElementById('add_afianzadora').style.display='block'"><span class="mif-plus"></span> Agregar</a></li>
+                        <li><a href="#" onclick="document.getElementById('search_afianzadora').style.display='block'; document.getElementById('2search').focus();"><span class="mif-search"></span> Buscar</a></li>
+                    </ul>
+            </div>
             
-            <button onclick="document.getElementById('add_afianzadora').style.display='block'" class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-plus"></span>
-                    </span>
-                <span class="caption">Agregar</span>
-            </button>
+            <div class="ribbon-split-button">
+                <a href="<?php echo base_url(); ?>all/afianzadores_tipos">
+                        <button class="ribbon-main">
+                            <span class="icon ribbon-main">
+                                <span class="mif-file-text"></span>
+                            </span>
+                        </button>
+                    </a>
+                    <span class="ribbon-split dropdown-toggle">Tipos</span>
+                    <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
+                        <li><a href="<?php echo base_url(); ?>all/afianzadores_tipos"><span class="mif-database"></span> Vizualizar</a></li>
+                        <li><a href="#" onclick="document.getElementById('add_afianzadora_tipo').style.display='block';"><span class="mif-plus"></span> Agregar</a></li>    
+                    </ul>
+            </div>
             
-
-            <a href="<?php echo base_url(); ?>all/afianzadoras">
-            <button class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-database"></span>
-                    </span>
-                <span class="caption">Gestionar</span>
-            </button>
-            </a>
-
-            
-            <button onclick="document.getElementById('search_afianzadora').style.display='block'; document.getElementById('2search').focus();" class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-search"></span>
-                    </span>
-                <span class="caption">Buscar</span>
-            </button>
-            
-            <a href="<?php echo base_url(); ?>all/afianzadores_tipos">
-            <button class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-file-text"></span>
-                    </span>
-                <span class="caption">Tipos</span>
-            </button>
-            </a>
-
-            <button onclick="document.getElementById('add_afianzadora_tipo').style.display='block';" class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-note-add"></span>
-                    </span>
-                <span class="caption">Agregar Tipo</span>
-            </button>
 
             <span class="title">Afianzadoras</span>
         </div>
@@ -183,21 +170,21 @@
                 <span class="caption">Pagos</span>
             </button></a>
 
-            <a href="gest_adicionales.php?pagina=1">
-            <button class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-compass"></span>
-                    </span>
-                <span class="caption">Emisiones</span>
-            </button></a>
 
-            <a href="gest_adicionales.php?pagina=1">
-            <button class="ribbon-button">
-                    <span class="icon">
+            <div class="ribbon-split-button">
+            <a href="comisiones">
+                <button class="ribbon-main">
+                    <span class="icon ribbon-main">
                         <span class="mif-dollar"></span>
                     </span>
-                <span class="caption">Pago de comisiones</span>
-            </button></a>
+                </button>
+            </a>
+                <span class="ribbon-split dropdown-toggle">Comisiones</span>
+                <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
+                    <li><a href="comisiones" ><span class="mif-dollar"></span> Gestionar</a></li>
+                    <li><a href="add_comisiones" ><span class="mif-plus"></span> Agregar</a></li>
+                </ul>
+            </div>
 
             <span class="title">Gestion</span>
         </div>
@@ -205,23 +192,22 @@
         <!-- Inicia modulo usuarios-->
         <div class="group">
             
-            <button onclick="document.getElementById('add_user_sistem').style.display='block';"  class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-user-plus"></span>
-                    </span>
-                <span class="caption">Agregar usuario</span>
-            </button>
+            <div class="ribbon-split-button">
+                <a href="<?php echo base_url(); ?>all/manager_users">
+                        <button class="ribbon-main">
+                            <span class="icon ribbon-main">
+                                <span class="mif-users"></span>
+                            </span>
+                        </button>
+                    </a>
+                    <span class="ribbon-split dropdown-toggle">Gestionar</span>
+                    <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
+                        <li><a href="#" onclick="document.getElementById('add_user_sistem').style.display='block';"><span class="mif-user-plus"></span> Nuevo usuario</a></li>
+                        <li><a href="<?php echo base_url(); ?>all/manager_users" ><span class="mif-user-plus"></span> Gestionar</a></li>
+                    </ul>
+            </div>
+
             
-
-            <a href="<?php echo base_url(); ?>all/manager_users">
-            <button class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-users"></span>
-                    </span>
-                <span class="caption">Gestionar usuarios</span>
-            </button>
-            </a>
-
             <span class="title">Usuarios</span>
         </div>
         <!-- Finaliza modulo usuarios-->

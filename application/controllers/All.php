@@ -819,4 +819,45 @@ class All extends CI_Controller {
 			redirect($url.'?no_posible=false');
 		}
 	}
+
+	public function comisiones ()
+	{
+		LoginCheck();
+		$pag = $this->input->get('pagina');
+		$buscar = $this->input->get('search');
+		$limit = '';
+		if (is_null($pag))
+		{
+			$pag = 1;
+		}
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ')->num_rows() / 12, 0, '', ' ');
+		}
+		else
+		{
+			$TotalPags = number_format($this->db->query('SELECT id FROM `afianzadoras`')->num_rows() / 12, 0, '', ' ');
+		}
+
+		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
+		$data['pags'] = $TotalPags;
+		$data['pag'] = $pag;
+
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$data['data'] = $this->db->query('SELECT * FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ' . $limit .' ')->result();
+		}
+		else
+		{
+			$data['data'] = $this->db->query('SELECT * FROM `afianzadoras`  '.$limit.' ')->result();
+		}
+		
+		$this->load->view('layout/header');
+		$this->load->view('layout/header_next');
+		$this->load->view('afianzadoras', $data);
+		$this->load->view('layout/footer_previus');
+		$this->load->view('layout/footer');
+	}
 }
