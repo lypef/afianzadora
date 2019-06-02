@@ -2,10 +2,10 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 09-03-2019 a las 15:23:40
--- Versión del servidor: 10.2.17-MariaDB
--- Versión de PHP: 7.2.10
+-- Servidor: localhost:3306
+-- Tiempo de generación: 27-05-2019 a las 01:26:00
+-- Versión del servidor: 5.7.26
+-- Versión de PHP: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `fastener`
+-- Base de datos: `servi175_db`
 --
 
 -- --------------------------------------------------------
@@ -95,7 +95,7 @@ CREATE TABLE `fiadores` (
 --
 
 INSERT INTO `fiadores` (`id`, `razon_social`, `contactos`, `correo1`, `telefonos`, `correo2`) VALUES
-(1, 'ADIB SAADE VALDESPINO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
+(1, 'ALBERTO LOPEZ CRUZ', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
 (2, 'FRANCISCO EDUARDO ASCENCIO  DOMINGUEZ', 'LIC. TERE / ING. ALEX', 'CONTACTO@CYBERCHOAPAS.COM', '012484854092', 'CONTACTO@CYBERCHOAPAS.COM'),
 (6, 'ALEJANDRO SOTELO CABALLERO\r\n', '41d564d564d5d45', '5dws5d5w4dw54', '5454545454', '5454\r\n'),
 (7, 'ALEJANDRO SOTELO CABALLERO\r\n', '41d564d564d5d45', '5dws5d5w4dw54', '5454545454', '5454\r\n'),
@@ -176,10 +176,105 @@ INSERT INTO `fiadores` (`id`, `razon_social`, `contactos`, `correo1`, `telefonos
 (82, 'ALEJANDRO SOTELO CABALLERO\r\n', '41d564d564d5d45', '5dws5d5w4dw54', '5454545454', '5454\r\n'),
 (83, 'ALEJANDRO SOTELO CABALLERO\r\n', '41d564d564d5d45', '5dws5d5w4dw54', '5454545454', '5454\r\n'),
 (84, 'FRANCISCO EDUARDO ASCENCIO  DOMINGUEZ', 'FRANCISCO EDUARDO ASCENCIO  DOMINGUEZ', 'CONTACTO@CYBERCHOAPAS.COM', '2122', 'CONTACTO@CYBERCHOAPAS.COM'),
-(85, 'ADIB SAADE VALDESPINO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
+(85, 'LILIANA PEREZ GUTIERREZ', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
 (86, 'ADIB SAADE VALDESPINO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
-(87, 'ADIB SAADE VALDESPINO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
-(88, 'ADIB SAADE VALDESPINO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx');
+(87, 'JULIAN TURISO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
+(88, 'KORAIMA PEREZ YO NO FUI', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
+(89, 'Miguel Ramirez Pantiga', 'Pantiga', 'cp_pantiga@hotmail.com', '7441324811', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fianzas`
+--
+
+CREATE TABLE `fianzas` (
+  `id` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `fiador` int(11) NOT NULL,
+  `contrato` varchar(254) NOT NULL,
+  `tipo_fianza` int(11) NOT NULL,
+  `folio_fianza` varchar(254) NOT NULL,
+  `afianzadora` int(11) NOT NULL,
+  `fecha_emision` date NOT NULL,
+  `folio_factura` varchar(254) NOT NULL,
+  `monto_factura` double NOT NULL DEFAULT '0',
+  `fecha_pago` date NOT NULL,
+  `entrega` varchar(254) NOT NULL,
+  `pdf_contrato_obra` varchar(254) NOT NULL,
+  `pdf_constancia_situacion_fiscal` varchar(254) NOT NULL,
+  `pdf_estados_financiero` varchar(254) NOT NULL,
+  `pdf_comprobante_domicilio` varchar(254) NOT NULL,
+  `pdf_ife_representante_legal` varchar(254) NOT NULL,
+  `pdf_curp` varchar(254) NOT NULL,
+  `comentarios` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `fianzas`
+--
+
+INSERT INTO `fianzas` (`id`, `active`, `fiador`, `contrato`, `tipo_fianza`, `folio_fianza`, `afianzadora`, `fecha_emision`, `folio_factura`, `monto_factura`, `fecha_pago`, `entrega`, `pdf_contrato_obra`, `pdf_constancia_situacion_fiscal`, `pdf_estados_financiero`, `pdf_comprobante_domicilio`, `pdf_ife_representante_legal`, `pdf_curp`, `comentarios`) VALUES
+(2, 1, 73, 'A84D58485D_Actualizado', 5, 'aaaaaaa', 6, '2001-01-12', '54W154158', 245000000.123, '2001-01-12', 'ENTREGADO', '', '././documentos/situacion_fiscal20190315195208.pdf', '././documentos/estados_financieros20190315195208.pdf', '././documentos/comprobante_domicilio20190315195208.pdf', '././documentos/ife_r_legal20190315195208.pdf', '././documentos/curp20190315195208.pdf', 'Se conoce como texto al conjunto de frases y palabras coherentes y ordenadas que permiten ser interpretadas y transmiten las ideas de un autor (emisor o locutor). La palabra texto es de origen latín textos que significa ´tejido´.\r\n\r\nLos textos pueden ser cortos, únicamente con una palabra, o más largos por medio de un conjunto de ellas; pero es de aclarar que el texto no son maraña de frases, así que para que sea efectivo existen dos criterios fundamentales para su existencia: coherencia y cohesión.\r\n\r\nLa cohesión y la coherencia son recursos fundamentales utilizados en la formación de un texto. De esta forma, la cohesión establece la conexión armoniosa entre las diversas partes del texto, en la composición de parágrafos, frases. Por su parte, la coherencia es fundamental para establecer la relación lógica entre las ideas de un texto, logrando que se complementen unas con otras.\r\n\r\nLa estructura de los textos, comprende, una introducción, donde se presenta el tema que se tratara y los aspectos más relevantes del mismo; un desarrollo, donde se expone, de manera clara, precisa, ordenada y coherente la información relativa al tema que se indicó en la introducción; y una conclusión, síntesis y valoración de la información presentada donde se destaca las ideas principales del tema.\r\n\r\nEl objetivo del texto es comunicar un mensaje claro y preciso, bien sea romántico, descriptivo, científico, informativo, entre otros, para ser comprendido por el destinatario. En este sentido, es de aclarar que el Texto Sagrado son los diferentes textos o libros de las diferentes religiones, por ejemplo: la Biblia es del cristianismo, el Corán es del islamismo, la Biblia hebrea es del judaísmo, etc.\r\n\r\nPor el momento, es todo. Gracias'),
+(3, 1, 84, 'A84D58485Dactualizado', 4, '6D546WD45', 3, '2018-03-11', '54W154158update', 154759, '2019-03-09', 'WE5241EW65F56EWupdate', '', '', '', '', '', '', ''),
+(4, 0, 85, 'A84D58485D', 3, '6D546WD45', 2, '2019-03-11', '6d541d541d', 1456151, '2019-03-11', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(5, 1, 85, '15032019', 6, '6D546WD45', 1, '2026-01-05', '54W154158', 125000.56, '2019-03-22', 'CORRECTO', '../../documentos/finza_5_20190315211513.pdf', '../../documentos/finza_5_201903152115131.pdf', '../../documentos/finza_5_201903152115132.pdf', '../../documentos/finza_5_201903152115133.pdf', '../../documentos/finza_5_201903152115134.pdf', '../../documentos/finza_5_201903152115135.pdf', ':D\r\n:D'),
+(6, 1, 84, 'A84D58485Da', 3, '6D546WD45', 6, '2019-03-12', '54W154158', 1456151, '2019-03-12', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(7, 1, 84, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-11', '54W154158', 1456151, '2019-03-11', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(8, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(9, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(10, 0, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(12, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(13, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-09', '54W154158', 1456150, '2019-03-09', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(14, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(15, 0, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(16, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(17, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(18, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(19, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(20, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(21, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(22, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(23, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(24, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(25, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(26, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(27, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(28, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(29, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(30, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(31, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(32, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(33, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(34, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(35, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(36, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(37, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(38, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(39, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(40, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(41, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(42, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(43, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(44, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(45, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(46, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(47, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(48, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(49, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(50, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(51, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(52, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(53, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(54, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(55, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(56, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(57, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(58, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(59, 1, 85, 'A84D58485D', 3, '6D546WD45', 4, '2019-03-10', '54W154158', 1456151, '2019-03-10', 'WE5241EW65F56EW', '', '', '', '', '', '', ''),
+(61, 1, 84, 'asc151514', 3, 'a51a515a1', 6, '2019-03-18', '14aa565a', 154.5, '2019-03-18', '151515', '', '', '', '', '', '', ''),
+(62, 1, 84, 'AEDF9201', 2, 'D-SSOFD88', 3, '2019-03-15', 'F-33MD', 145000.5, '2019-03-19', 'CORRECTO', '', '', '', '', '', '', ''),
+(63, 1, 1, 'fghjk', 3, 'sss', 4, '2019-03-19', 'ghjk', 154.5, '2019-03-19', 'ghjnmk', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -199,7 +294,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`) VALUES
-(1, 'NOMBRE DE USUARIO', 'root', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU=');
+(1, 'FRANCISCO EDUARDO ASCENCIO DOMINGUEZ', 'root', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU='),
+(3, 'FRANCISCO EDUARDO ASCENCIO DOMINGUEZ', 'new', 'MjJhZjY0NWQxODU5Y2I1Y2E2ZGEwYzQ4NGYxZjM3ZWE='),
+(4, 'FRANCISCO EDURDO ASCENCIO DOMINGUEZ', 'root1', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU='),
+(5, 'FRANCISCO EDURDO ASCENCIO DOMINGUEZ', 'root2', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU='),
+(6, 'FRANCISCO EDURDO ASCENCIO DOMINGUEZ', 'root3', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU='),
+(7, 'FRANCISCO EDURDO ASCENCIO DOMINGUEZ', 'root4', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU='),
+(8, 'FRANCISCO EDURDO ASCENCIO DOMINGUEZ', 'root5', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU='),
+(9, 'FRANCISCO EDURDO ASCENCIO DOMINGUEZ', 'root6', 'NjNhOWYwZWE3YmI5ODA1MDc5NmI2NDllODU0ODE4NDU='),
+(11, 'ARLENE GARCIA AGUILAR', 'lene', 'YTYyOTA1NmZmNDA5ZTFiMjYwYjY2YmY2ZDJiNTQxYWU=');
 
 --
 -- Índices para tablas volcadas
@@ -224,10 +327,20 @@ ALTER TABLE `fiadores`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `fianzas`
+--
+ALTER TABLE `fianzas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fiador_fianza` (`fiador`),
+  ADD KEY `tipo_fianza` (`tipo_fianza`),
+  ADD KEY `afianzadora_fianza` (`afianzadora`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -237,25 +350,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `afianzadoras`
 --
 ALTER TABLE `afianzadoras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `afianzadores_tipos`
 --
 ALTER TABLE `afianzadores_tipos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `fiadores`
 --
 ALTER TABLE `fiadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+
+--
+-- AUTO_INCREMENT de la tabla `fianzas`
+--
+ALTER TABLE `fianzas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `fianzas`
+--
+ALTER TABLE `fianzas`
+  ADD CONSTRAINT `afianzadora_fianza` FOREIGN KEY (`afianzadora`) REFERENCES `afianzadoras` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fiador_fianza` FOREIGN KEY (`fiador`) REFERENCES `fiadores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tipo_fianza` FOREIGN KEY (`tipo_fianza`) REFERENCES `afianzadores_tipos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
