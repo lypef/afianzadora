@@ -245,6 +245,24 @@
 </div>
 <!-- Finaliza search_fianza -->
 
+<!-- search_comisiones -->
+<div id="search_comisiones" class="w3-modal">
+  <div class="w3-modal-content">
+    <div class="w3-container">
+    <div class="dialog-title">Buscar Comisiones:</strong></div>
+    <div class="dialog-content">
+        <form action="<?php echo base_url(); ?>all/comisiones" method="get">
+            <input type="text" id="search_comisiones_input" name="search" data-role="input" data-search-button="true" placeholder="Ingrese texto aqui ..." >
+    </div>
+    <div class="dialog-actions">
+        </form>
+        <button class="button" onclick="document.getElementById('search_comisiones').style.display='none'" >Cerrar</button>
+    </div>
+    </div>
+  </div>
+</div>
+<!-- Finaliza search_comisiones -->
+
 <!-- search_afianzadora-->
 <div id="search_afianzadora" class="w3-modal">
   <div class="w3-modal-content">
@@ -381,10 +399,10 @@
     <div class="row">
         <div class="cell-md-6">
             <p>
-              <span class="no-wrap">PROYECCIÓN Y SERVICIOS RJD</span>
+              <span class="no-wrap">PROYECCION Y SERVICIOS RJD SA DE CV</span>
                 <br />
-                <span class="no-wrap">Direccion temporal, 234 altos</span><br>
-                <span class="no-wrap">Ciudad: Manizales. CP: 23700, Vercruz, mexico.</span><br>
+                <span class="no-wrap">Magallanes Ext. 166 Int. 61 Cuauhtemoc.</span><br>
+                <span class="no-wrap">Acapulco De Juarez. Cp: 39670, Guerrero, Mexico.</span><br>
                 <span class="no-wrap">© 2019 | DESARROLLADO POR <a target="_blank" href="http://www.cyberchoapas.com"> CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE</a>.</span>
             </p>
             <ul class="inline-list h-menu no-hover bg-grayWhite" style="margin-left: -.5rem">

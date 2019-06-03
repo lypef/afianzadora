@@ -172,7 +172,7 @@
 
 
             <div class="ribbon-split-button">
-            <a href="comisiones">
+            <a href="<?php echo base_url(); ?>all/comisiones">
                 <button class="ribbon-main">
                     <span class="icon ribbon-main">
                         <span class="mif-dollar"></span>
@@ -183,6 +183,7 @@
                 <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
                     <li><a href="comisiones" ><span class="mif-dollar"></span> Gestionar</a></li>
                     <li><a href="add_comisiones" ><span class="mif-plus"></span> Agregar</a></li>
+                    <li><a href="#" onclick="document.getElementById('search_comisiones').style.display='block'; document.getElementById('search_comisiones_input').focus();" ><span class="mif-search"></span> Buscar</a></li>
                 </ul>
             </div>
 
