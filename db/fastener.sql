@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 27-05-2019 a las 01:26:00
--- Versión del servidor: 5.7.26
--- Versión de PHP: 7.2.7
+-- Servidor: localhost
+-- Tiempo de generación: 04-06-2019 a las 05:51:18
+-- Versión del servidor: 10.3.12-MariaDB
+-- Versión de PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `servi175_db`
+-- Base de datos: `fastener`
 --
 
 -- --------------------------------------------------------
@@ -74,6 +74,45 @@ INSERT INTO `afianzadores_tipos` (`id`, `nombre`) VALUES
 (10, 'NUEVA FIANZA ACTUALIZADA'),
 (11, 'SEGUNDA FIANZA'),
 (31, 'NUEVO TIPO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comisiones`
+--
+
+CREATE TABLE `comisiones` (
+  `id` int(11) NOT NULL,
+  `fianza` int(11) NOT NULL,
+  `endoso` varchar(254) NOT NULL,
+  `prima_neta` double NOT NULL,
+  `comision_agente` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `comisiones`
+--
+
+INSERT INTO `comisiones` (`id`, `fianza`, `endoso`, `prima_neta`, `comision_agente`) VALUES
+(1, 3, 'ANULACION', 3377.469970703125, 800),
+(2, 54, 'ANULACION', 51515, 5),
+(3, 62, 'ANULACION', 127548000, 5),
+(4, 48, 'ANULACION', 51515, 5),
+(5, 15, 'ANULACION', 51515, 5),
+(6, 12, 'ANULACION', 51515, 5),
+(7, 59, 'ANULACION', 51515, 5),
+(9, 52, 'ANULACION', 51515, 5),
+(15, 47, 'ANULACION', 51515, 5),
+(17, 43, 'ANULACION', 51515, 5),
+(19, 55, 'ANULACION', 51515, 5),
+(20, 51, 'ANULACION', 51515, 5),
+(32, 5, 'anulacion', 158964.546875, 1511.219970703125),
+(33, 58, 'anulkacioNNNN', 15444.5498046875, 555.1099853515625),
+(34, 57, 'aa', 1895000.5, 555),
+(35, 56, 'anulacion', 189000000, 1568.550048828125),
+(36, 53, 'ss', 189000000.55, 1545.25),
+(37, 50, 'a', 15.399999618530273, 45.54999923706055),
+(38, 49, 'anulacion', 898956000.56, 5965496496.54);
 
 -- --------------------------------------------------------
 
@@ -176,7 +215,7 @@ INSERT INTO `fiadores` (`id`, `razon_social`, `contactos`, `correo1`, `telefonos
 (82, 'ALEJANDRO SOTELO CABALLERO\r\n', '41d564d564d5d45', '5dws5d5w4dw54', '5454545454', '5454\r\n'),
 (83, 'ALEJANDRO SOTELO CABALLERO\r\n', '41d564d564d5d45', '5dws5d5w4dw54', '5454545454', '5454\r\n'),
 (84, 'FRANCISCO EDUARDO ASCENCIO  DOMINGUEZ', 'FRANCISCO EDUARDO ASCENCIO  DOMINGUEZ', 'CONTACTO@CYBERCHOAPAS.COM', '2122', 'CONTACTO@CYBERCHOAPAS.COM'),
-(85, 'LILIANA PEREZ GUTIERREZ', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
+(85, 'JACINTO PEREZ GUTIERREZ', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
 (86, 'ADIB SAADE VALDESPINO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
 (87, 'JULIAN TURISO', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
 (88, 'KORAIMA PEREZ YO NO FUI', 'LIC. TERE / ING. ALEX', 'administracion1@adibsa.com.mx', '771-748-8752   /  771-191-7906', 'aaaaadministracion1@adibsa.com.mx'),
@@ -190,7 +229,7 @@ INSERT INTO `fiadores` (`id`, `razon_social`, `contactos`, `correo1`, `telefonos
 
 CREATE TABLE `fianzas` (
   `id` int(11) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL DEFAULT 1,
   `fiador` int(11) NOT NULL,
   `contrato` varchar(254) NOT NULL,
   `tipo_fianza` int(11) NOT NULL,
@@ -198,7 +237,7 @@ CREATE TABLE `fianzas` (
   `afianzadora` int(11) NOT NULL,
   `fecha_emision` date NOT NULL,
   `folio_factura` varchar(254) NOT NULL,
-  `monto_factura` double NOT NULL DEFAULT '0',
+  `monto_factura` double NOT NULL DEFAULT 0,
   `fecha_pago` date NOT NULL,
   `entrega` varchar(254) NOT NULL,
   `pdf_contrato_obra` varchar(254) NOT NULL,
@@ -321,6 +360,13 @@ ALTER TABLE `afianzadores_tipos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `comisiones`
+--
+ALTER TABLE `comisiones`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `fianza` (`fianza`);
+
+--
 -- Indices de la tabla `fiadores`
 --
 ALTER TABLE `fiadores`
@@ -359,6 +405,12 @@ ALTER TABLE `afianzadores_tipos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
+-- AUTO_INCREMENT de la tabla `comisiones`
+--
+ALTER TABLE `comisiones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
 -- AUTO_INCREMENT de la tabla `fiadores`
 --
 ALTER TABLE `fiadores`
@@ -379,6 +431,12 @@ ALTER TABLE `users`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `comisiones`
+--
+ALTER TABLE `comisiones`
+  ADD CONSTRAINT `fianza_poliza` FOREIGN KEY (`fianza`) REFERENCES `fianzas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `fianzas`
