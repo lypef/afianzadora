@@ -152,6 +152,10 @@
         {
             Metro.notify.create("Usuario agregado con exito", "<span class='mif-checkmark'></span> AGREGADO", {cls: "success"});
         }
+        if (getUrlVars()["addcomisiontrue"])
+        {
+            Metro.notify.create("Comision agregada con exito", "<span class='mif-checkmark'></span> AGREGADO", {cls: "success"});
+        }
     </script>
 
 </body>

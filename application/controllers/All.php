@@ -67,15 +67,15 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT id FROM fiadores WHERE razon_social like '.$like.' or contactos like '.$like.' or correo1 like '.$like.' or correo2 like '.$like.' or telefonos like '.$like.' ')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT id FROM fiadores WHERE razon_social like '.$like.' or contactos like '.$like.' or correo1 like '.$like.' or correo2 like '.$like.' or telefonos like '.$like.' ')->num_rows() / 12;
 		}
 		else
 		{
-			$TotalPags = number_format($this->db->query('SELECT id FROM `fiadores`')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT id FROM `fiadores`')->num_rows() / 12;
 		}
 
 		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
-		$data['pags'] = $TotalPags;
+		$data['pags'] = ceil($TotalPags);
 		$data['pag'] = $pag;
 
 		if (!is_null($buscar))
@@ -171,15 +171,15 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadores_tipos WHERE nombre like '.$like.'  ')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT id FROM afianzadores_tipos WHERE nombre like '.$like.'  ')->num_rows() / 12;
 		}
 		else
 		{
-			$TotalPags = number_format($this->db->query('SELECT id FROM `afianzadores_tipos`')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT id FROM `afianzadores_tipos`')->num_rows() / 12;
 		}
 
 		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
-		$data['pags'] = $TotalPags;
+		$data['pags'] = ceil($TotalPags);
 		$data['pag'] = $pag;
 
 		if (!is_null($buscar))
@@ -267,15 +267,15 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT id FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT id FROM afianzadoras WHERE nombre like '.$like.' or razon_social like '.$like.'  ')->num_rows() / 12;
 		}
 		else
 		{
-			$TotalPags = number_format($this->db->query('SELECT id FROM `afianzadoras`')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT id FROM `afianzadoras`')->num_rows() / 12;
 		}
 
 		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
-		$data['pags'] = $TotalPags;
+		$data['pags'] = ceil($TotalPags);
 		$data['pag'] = $pag;
 
 		if (!is_null($buscar))
@@ -374,27 +374,27 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.razon_social like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.contrato like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and t.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_fianza like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_factura like '.$like.' ')->num_rows() / 10, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.razon_social like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.contrato like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and t.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_fianza like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.folio_factura like '.$like.' ')->num_rows() / 10;
 		}
 		else
 		{
 			if  ($fiador > 0)
 			{
-				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.id = '.$fiador.' ')->num_rows() / 10, 0, '', ' ');
+				$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.id = '.$fiador.' ')->num_rows() / 10;
 			}
 			else if ($afianzadora > 0)
 			{
-				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.id = '.$afianzadora.' ')->num_rows() / 10, 0, '', ' ');
+				$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.id = '.$afianzadora.' ')->num_rows() / 10;
 			}
 			else
 			{
-				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id')->num_rows() / 10, 0, '', ' ');
+				$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id')->num_rows() / 10;
 			}
 			
 		}
 
 		$limit = 'LIMIT '.(($pag * 10) - 10).', 10;';
-		$data['pags'] = $TotalPags;
+		$data['pags'] = ceil($TotalPags);
 		$data['pag'] = $pag;
 
 		if (!is_null($buscar))
@@ -446,27 +446,27 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and fi.razon_social like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and f.contrato like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and t.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and f.folio_fianza like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and a.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and f.folio_factura like '.$like.' ')->num_rows() / 10, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and fi.razon_social like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and f.contrato like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and t.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and f.folio_fianza like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and a.nombre like '.$like.' or f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 and f.folio_factura like '.$like.' ')->num_rows() / 10;
 		}
 		else
 		{
 			if  ($fiador > 0)
 			{
-				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.id = '.$fiador.'  and f.active = 0 ')->num_rows() / 10, 0, '', ' ');
+				$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and fi.id = '.$fiador.'  and f.active = 0 ')->num_rows() / 10;
 			}
 			else if ($afianzadora > 0)
 			{
-				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.id = '.$afianzadora.'  and f.active = 0 ')->num_rows() / 10, 0, '', ' ');
+				$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and a.id = '.$afianzadora.'  and f.active = 0 ')->num_rows() / 10;
 			}
 			else
 			{
-				$TotalPags = number_format($this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 ')->num_rows() / 10, 0, '', ' ');
+				$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadores_tipos t, afianzadoras a where f.fiador = fi.id and f.tipo_fianza = t.id and f.afianzadora = a.id and f.active = 0 ')->num_rows() / 10;
 			}
 			
 		}
 
 		$limit = 'LIMIT '.(($pag * 10) - 10).', 10;';
-		$data['pags'] = $TotalPags;
+		$data['pags'] = ceil($TotalPags);
 		$data['pag'] = $pag;
 
 		if (!is_null($buscar))
@@ -834,19 +834,19 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = number_format($this->db->query('SELECT c.id FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.contrato like '.$like.' or c.fianza = f.id and fi.id = f.fiador and fi.razon_social like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_fianza like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_factura like '.$like.' ')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT c.id FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.contrato like '.$like.' or c.fianza = f.id and fi.id = f.fiador and fi.razon_social like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_fianza like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_factura like '.$like.' ')->num_rows() / 12;
 		}
 		else if (!is_null($id_fiador))
 		{
-			$TotalPags = number_format($this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.fiador = '.$id_fiador.' ')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT c.id FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.fiador = '.$id_fiador.' ')->num_rows() / 12;
 		}
 		else
 		{
-			$TotalPags = number_format($this->db->query('SELECT id FROM `comisiones`')->num_rows() / 12, 0, '', ' ');
+			$TotalPags = $this->db->query('SELECT id FROM `comisiones`')->num_rows() / 12;
 		}
 
 		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
-		$data['pags'] = $TotalPags;
+		$data['pags'] = ceil($TotalPags);
 		$data['pag'] = $pag;
 
 		if (!is_null($buscar))
@@ -868,5 +868,30 @@ class All extends CI_Controller {
 		$this->load->view('comisiones', $data);
 		$this->load->view('layout/footer_previus');
 		$this->load->view('layout/footer');
+	}
+
+	public function comision_add ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		
+		$data = array(
+			'fianza' => $this->input->post('comision_0'),
+			'endoso' => $this->input->post('comision_endoso'),
+			'prima_neta' => floatval($this->input->post('comision_p_neta')),
+			'comision_agente' => floatval($this->input->post('comision_agente'))
+		);
+		
+		
+		$this->db->insert('comisiones',$data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?addcomisiontrue=true');
+		}else
+		{
+			redirect($url.'?no_posible=false');
+		}
 	}
 }

@@ -174,4 +174,39 @@
         }
         return $r;
     }
+
+    function GetPolizaSelect ($input)
+    {
+        $id_select = 0;
+
+        $c =& get_instance();
+        
+        $fianzas = $c->db->query('SELECT id, contrato FROM `fianzas` where id not IN (SELECT fianza FROM `comisiones`) order by contrato asc ')->result();
+        
+        $r = null;
+        $r = '
+        <div class="form-group">
+            <label ><strong>Poliza</strong></label>
+            <select id="afianzadora" name="afianzadora" data-role="select" data-on-item-select="select_comision('.$input.',arguments[0])">
+            
+        ';
+        
+        foreach ($fianzas as $row)
+        {
+            if ($id_select <= 0)
+            {
+                $id_select = $row->id;
+            }
+            
+            $r .= '
+            <option value="'.$row->id.'">'.$row->contrato.'</option>
+            ';    
+        }
+        $r .= '
+        </select>
+        </div>
+        ';
+        echo '<script>document.getElementById("comision_0").value = "'.$id_select.'";</script>';
+        return $r;
+    }
 ?>

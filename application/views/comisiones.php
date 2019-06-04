@@ -83,10 +83,9 @@
 
             <td>
                 <div class="split-button">
-                    <button class="button" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'block\'"><span class="mif-eye"></span> Detalles</button>
+                    <button class="button" onclick="document.getElementById(\'view'.$item->id.'\').style.display=\'block\'"><span class="mif-pencil"></span> Editar</button>
                     <button class="split dropdown-toggle"></button>
                     <ul class="d-menu" data-role="dropdown"> 
-                        <li><a href="#" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'block\'"><span class="mif-pencil"></span> Editar</a></li>
                         <li><a href="#" onclick="document.getElementById(\'editar'.$item->id.'\').style.display=\'block\'"><span class="mif-bin"></span> Eliminar</a></li>
                     </ul>
                 </div>

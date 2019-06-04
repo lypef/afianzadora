@@ -35,8 +35,58 @@
 </div>
 <!-- Finaliza Agregar Usuario -->
 
-<!--Agregar fianza-->            
+<!-- Agregar comision -->
+<div id="add_comision" class="w3-modal">
+  <div class="w3-modal-content" style="width: 550px; !important">
+    <div class="w3-container">
+    <div class="dialog-title"><strong><center>AGREGAR COMISION</center></strong></div>
+    <div class="dialog-content">
+        <form action="<?php echo base_url(); ?>all/comision_add" method="post" autocomplete="off">
+            
+        <input type="hidden" id="comision_0" name="comision_0" value="">
+        <?php echo GetPolizaSelect("0") ?>
+        </p>
+        
+        <div class="form-group">
+            <div class="form-group">
+                <label><strong>ENDOSO</strong></label>
+                <input id="comision_endoso" name="comision_endoso" type="text" placeholder="ANULACION / ETC / ETC" required value="" />
+            </div>
+        </div>
 
+        </p>
+        <div class="row">
+            <div class="cell-6">
+            <div class="form-group">
+                <div class="form-group">
+                    <label><strong>PRIMA NETA</strong></label>
+                    <input id="comision_p_neta" name="comision_p_neta" type="text" placeholder="$ 0.00 MXN" required value="" />
+                </div>
+            </div>
+            </div>
+
+            <div class="cell-6">
+                <div class="form-group">
+                    <label><strong>COMISION AGENTE</strong></label>
+                    <input id="comision_agente" name="comision_agente" type="text" placeholder="$ 0.00 MXN" required value="" />
+                </div>
+            </div>
+        </div> 
+
+
+        <input type="hidden" id="url" name="url" value="<?php echo UrlActual($_SERVER['REQUEST_URI']) ?>">
+    </div>
+    <div class="dialog-actions">
+        <button type="submit" class="button warning"><span class="mif-plus"></span> Agregar</button>
+        </form>
+        <button class="button" onclick="document.getElementById('add_comision').style.display='none'" ><span class="mif-cross"></span> cancelar</button>
+    </div>
+    </div>
+  </div>
+</div>
+<!-- Finaliza Agregar comision -->
+
+<!--Agregar fianza-->            
 
 <div id="add_fianza" class="w3-modal">
     <div class="w3-modal-content" style="width: 550px; !important">
@@ -436,6 +486,10 @@
     function select_afianzadora (id, select)
     {
         $("#afianzadora_".concat(id)).val(select);
+    }
+    function select_comision (id, select)
+    {
+        $("#comision_".concat(id)).val(select);
     }
     function select_fiador (id, select)
     {
