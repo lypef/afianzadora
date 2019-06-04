@@ -209,4 +209,30 @@
         echo '<script>document.getElementById("comision_0").value = "'.$id_select.'";</script>';
         return $r;
     }
+
+    function GetComisionesPago ($input, $status)
+    {
+        $r = null;
+        $r = '
+        <div class="form-group">
+            <label ><strong>ESTATUS PAGO</strong></label>
+            <select id="afianzadora" name="afianzadora" data-role="select" data-on-item-select="select_comision_update_pago('.$input.',arguments[0])">
+            
+        ';
+        if ($status == 0)
+        {
+            $r .= '<option value="0" selected >Pendiente</option>';    
+        }else {$r .= '<option value="0">Pendiente</option>';    }
+        
+        if ($status == 1)
+        {
+            $r .= '<option value="1" selected >Acreditado</option>';    
+        }else {$r .= '<option value="1">Acreditado</option>';    }
+        
+        $r .= '
+        </select>
+        </div>
+        ';
+        return $r;
+    }
 ?>

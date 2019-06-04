@@ -491,6 +491,10 @@
     {
         $("#comision_".concat(id)).val(select);
     }
+    function select_comision_update_pago (id, select)
+    {
+        $("#comision_update".concat(id)).val(select);
+    }
     function select_fiador (id, select)
     {
         $("#fiador_".concat(id)).val(select);

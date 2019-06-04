@@ -852,15 +852,15 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.contrato like '.$like.' or c.fianza = f.id and fi.id = f.fiador and fi.razon_social like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_fianza like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_factura like '.$like.'  ' . $limit .' ')->result();
+			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente, IF( c.comision_acreditado > 0, "ACREDITADO", "PENDIENTE") as pago, c.comision_acreditado as pago_boolean, IF( c.facturado > 0, "SI", "NO") as facturado_, c.facturado FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.contrato like '.$like.' or c.fianza = f.id and fi.id = f.fiador and fi.razon_social like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_fianza like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_factura like '.$like.'  ' . $limit .' ')->result();
 		}
 		else if (!is_null($id_fiador))
 		{
-			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.fiador = '.$id_fiador.'  ' . $limit .' ')->result();
+			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente, IF( c.comision_acreditado > 0, "ACREDITADO", "PENDIENTE") as pago, c.comision_acreditado as pago_boolean, IF( c.facturado > 0, "SI", "NO") as facturado_, c.facturado FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.fiador = '.$id_fiador.'  ' . $limit .' ')->result();
 		}
 		else
 		{
-			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador  '.$limit.' ')->result();
+			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente, IF( c.comision_acreditado > 0, "ACREDITADO", "PENDIENTE") as pago, c.comision_acreditado as pago_boolean, IF( c.facturado > 0, "SI", "NO") as facturado_, c.facturado FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador  '.$limit.' ')->result();
 		}
 		
 		$this->load->view('layout/header');
@@ -893,5 +893,93 @@ class All extends CI_Controller {
 		{
 			redirect($url.'?no_posible=false');
 		}
+	}
+
+	public function comision_delete ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$this->db->where('id', $this->input->post('id'))->delete('comisiones');
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?si_posible=true');
+		}else
+		{
+			redirect($url.'?no_posible=false');
+		}
+	}
+
+	public function comision_update ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$data = array(
+			'endoso' => $this->input->post('comision_endoso'),
+			'comision_acreditado' => $this->input->post('comision_update'.$this->input->post('id')),
+			'prima_neta' => floatval($this->input->post('comision_p_neta')),
+			'comision_agente' => floatval($this->input->post('comision_agente'))
+		);
+		
+		$this->db->where('id', $this->input->post('id'))->update('comisiones', $data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?si_posible=true');
+		}else
+		{
+			redirect($url.'?no_posible=false');
+		}
+	}
+
+	public function cobranza ()
+	{
+		LoginCheck();
+		$pag = $this->input->get('pagina');
+		$buscar = $this->input->get('search');
+		$id_fiador = $this->input->get('id_fiador');
+		$limit = '';
+		if (is_null($pag))
+		{
+			$pag = 1;
+		}
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$TotalPags = $this->db->query('SELECT c.id FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.contrato like '.$like.' or c.fianza = f.id and fi.id = f.fiador and fi.razon_social like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_fianza like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_factura like '.$like.' ')->num_rows() / 12;
+		}
+		else if (!is_null($id_fiador))
+		{
+			$TotalPags = $this->db->query('SELECT c.id FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.fiador = '.$id_fiador.' ')->num_rows() / 12;
+		}
+		else
+		{
+			$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadoras a where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 order by f.fecha_pago asc')->num_rows() / 12;
+		}
+
+		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
+		$data['pags'] = ceil($TotalPags);
+		$data['pag'] = $pag;
+
+		if (!is_null($buscar))
+		{
+			$like = "'%" .$buscar. "%'";
+			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente, IF( c.comision_acreditado > 0, "ACREDITADO", "PENDIENTE") as pago, c.comision_acreditado as pago_boolean, IF( c.facturado > 0, "SI", "NO") as facturado_, c.facturado FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.contrato like '.$like.' or c.fianza = f.id and fi.id = f.fiador and fi.razon_social like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_fianza like '.$like.' or c.fianza = f.id and fi.id = f.fiador and f.folio_factura like '.$like.'  ' . $limit .' ')->result();
+		}
+		else if (!is_null($id_fiador))
+		{
+			$data['data'] = $this->db->query('SELECT c.id, f.contrato, c.endoso, fi.razon_social, c.prima_neta, c.comision_agente, IF( c.comision_acreditado > 0, "ACREDITADO", "PENDIENTE") as pago, c.comision_acreditado as pago_boolean, IF( c.facturado > 0, "SI", "NO") as facturado_, c.facturado FROM comisiones c, fianzas f, fiadores fi WHERE c.fianza = f.id and fi.id = f.fiador and f.fiador = '.$id_fiador.'  ' . $limit .' ')->result();
+		}
+		else
+		{
+			$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, a.nombre, f.contrato, f.monto_factura, f.fecha_pago, fi.contactos, fi.correo1, fi.telefonos, fi.correo2 FROM fianzas f, fiadores fi, afianzadoras a where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 order by f.fecha_pago asc  '.$limit.' ')->result();
+		}
+		
+		$this->load->view('layout/header');
+		$this->load->view('layout/header_next');
+		$this->load->view('cobranza', $data);
+		$this->load->view('layout/footer_previus');
+		$this->load->view('layout/footer');
 	}
 }

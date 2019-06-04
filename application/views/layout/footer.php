@@ -142,7 +142,11 @@
 
         if (getUrlVars()["no_posible"])
         {
-            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NO AGREGADO", {cls: "alert"});
+            Metro.notify.create("No es posible la operacion, intete otra vez.", "<span class='mif-checkmark'></span> NEGATIVO", {cls: "alert"});
+        }
+        if (getUrlVars()["si_posible"])
+        {
+            Metro.notify.create("Operacion exitosa", "<span class='mif-checkmark'></span> CORRECTO", {cls: "success"});
         }
         if (getUrlVars()["updateusertrue"])
         {

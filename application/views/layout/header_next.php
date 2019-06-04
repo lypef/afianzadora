@@ -154,22 +154,14 @@
 
         <!-- Inicia modulo Adicionales-->
         <div class="group">
-            <a href="gest_adicionales.php?pagina=1">
+            
+            <a href="<?php echo base_url(); ?>all/cobranza">
             <button class="ribbon-button">
                     <span class="icon">
                         <span class="mif-visa"></span>
                     </span>
                 <span class="caption">Cobranza</span>
             </button></a>
-
-            <a href="gest_adicionales.php?pagina=1">
-            <button class="ribbon-button">
-                    <span class="icon">
-                        <span class="mif-credit-card"></span>
-                    </span>
-                <span class="caption">Pagos</span>
-            </button></a>
-
 
             <div class="ribbon-split-button">
             <a href="<?php echo base_url(); ?>all/comisiones">
