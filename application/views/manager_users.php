@@ -11,10 +11,7 @@
             <div class="cell-4">
                 <div class="card">
                     <div class="card-header">
-                        <div class="avatar">
-                            <img src="http://lorempixel.com/68/68/people/">
-                        </div>
-                        <div class="name">'.$name_tmp[0].' '.$name_tmp[1].'</div>
+                        <strong>'.$name_tmp[0].' '.$name_tmp[1].'</strong>
                         </p>
                     </div>
                     <div class="card-content p-2">
