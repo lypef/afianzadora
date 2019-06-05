@@ -11,16 +11,12 @@
             <div class="cell-4">
                 <div class="card">
                     <div class="card-header">
-                        <strong>'.$name_tmp[0].' '.$name_tmp[1].'</strong>
+                        <strong>'.$item->name.'</strong>
                         </p>
                     </div>
                     <div class="card-content p-2">
                         </p>
-                        <span>NOMBRE COMPLETO<br>'.$item->name.'</span>
-                    </div>
-                    <div class="card-content p-2">
-                        </p>
-                        <span>NOMBRE DE USUARIO | USERNAME<br>'.$item->username.'</span>
+                        <span>NOMBRE DE USUARIO: '.$item->username.'</span>
                     </div>
                     <div class="card-footer">
                         <button onclick="Metro.dialog.open(\'#permisos'.$item->id.'\')" class="flat-button mif-security mif-2x"></button>
