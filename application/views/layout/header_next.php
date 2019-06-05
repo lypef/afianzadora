@@ -13,20 +13,6 @@
         {?>
 
         <div class="group">
-          <div class="ribbon-split-button">
-              <button class="ribbon-main">
-                  <span class="icon ribbon-main">
-                      <span class="mif-file-pdf"></span>
-                  </span>
-              </button>
-              <span class="ribbon-split dropdown-toggle">pdf</span>
-              <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
-                  <li><a href="reports/reporte_titulares.php">Reportes fiadores</a></li>
-                  <li><a href="reports/reporte_vehicles.php">Reportes afianzadoras</a></li>
-                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas</a></li>
-                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas canceladas</a></li>
-              </ul>
-            </div>
             <div class="ribbon-split-button">
               <button class="ribbon-main">
                   <span class="icon ribbon-main">
@@ -35,13 +21,14 @@
               </button>
               <span class="ribbon-split dropdown-toggle">xls</span>
               <ul class="ribbon-dropdown" data-role="dropdown" data-duration="100">
-                  <li><a href="reports/reporte_titulares.php">Reportes fiadores</a></li>
-                  <li><a href="reports/reporte_vehicles.php">Reportes afianzadoras</a></li>
-                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas</a></li>
-                  <li><a href="reports/reporte_adicionales.php">Reportes fianzas canceladas</a></li>
+                  <li><a href="<?php echo base_url(); ?>all/xls_fiadores">Reporte fiadores</a></li>
+                  <li><a href="<?php echo base_url(); ?>all/xls_afianzadoras">Reporte afianzadoras</a></li>
+                  <li><a href="<?php echo base_url(); ?>all/xls_fianzas">Reporte fianzas</a></li>
+                  <li><a href="<?php echo base_url(); ?>all/xls_comisiones">Reporte comisiones</a></li>
+                  <li><a href="<?php echo base_url(); ?>all/xls_cobranza">Reporte cobranza</a></li>
               </ul>
             </div>
-            <span class="title">REPORTES</span>
+            <span class="title">EXPORTAR</span>
         </div>
         <?}?>
 
