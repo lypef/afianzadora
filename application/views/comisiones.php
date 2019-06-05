@@ -54,7 +54,7 @@
             {
                 $facturar = 
                 '
-                    <li><a href="#" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-books"></span> Facturar</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'facturar'.$item->id.'\').style.display=\'block\'"><span class="mif-books"></span> Facturar</a></li>
                 ';
             }else if ($item->facturado == 1 && $item->pago_boolean == 1)
             {
@@ -64,7 +64,7 @@
                 '
                     <li><a href="#" onclick="document.getElementById(\'edit'.$item->id.'\').style.display=\'block\'"><span class="mif-pencil"></span> Editar</a></li>
                     <li><a href="#" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-cross"></span> Eliminar</a></li>
-                    <li><a href="#" onclick="document.getElementById(\'delete'.$item->id.'\').style.display=\'block\'"><span class="mif-books"></span> Facturar</a></li>
+                    <li><a href="#" onclick="document.getElementById(\'facturar'.$item->id.'\').style.display=\'block\'"><span class="mif-books"></span> Facturar</a></li>
                 ';
             }
             $classTable="";
@@ -204,6 +204,26 @@
             </div>
             <!-- Finaliza Editar comision -->
 
+            <div id="facturar'.$item->id.'" class="w3-modal">
+            <div class="w3-modal-content" style="width: 480px; !important">
+                <div class="w3-container">
+                <div class="dialog-title"><strong><center>FACTURAR COMISION: '.$item->contrato.'</center></strong></div>
+                <div class="dialog-content">
+                    <form action="'.base_url().'all/comision_facturar" method="post">
+                        <p>Esta seguro que esta comision ya esta facturada ?, Una comision ya facturado no se puede editar o eliminar.</p>
+                        <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
+                        <input type="hidden" id="id" name="id" value="'.$item->id.'">
+                </div>
+                <div class="dialog-actions">
+                    <button type="submit" class="button warning"><span class="mif-dollar"></span> Facturado</button>
+                    </form>
+                    <button class="button success" onclick="document.getElementById(\'facturar'.$item->id.'\').style.display=\'none\'" ><span class="mif-checkmark"></span> Cancelar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            
+            
             <div id="delete'.$item->id.'" class="w3-modal">
             <div class="w3-modal-content" style="width: 480px; !important">
                 <div class="w3-container">

@@ -933,6 +933,26 @@ class All extends CI_Controller {
 		}
 	}
 
+	public function comision_facturar ()
+	{
+		LoginCheck();
+		$url = $this->input->post('url');
+		
+		$data = array(
+			'facturado' => 1
+		);
+	
+		$this->db->where('id', $this->input->post('id'))->update('comisiones', $data);
+		
+		if ($this->db->affected_rows() >= 1 )
+		{
+			redirect($url.'?si_posible=true');
+		}else
+		{
+			redirect($url.'?no_posible=false');
+		}
+	}
+
 	public function cobranza ()
 	{
 		LoginCheck();
