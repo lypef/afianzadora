@@ -96,8 +96,8 @@
                         </div>
                         </p>
                         <label><strong>Mensaje</strong></label>
-                        <textarea id="text" name="text" style="overflow-y:scroll;" data-clear-button="false" data-auto-size="false" rows="6" data-role="textarea" data-prepend="<span class='.'mif-leanpub'.'></span>" data-on-change="comentarios('.$item->id.', arguments[0])">Apreciable: '.$item->fiador.', le recordamos su pago el dia: '.GetFormatDate($item->fecha_pago).', por la cantidad de: $ '.number_format($item->monto_factura, 2, '.', ',').' MXN.</textarea>
-                        <textarea id="comentarios'.$item->id.'" name="comentarios'.$item->id.'" style="display:none;">Apreciable: '.$item->fiador.', le recordamos su pago el dia: '.GetFormatDate($item->fecha_pago).', por la cantidad de: $ '.number_format($item->monto_factura, 2, '.', ',').' MXN.</textarea>
+                        <textarea id="text" name="text" style="overflow-y:scroll;" data-clear-button="false" data-auto-size="false" rows="6" data-role="textarea" data-prepend="<span class='.'mif-leanpub'.'></span>" data-on-change="comentarios('.$item->id.', arguments[0])">Apreciable: '.$item->fiador.', le recordamos su pago el dia: '.GetFormatDate($item->fecha_pago).', por la cantidad de: $ '.number_format($item->monto_factura, 2, '.', ',').' MXN, correspondiente a la poliza: '.$item->contrato.'</textarea>
+                        <textarea id="comentarios'.$item->id.'" name="comentarios'.$item->id.'" style="display:none;">Apreciable: '.$item->fiador.', le recordamos su pago el dia: '.GetFormatDate($item->fecha_pago).', por la cantidad de: $ '.number_format($item->monto_factura, 2, '.', ',').' MXN, correspondiente a la poliza: '.$item->contrato.'</textarea>
 
 
                         <input type="hidden" id="url" name="url" value="'.UrlActual($_SERVER['REQUEST_URI']).'">
