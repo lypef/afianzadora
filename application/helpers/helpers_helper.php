@@ -235,4 +235,44 @@
         ';
         return $r;
     }
+
+    function GetFormatDate ($fecha)
+    {
+        $date = date_create($fecha);
+        
+        $mes = array(
+            'January' => 'Enero',
+            'February' => 'Febrero',
+            'March' => 'Marzo',
+            'April' => 'Abril',
+            'May' => 'Mayo',
+            'June' => 'Junio',
+            'July' => 'Julio',
+            'August' => 'Agosto',
+            'September' => 'Septiembre',
+            'October' => 'Octubre',
+            'November' => 'Noviembre',
+            'December' => 'Diciembre'
+        );
+
+        $dia_desc = array(
+            'Monday' => 'Lunes',
+            'Tuesday' => 'Martes',
+            'Wednesday' => 'Miercoles',
+            'Thursday' => 'Jueves',
+            'Friday' => 'Viernes',
+            'Saturday' => 'Sabado',
+            'Sunday' => 'Domingo'
+        );
+
+        $dia_number = array(
+            'th' => ',',
+            'nd' => ',',
+            'st' => ','
+        );
+        
+        
+        return strtr(strtr(strtr(date_format($date, 'l jS F Y'),$mes),$dia_desc),$dia_number);
+    }
+
 ?>

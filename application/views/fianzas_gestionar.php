@@ -83,7 +83,7 @@
             <td>'.$item->fiador.'</td>
             <td><center>'.$item->afianzadora.'</center></td>
             <td>'.$item->contrato.'</td>
-            <td><center>'.$item->fecha_emision.'</center></td>
+            <td><center>'.GetFormatDate($item->fecha_emision).'</center></td>
             <td>
             
             <div class="split-button">
@@ -500,7 +500,7 @@
                                     <strong>AFIANZADORA:</strong> '.$item->afianzadora.'
                                 </div>
                                 <div class="pl-6 pb-2">
-                                    <strong>FECHA DE EMISION:</strong> '.$item->fecha_emision.'
+                                    <strong>FECHA DE EMISION:</strong> '.GetFormatDate($item->fecha_emision).'
                                 </div>
                                 <div class="pl-6 pb-2">
                                     <strong>FOLIO DE FACTURA:</strong> '.$item->folio_factura.'
@@ -509,7 +509,7 @@
                                     <strong>MONTO DE FACTURA:</strong> $ '.$item->monto_factura.' MXN
                                 </div>
                                 <div class="pl-6 pb-2">
-                                    <strong>FECHA DE PAGO:</strong> '.$item->fecha_pago.'
+                                    <strong>FECHA DE PAGO:</strong> '.GetFormatDate($item->fecha_pago).'
                                 </div>
                                 <div class="pl-6 pb-2">
                                     <strong>ESTATUS DE ENTREGA:</strong> '.$item->entrega.'
