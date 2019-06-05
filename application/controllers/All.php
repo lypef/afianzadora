@@ -18,7 +18,7 @@ class All extends CI_Controller {
 		{
 			if ($this->Models_model->login($_POST['username'], $_POST['password']))
 			{
-				redirect(base_url().'all/dashboard/?yessession=true');
+				redirect(base_url().'all/fianzas_gestionar/?yessession=true');
 			}
 			else
 			{
@@ -28,7 +28,7 @@ class All extends CI_Controller {
 		{
 			if (LoginCheckBool())
 			{
-				redirect(base_url().'all/dashboard');
+				redirect(base_url().'all/fianzas_gestionar');
 			}else
 			{
 				$this->load->view('layout/header');
