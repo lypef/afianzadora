@@ -78,7 +78,7 @@
                     </ul>
             </div>
             
-            <div class="ribbon-split-button">
+            <!--<div class="ribbon-split-button">
                 <a href="<?php echo base_url(); ?>all/afianzadores_tipos">
                         <button class="ribbon-main">
                             <span class="icon ribbon-main">
@@ -91,7 +91,7 @@
                         <li><a href="<?php echo base_url(); ?>all/afianzadores_tipos"><span class="mif-database"></span> Vizualizar</a></li>
                         <li><a href="#" onclick="document.getElementById('add_afianzadora_tipo').style.display='block';"><span class="mif-plus"></span> Agregar</a></li>    
                     </ul>
-            </div>
+            </div>-->
             
 
             <span class="title">Afianzadoras</span>

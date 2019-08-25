@@ -966,11 +966,11 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadoras a where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and fi.razon_social LIKE '.$like.' or f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and f.contrato LIKE '.$like.' or f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and fi.contactos LIKE '.$like.' order by f.fecha_pago asc')->num_rows() / 12;
+			$TotalPags = $this->db->query('SELECT f.id, fi.razon_social as fiador, a.nombre, f.contrato, f.monto_factura, f.folio_factura, f.fecha_pago, fi.contactos, fi.correo1, fi.correo2, f.folio_fianza, t.nombre AS t_fianza FROM fianzas f, fiadores fi, afianzadoras a, afianzadores_tipos t  where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and f.tipo_fianza = t.id order by f.fecha_pago and fi.contactos LIKE '.$like.' order by f.fecha_pago asc')->num_rows() / 12;
 		}
 		else
 		{
-			$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadoras a where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 order by f.fecha_pago asc')->num_rows() / 12;
+			$TotalPags = $this->db->query('SELECT f.id FROM fianzas f, fiadores fi, afianzadoras a, afianzadores_tipos t  where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and f.tipo_fianza = t.id order by f.fecha_pago')->num_rows() / 12;
 		}
 
 		$limit = 'LIMIT '.(($pag * 12) - 12).', 12;';
@@ -980,11 +980,11 @@ class All extends CI_Controller {
 		if (!is_null($buscar))
 		{
 			$like = "'%" .$buscar. "%'";
-			$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, a.nombre, f.contrato, f.monto_factura, f.fecha_pago, fi.contactos, fi.correo1, fi.telefonos, fi.correo2 FROM fianzas f, fiadores fi, afianzadoras a where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and fi.razon_social LIKE '.$like.' or f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and f.contrato LIKE '.$like.' or f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and fi.contactos LIKE '.$like.' order by f.fecha_pago asc '. $limit .' ')->result();
+			$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, a.nombre, f.contrato, f.monto_factura, f.folio_factura, f.fecha_pago, fi.contactos, fi.correo1, fi.correo2, f.folio_fianza, t.nombre AS t_fianza FROM fianzas f, fiadores fi, afianzadoras a, afianzadores_tipos t  where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and f.tipo_fianza = t.id order by f.fecha_pago and fi.razon_social LIKE '.$like.' or f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and f.contrato LIKE '.$like.' or f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and fi.contactos LIKE '.$like.' order by f.fecha_pago asc '. $limit .' ')->result();
 		}
 		else
 		{
-			$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, a.nombre, f.contrato, f.monto_factura, f.fecha_pago, fi.contactos, fi.correo1, fi.telefonos, fi.correo2 FROM fianzas f, fiadores fi, afianzadoras a where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 order by f.fecha_pago asc  '.$limit.' ')->result();
+			$data['data'] = $this->db->query('SELECT f.id, fi.razon_social as fiador, a.nombre, f.contrato, f.monto_factura, f.folio_factura, f.fecha_pago, fi.contactos, fi.correo1, fi.correo2, f.folio_fianza, t.nombre AS t_fianza FROM fianzas f, fiadores fi, afianzadoras a, afianzadores_tipos t  where f.fiador = fi.id and f.afianzadora = a.id and f.active = 1 and f.pagado = 0 and f.tipo_fianza = t.id order by f.fecha_pago  '.$limit.' ')->result();
 		}
 		
 		$this->load->view('layout/header');

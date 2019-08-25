@@ -139,7 +139,7 @@
                 <div class="dialog-content">
                 <div>
                         <div class="pl-6 pb-2">
-                            <strong>FOLIO, BASE DE DATOS:</strong> '.$item->id.'
+                            <strong>FOLIO FIANZA:</strong> '.$item->folio_fianza.'
                         </div>
                         <div class="pl-6 pb-2">
                             <strong>FIADOR:</strong> '.$item->fiador.'
@@ -151,22 +151,16 @@
                             <strong>POLIZA:</strong> '.$item->contrato.'
                         </div>
                         <div class="pl-6 pb-2">
-                            <strong>FECHA DE PAGO:</strong> '.GetFormatDate($item->fecha_pago).'
+                            <strong>TIPO FIANZA:</strong> '.$item->t_fianza.'
+                        </div>
+                        <div class="pl-6 pb-2">
+                            <strong>FOLIO FACTURA:</strong> '.$item->folio_factura.'
                         </div>
                         <div class="pl-6 pb-2">
                             <strong>MONTO FACTURA:</strong> $ '.number_format($item->monto_factura, 2, '.', ',').' MXN
                         </div>
                         <div class="pl-6 pb-2">
-                            <strong>CONTACTOS:</strong><br>'.$item->contactos.'
-                        </div>
-                        <div class="pl-6 pb-2">
-                            <strong>TELEFONO:</strong> '.$item->telefonos.'
-                        </div>
-                        <div class="pl-6 pb-2">
-                            <strong>CORREO 1:</strong> '.$item->correo1.'
-                        </div>
-                        <div class="pl-6 pb-2">
-                            <strong>CORREO 2:</strong> '.$item->correo2.'
+                            <strong>FECHA DE PAGO:</strong> '.GetFormatDate($item->fecha_pago).'
                         </div>
                     </div>
                 </div>

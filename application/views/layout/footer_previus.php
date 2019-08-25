@@ -91,7 +91,7 @@
 <div id="add_fianza" class="w3-modal">
     <div class="w3-modal-content" style="width: 550px; !important">
       <div class="w3-container">
-        <div class="dialog-title"><strong><center>NUEVA FIANZA</center></strong></div>
+        <div class="dialog-title"><strong><center>AGREGAR FIANZA</center></strong></div>
         <div class="dialog-content">
             <form action="<?php echo base_url() ?>all/fianzas_add" method="post">
                 <div class="form-group">
